@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageIconUrl>https://raw.githubusercontent.com/zhaopeiym/Talk/13827d45a808e4d8480d947d7876b88423313557/Resource/Img/hi_32px.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/zhaopeiym/Talk/tree/Dev/Talk.Redis</PackageProjectUrl>
+    <PackageTags>redis,缓存</PackageTags>
+    <Authors>农码一生</Authors>
+    <Company>Talk</Company>
+    <Product>Talk</Product>
+    <Description>redis的简单封装</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
+  </ItemGroup>
+
+</Project>

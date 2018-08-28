@@ -1,0 +1,1 @@
+NuGet  pack Talk.Extensions.csproj -Prop Configuration=Release  -Build
