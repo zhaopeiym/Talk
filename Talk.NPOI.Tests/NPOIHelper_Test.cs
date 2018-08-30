@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using Xunit;
@@ -118,11 +117,21 @@ namespace Talk.NPOI.Tests
             NPOIHelper.SaveExcel(basePath + "空运模板2.xls", filePath, 1, 14, dic);
         }
 
+        [Fact]
+        public void Excel转实体集合()
+        {
+            var entitys = NPOIHelper.ToEntitys<AirEntity>(basePath + "空运模板2.xls");
+        }
+
         public class AirEntity
         {
+            [Alias("*起运空港")]
             public string FromTerminal { get; set; }
+            [Alias("*目标空港")]
             public string ToTerminal { get; set; }
+            [Alias("*航空公司")]
             public string Carrier { get; set; }
+            [Alias("*开航日期")]
             public DateTime? ETD { get; set; }
         }
     }
