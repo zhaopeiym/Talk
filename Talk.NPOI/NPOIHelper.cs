@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace Talk.NPOI
@@ -712,6 +713,86 @@ namespace Talk.NPOI
             }
 
             return book;
+        }
+
+        /// <summary>
+        /// list数据转换datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sourceList"></param>
+        /// <returns></returns>
+        public static DataTable ToDatatableFromList<T>(this List<T> sourceList) where T : new()
+        {
+            if (sourceList == null || !sourceList.Any()) { return null; }
+            var pros = typeof(T).GetProperties();
+            DataTable targetTable = new DataTable();
+            var propertyInfoList = new List<PropertyInfo>();
+            foreach (var p in pros)
+            {
+                string alias = AliasAttribute<T>(p);
+                if ((!string.IsNullOrEmpty(alias)))
+                {
+                    targetTable.Columns.Add(alias);
+                    propertyInfoList.Add(p);
+                }
+            }
+            object[] values = new object[targetTable.Columns.Count];
+            foreach (T item in sourceList)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = propertyInfoList[i].GetValue(item);
+                }
+                targetTable.Rows.Add(values);
+            }
+            return targetTable;
+        }
+
+        /// <summary>
+        /// 把DataTable数据写入Workbook
+        /// </summary>
+        /// <param name="dataTables"></param>
+        /// <param name="isOldThan2007"></param>
+        /// <returns></returns>
+        public static IWorkbook ToWorkbook(this List<DataTable> dataTables, bool isOldThan2007)
+        {
+            IWorkbook book = isOldThan2007 ? new HSSFWorkbook() : (IWorkbook)new XSSFWorkbook();
+            foreach (var dataTable in dataTables)
+            {
+                if (dataTable == null)
+                    continue;
+                ISheet sheet = book.CreateSheet(dataTable.TableName);
+                IRow headerRow = sheet.CreateRow(0);
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                }
+
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    DataRow row = dataTable.Rows[i];
+                    IRow dataRow = sheet.CreateRow(i + 1);
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
+                    }
+                }
+            }
+            return book;
+        }
+
+        private static string AliasAttribute<T>(PropertyInfo p) where T : new()
+        {
+            var attributes = p.GetCustomAttributes(typeof(AliasAttribute), false);
+            AliasAttribute type = null;
+            foreach (var o in attributes)
+            {
+                if (o is AliasAttribute)
+                {
+                    type = o as AliasAttribute;
+                }
+            }
+            return type?.Alias;
         }
     }
 
