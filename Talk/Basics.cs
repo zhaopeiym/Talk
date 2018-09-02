@@ -17,7 +17,10 @@ namespace Talk
     /// </summary>
     public interface ISingletonDependency { }
 
-
+    /// <summary>
+    /// 自动释放
+    /// </summary>
+    public interface IRelease : IDisposable { }
     /// <summary>
     /// 拦截器标识
     /// </summary>

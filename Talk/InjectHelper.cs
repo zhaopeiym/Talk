@@ -1,11 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Talk
 {
@@ -22,25 +19,40 @@ namespace Talk
             var types = assembly.GetTypes();
 
             //标记了 拦截器 的类型
-            var interceptorClass = types
+            var autoInterceptorClass = types
                 .Where(t => t.GetInterfaces().Contains(typeof(IAutoInterceptor)) && t.IsClass)
+                .ToList();
+
+            //标记了 IRelease（自动释放） 的类型
+            var releaseClass = types
+                .Where(t => t.GetInterfaces().Contains(typeof(IRelease)) && t.IsClass)
                 .ToList();
 
             #region ISingletonDependency （单例）
             //获取标记了ISingletonDependency接口的接口
             var singletonInterfaceDependency = types
                     .Where(t => t.GetInterfaces().Contains(typeof(ISingletonDependency)))
-                    .SelectMany(t => t.GetInterfaces().Where(f => f.Name != "ISingletonDependency"))
+                    .SelectMany(t => t.GetInterfaces().Where(f => f.GetInterfaces().Contains(typeof(ISingletonDependency)) && f.Name != "ISingletonDependency"))
                     .ToList();
             //自动注入标记了 ISingletonDependency接口的 接口
             foreach (var interfaceName in singletonInterfaceDependency)
             {
                 var type = types.Where(t => t.GetInterfaces().Contains(interfaceName)).FirstOrDefault();
-                if (type != null)
+                //规则：
+                //1、接口必须以大写"I"开头
+                //2、type必须以接口去掉"I"为命名前缀
+                if (type != null && type.Name.StartsWith(interfaceName.Name.Substring(1)))
                 {
                     var builder = services.RegisterType(type).As(interfaceName).PropertiesAutowired().SingleInstance();
-                    if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                        builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+                    if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                        builder = builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+                    if (releaseClass.Any(t => t == type))
+                    {
+                        builder.OnRelease(e =>
+                        {
+                            (e as IRelease).Dispose();
+                        });
+                    }
                 }
             }
 
@@ -53,8 +65,15 @@ namespace Talk
             foreach (var type in singletonTypeDependency)
             {
                 var builder = services.RegisterType(type).As(type).PropertiesAutowired().SingleInstance();
-                if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                    builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                    builder = builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (releaseClass.Any(t => t == type))
+                {
+                    builder.OnRelease(e =>
+                    {
+                        (e as IRelease).Dispose();
+                    });
+                }
             }
             #endregion
 
@@ -62,17 +81,24 @@ namespace Talk
             //获取标记了ITransientDependency接口的接口
             var transientInterfaceDependency = types
                    .Where(t => t.GetInterfaces().Contains(typeof(ITransientDependency)))
-                   .SelectMany(t => t.GetInterfaces().Where(f => !f.Name.Equals("ITransientDependency")))
+                   .SelectMany(t => t.GetInterfaces().Where(f => f.GetInterfaces().Contains(typeof(ITransientDependency)) && !f.Name.Equals("ITransientDependency")))
                    .ToList();
             //自动注入标记了 ITransientDependency接口的 接口
             foreach (var interfaceName in transientInterfaceDependency)
             {
                 var type = types.Where(t => t.GetInterfaces().Contains(interfaceName)).FirstOrDefault();
-                if (type != null)
+                if (type != null && type.Name.StartsWith(interfaceName.Name.Substring(1)))
                 {
                     var builder = services.RegisterType(type).As(interfaceName).PropertiesAutowired().InstancePerDependency();
-                    if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                        builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+                    if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                        builder = builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+                    if (releaseClass.Any(t => t == type))
+                    {
+                        builder.OnRelease(e =>
+                        {
+                            (e as IRelease).Dispose();
+                        });
+                    }
                 }
             }
             //获取标记了ITransientDependency接口的类
@@ -83,8 +109,15 @@ namespace Talk
             foreach (var type in transientTypeDependency)
             {
                 var builder = services.RegisterType(type).As(type).PropertiesAutowired().InstancePerDependency();
-                if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                    builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                    builder = builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (releaseClass.Any(t => t == type))
+                {
+                    builder.OnRelease(e =>
+                    {
+                        (e as IRelease).Dispose();
+                    });
+                }
             }
             #endregion
 
@@ -92,17 +125,25 @@ namespace Talk
             //获取标记了IScopedDependency接口的接口
             var scopedInterfaceDependency = types
                    .Where(t => t.GetInterfaces().Contains(typeof(IScopedDependency)))
-                   .SelectMany(t => t.GetInterfaces().Where(f => !f.Name.Equals("IScopedDependency")))
+                   .SelectMany(t => t.GetInterfaces().Where(f => f.GetInterfaces().Contains(typeof(IScopedDependency)) && !f.Name.Equals("IScopedDependency")))
                    .ToList();
             //自动注入标记了 IScopedDependency接口的 接口
             foreach (var interfaceName in scopedInterfaceDependency)
             {
                 var type = types.Where(t => t.GetInterfaces().Contains(interfaceName)).FirstOrDefault();
-                if (type != null)
+                if (type != null && type.Name.StartsWith(interfaceName.Name.Substring(1)))//如：IDBContext 和 DBContext 这种命名才注入
                 {
                     var builder = services.RegisterType(type).As(interfaceName).PropertiesAutowired().InstancePerLifetimeScope();
-                    if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                        builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+                    if (releaseClass.Any(t => t == type))
+                    {
+                        builder = builder.OnRelease(e =>
+                        {
+                            (e as IRelease).Dispose();
+                        });
+                    }
+                    if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                        builder = builder.InterceptedBy(interceptedType).EnableInterfaceInterceptors();
+
                 }
             }
 
@@ -115,8 +156,15 @@ namespace Talk
             foreach (var type in scopedTypeDependency)
             {
                 var builder = services.RegisterType(type).As(type).PropertiesAutowired().InstancePerLifetimeScope();
-                if (interceptorClass.Any(t => t == type) && interceptedType != null)
-                    builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (autoInterceptorClass.Any(t => t == type) && interceptedType != null)
+                    builder = builder.InterceptedBy(interceptedType).EnableClassInterceptors();
+                if (releaseClass.Any(t => t == type))
+                {
+                    builder.OnRelease(e =>
+                    {
+                        (e as IRelease).Dispose();
+                    });
+                }
             }
             #endregion
         }
