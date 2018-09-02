@@ -335,7 +335,7 @@ namespace Talk.NPOI
             var blankCellCount = 0;
             for (int i = 0; i < cellNum; i++)
             {
-                if (row.GetCell(i) == null)
+                if (row.GetCell(i) == null|| string.IsNullOrWhiteSpace(row.GetValue(i)))
                 {
                     blankCellCount++;
                 }
