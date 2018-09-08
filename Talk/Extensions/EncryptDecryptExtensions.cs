@@ -7,7 +7,7 @@ namespace Talk.Extensions
     /// <summary>
     /// 3DES 加密、解密
     /// </summary>
-    public static class EncryptDecryptExtension
+    public static class EncryptDecryptExtensions
     {
         /// <summary>
         /// 3DES加密

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
 namespace Talk.Linq.Extensions
@@ -66,7 +66,7 @@ namespace Talk.Linq.Extensions
         {
             if (query == null)
                 throw new ArgumentNullException("query");
-            return DynamicQueryable.OrderBy(query, ordering, values);
+            return DynamicQueryableExtensions.OrderBy(query, ordering, values);
         }
 
         /// <summary>

@@ -330,3 +330,5 @@ ASALocalRun/
 *.org
 /Talk.NPOI.Tests/Data/Temp
 /Talk.NPOI.Tests/Data/Temp
+/Talk.Linq.Extensions ---
+/Talk.AutoMap.Extensions ----

@@ -1,1 +1,0 @@
-NuGet  pack Talk.Linq.Extensions.csproj -Prop Configuration=Release  -Build

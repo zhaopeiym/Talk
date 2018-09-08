@@ -1,1 +1,0 @@
-NuGet pack Talk.AutoMap.Extensions.csproj -Prop Configuration=Release  -Build
