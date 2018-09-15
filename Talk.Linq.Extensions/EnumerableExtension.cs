@@ -14,18 +14,19 @@ namespace Talk.Linq.Extensions
             return condition ? query.Where(func) : query;
         }
 
-        public static IEnumerable<T> AddIf<T>(this IEnumerable<T> query, bool condition, T entity)
+        public static IList<T> AddIf<T>(this IEnumerable<T> query, bool condition, T entity)
         {
+            var list = query.ToList();
             if (condition)
-                query.ToList().Add(entity);
-            return query;
+                list.Add(entity);
+            return list;
         }
 
-        public static IEnumerable<T> AddIf<T>(this T oldEntity, bool condition, T entity)
+        public static IList<T> AddIf<T>(this T oldEntity, bool condition, T entity)
         {
-            IEnumerable<T> list = new List<T>();
+            var list = new List<T>();
             if (condition)
-                list.ToList().Add(entity);
+                list.Add(entity);
             return list;
         }
 
