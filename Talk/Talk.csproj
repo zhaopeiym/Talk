@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.4.0" />
+    <PackageReference Include="Talk.Extensions" Version="1.0.1.9" />
   </ItemGroup>
 
   <ItemGroup>

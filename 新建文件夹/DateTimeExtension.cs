@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Talk.Extensions
 {
-    public static class DateTimeExtensions
+    public static class DateTimeExtension
     {
         /// <summary>
         /// 获取时间戳
@@ -11,7 +15,7 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static long TimeStamp(this DateTime time)
         {
-            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
 
             return (int)(time - startTime).TotalSeconds;
         }

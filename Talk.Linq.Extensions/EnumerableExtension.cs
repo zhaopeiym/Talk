@@ -9,6 +9,26 @@ namespace Talk.Linq.Extensions
     /// </summary>
     public static class EnumerableExtension
     {
+        public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> query, bool condition, Func<T, bool> func)
+        {
+            return condition ? query.Where(func) : query;
+        }
+
+        public static IEnumerable<T> AddIf<T>(this IEnumerable<T> query, bool condition, T entity)
+        {
+            if (condition)
+                query.ToList().Add(entity);
+            return query;
+        }
+
+        public static IEnumerable<T> AddIf<T>(this T oldEntity, bool condition, T entity)
+        {
+            IEnumerable<T> list = new List<T>();
+            if (condition)
+                list.ToList().Add(entity);
+            return list;
+        }
+
         /// <summary>
         /// 确定Enumerable是否包含任何元素。
         /// </summary>
@@ -16,7 +36,7 @@ namespace Talk.Linq.Extensions
         /// <param name="t">Enumerable对象</param>
         /// <returns>如果源Enumerable包含任何元素，则为 true；否则为 false。</returns>
         public static bool IsAny<T>(this IEnumerable<T> t)
-        {          
+        {
             if (t == null) return false;
             return t.Any();
         }
@@ -103,7 +123,7 @@ namespace Talk.Linq.Extensions
                 action.Invoke(t);
             }
             return each;
-        }    
+        }
 
         /// <summary>
         /// 自定义排序，根据条件的先后将原List重新排序
@@ -127,7 +147,7 @@ namespace Talk.Linq.Extensions
             var diff = list.Except(items);
             items.AddRange(diff);
             return items;
-        }  
+        }
 
         /// <summary>
         /// 是否包含
@@ -141,7 +161,7 @@ namespace Talk.Linq.Extensions
         public static bool Contains<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> selectFunc, TKey value)
         {
             return collection.Select(selectFunc).Contains(value);
-        } 
+        }
 
         #region MyRegion
         ///// <summary>
