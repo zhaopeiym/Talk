@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Talk.Extensions
 {
@@ -28,21 +26,54 @@ namespace Talk.Extensions
 
         /// <summary>
         /// 从字符串的开头得到一个字符串的子串
+        /// len参数不能大于给定字符串的长度
         /// </summary>
         /// <param name="str"></param>
         /// <param name="len"></param>
         /// <returns></returns>
         public static string Left(this string str, int len)
         {
+            if (str == null) 
+                throw new ArgumentNullException("str"); 
+
+            if (str.Length < len) 
+                throw new ArgumentException("len参数不能大于给定字符串的长度"); 
+
+            return str.Substring(0, len);
+        }
+
+        /// <summary>
+        /// 从字符串的末尾得到一个字符串的子串
+        /// len参数不能大于给定字符串的长度
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static string Right(this string str, int len)
+        {
+            if (str == null) 
+                throw new ArgumentNullException("str"); 
+
+            if (str.Length < len) 
+                throw new ArgumentException("len参数不能大于给定字符串的长度"); 
+
+            return str.Substring(str.Length - len, len);
+        }
+
+        /// <summary>
+        /// 
+        /// len参数大于给定字符串是返回原字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static string MaxLeft(this string str, int len)
+        {
             if (str == null)
-            {
                 throw new ArgumentNullException("str");
-            }
 
             if (str.Length < len)
-            {
-                throw new ArgumentException("len参数不能大于给定字符串的长度");
-            }
+                return str;
 
             return str.Substring(0, len);
         }
@@ -53,17 +84,13 @@ namespace Talk.Extensions
         /// <param name="str"></param>
         /// <param name="len"></param>
         /// <returns></returns>
-        public static string Right(this string str, int len)
+        public static string MaxRight(this string str, int len)
         {
-            if (str == null)
-            {
-                throw new ArgumentNullException("str");
-            }
+            if (str == null) 
+                throw new ArgumentNullException("str"); 
 
             if (str.Length < len)
-            {
-                throw new ArgumentException("len参数不能大于给定字符串的长度");
-            }
+                return str;
 
             return str.Substring(str.Length - len, len);
         }
@@ -77,11 +104,8 @@ namespace Talk.Extensions
         public static T ToEnum<T>(this string value)
            where T : struct
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
+            if (value == null) 
+                throw new ArgumentNullException(nameof(value));  
             return (T)Enum.Parse(typeof(T), value);
         }
 
@@ -96,11 +120,43 @@ namespace Talk.Extensions
             where T : struct
         {
             if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
+                throw new ArgumentNullException(nameof(value)); 
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
-        } 
+        }
+
+        public static int ToInt32(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToInt32(str);
+        }
+
+        public static bool ToBoolean(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToBoolean(str);
+        }
+
+        public static DateTime ToDateTime(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToDateTime(str);
+        }
+
+        public static decimal ToDecimal(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToDecimal(str);
+        }
+
+        public static double ToDouble(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToDouble(str);
+        }
     }
 }
