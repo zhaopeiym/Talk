@@ -5,13 +5,13 @@ using System.Text;
 namespace Talk.Application.Dto
 {
     /// <summary>
-    /// 分页
+    /// 分页查询
     /// </summary>
-    public interface ILimitedResultRequest
+    public interface IPagedRequest : ILimitedRequest
     {
         /// <summary>
-        /// 取多少条
+        /// 跳过多少条
         /// </summary>
-        int MaxResultCount { get; set; }
+        int SkipCount { get; set; }
     }
 }
