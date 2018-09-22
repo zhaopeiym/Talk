@@ -7,6 +7,9 @@ $versionXml.Project.PropertyGroup.VersionPrefix = $Version
 $versionSuffix = $versionXml.Project.PropertyGroup.VersionSuffix
 $versionXml.Save("$PSScriptRoot/version.props")
 
+Write-Host '升级依赖包...'
+dotnet add package Talk.Extensions
+
 # 打包
 Write-Host '开始打包...'
 dotnet pack /p:Version=$Version$versionSuffix -c Release
