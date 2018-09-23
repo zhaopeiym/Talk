@@ -22,12 +22,24 @@ namespace Talk.Extensions
 
         /// <summary>
         /// 获取yyyMMddHHssmm时间
+        /// yyyy-MM-dd HH:ss:mm
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
         public static string yyyMMddHHssmm(this DateTime time)
         {
             return time.ToString("yyyy-MM-dd HH:ss:mm");
+        }
+
+        /// <summary>
+        /// 获取yyyMMddHHssmm时间
+        /// yyyy/MM/dd HH:ss:mm
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static string yyyMMddHHssmm2(this DateTime time)
+        {
+            return time.ToString("yyyy/MM/dd HH:ss:mm");
         }
 
         /// <summary>
