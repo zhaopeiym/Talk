@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Talk.Extensions
 {
@@ -157,6 +158,20 @@ namespace Talk.Extensions
             if (str == null)
                 throw new ArgumentNullException(nameof(str));
             return Convert.ToDouble(str);
+        }
+
+        public static string BytesToString(this byte[] byteArray)
+        {
+            if (byteArray == null)
+                throw new ArgumentNullException(nameof(byteArray));
+            return Encoding.Default.GetString(byteArray);
+        }
+
+        public static byte[] ToBytes(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Encoding.Default.GetBytes(str); ;
         }
     }
 }
