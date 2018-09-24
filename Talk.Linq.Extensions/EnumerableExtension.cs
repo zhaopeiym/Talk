@@ -39,15 +39,16 @@ namespace Talk.Linq.Extensions
         /// <returns></returns>
         public static bool Contains<T>(this IEnumerable<T> source, IEnumerable<T> parameter)
         {
-            if (source == null) 
+            if (source == null)
                 throw new ArgumentNullException("source");
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
 
             foreach (var item in parameter)
             {
-                if (!source.Contains(item))
-                    return false;
+                if (!string.IsNullOrWhiteSpace(item?.ToString()))
+                    if (!source.Contains(item))
+                        return false;
             }
             return true;
         }

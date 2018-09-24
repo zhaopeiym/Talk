@@ -146,7 +146,7 @@ namespace Talk.NPOI
         /// <param name="book"></param>
         /// <param name="sheetIndex"></param>
         /// <returns></returns>
-        public static List<T> ToEntitys<T>(IWorkbook book, int sheetIndex = 0) where T : class, new()
+        public static List<T> ToEntitys<T>(this IWorkbook book, int sheetIndex = 0) where T : class, new()
         {
             List<T> list = new List<T>();
             ISheet sheet = book.GetSheetAt(sheetIndex);
@@ -232,7 +232,7 @@ namespace Talk.NPOI
         /// <param name="book"></param>
         /// <param name="sheetIndex"></param>
         /// <returns></returns>
-        public static List<string> GetExcelHead(IWorkbook book, int sheetIndex = 0)
+        public static List<string> GetExcelHead(this IWorkbook book, int sheetIndex = 0)
         {
             var header = new List<string>();
             ISheet sheet = book.GetSheetAt(sheetIndex);
@@ -278,7 +278,7 @@ namespace Talk.NPOI
         /// <param name="book"></param>
         /// <param name="sheetIndex"></param>
         /// <returns></returns>
-        public static KeyValuePair<int, List<string>> GetMaxRowNumAndHead(IWorkbook book, int sheetIndex = 0)
+        public static KeyValuePair<int, List<string>> GetMaxRowNumAndHead(this IWorkbook book, int sheetIndex = 0)
         {
             var header = new List<string>();
             ISheet sheet = book.GetSheetAt(sheetIndex);
@@ -327,7 +327,7 @@ namespace Talk.NPOI
         /// <param name="sheetIndex"></param>
         /// <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
         /// <returns></returns>
-        public static int GetSheetLastRowNum(IWorkbook workbook, int sheetIndex = 0, int? maxRowNum = null)
+        public static int GetSheetLastRowNum(this IWorkbook workbook, int sheetIndex = 0, int? maxRowNum = null)
         {
             ISheet sheet = workbook.GetSheetAt(sheetIndex);
             var rowNum = sheet.LastRowNum;
