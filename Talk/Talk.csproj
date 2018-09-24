@@ -13,10 +13,18 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Users\benny\Documents\Code\gitee\Talk\Talk\Talk.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Talk.xml" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.4.0" />
-    <PackageReference Include="Talk.Extensions" Version="1.0.1.14" />
+    <PackageReference Include="Talk.Extensions" Version="1.0.1.16" />
   </ItemGroup>
 
   <ItemGroup>

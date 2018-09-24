@@ -198,6 +198,153 @@ namespace Talk.NPOI
             }
             return list;
         }
+
+        /// <summary>
+        /// 获取表头
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static List<string> GetExcelHead(string path, int sheetIndex = 0)
+        {
+            IWorkbook book = GetWorkbook(path);
+            return GetExcelHead(book, sheetIndex);
+        }
+
+        /// <summary>
+        /// 获取表头
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileName"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static List<string> GetExcelHead(Stream stream, string fileName, int sheetIndex = 0)
+        {
+            bool isOldThan2007 = Path.GetExtension(fileName) == ".xls";
+            IWorkbook book = GetWorkbook(stream, isOldThan2007);
+            return GetExcelHead(book, sheetIndex);
+        }
+
+        /// <summary>
+        /// 获取表头
+        /// excel的第一行数据
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static List<string> GetExcelHead(IWorkbook book, int sheetIndex = 0)
+        {
+            var header = new List<string>();
+            ISheet sheet = book.GetSheetAt(sheetIndex);
+            IRow headerRow = sheet.GetRow(0);
+            var rowNum = headerRow.LastCellNum;
+            for (int i = 0; i <= rowNum; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(headerRow?.GetCell(i)?.ToString()))
+                    header.Add(headerRow?.GetCell(i)?.ToString());
+            }
+            return header;
+        }
+
+        /// <summary>
+        /// 获取最大行数和表头数据
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static KeyValuePair<int, List<string>> GetMaxRowNumAndHead(string path, int sheetIndex = 0)
+        {
+            IWorkbook book = GetWorkbook(path);
+            return GetMaxRowNumAndHead(book, sheetIndex);
+        }
+
+        /// <summary>
+        /// 获取最大行数和表头数据
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileName"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static KeyValuePair<int, List<string>> GetMaxRowNumAndHead(Stream stream, string fileName, int sheetIndex = 0)
+        {
+            bool isOldThan2007 = Path.GetExtension(fileName) == ".xls";
+            IWorkbook book = GetWorkbook(stream, isOldThan2007);
+            return GetMaxRowNumAndHead(book, sheetIndex);
+        }
+
+        /// <summary>
+        /// 获取最大行数和表头数据
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static KeyValuePair<int, List<string>> GetMaxRowNumAndHead(IWorkbook book, int sheetIndex = 0)
+        {
+            var header = new List<string>();
+            ISheet sheet = book.GetSheetAt(sheetIndex);
+            IRow headerRow = sheet.GetRow(0);
+            var rowNum = headerRow.LastCellNum;
+            for (int i = 0; i <= rowNum; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(headerRow?.GetCell(i)?.ToString()))
+                    header.Add(headerRow?.GetCell(i)?.ToString());
+            }
+            return new KeyValuePair<int, List<string>>(sheet.LastRowNum, header);
+        }
+
+        /// <summary>
+        /// 获取Excel最大行数
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="sheetIndex"></param>
+        /// <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+        /// <returns></returns>
+        public static int GetSheetLastRowNum(string path, int sheetIndex = 0, int? maxRowNum = null)
+        {
+            IWorkbook book = GetWorkbook(path);
+            return GetSheetLastRowNum(book, sheetIndex, maxRowNum);
+        }
+
+        /// <summary>
+        ///  获取Excel最大行数
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileName"></param>
+        /// <param name="sheetIndex"></param>
+        /// <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+        /// <returns></returns>
+        public static int GetSheetLastRowNum(Stream stream, string fileName, int sheetIndex = 0, int? maxRowNum = null)
+        {
+            bool isOldThan2007 = Path.GetExtension(fileName) == ".xls";
+            IWorkbook book = GetWorkbook(stream, isOldThan2007);
+            return GetSheetLastRowNum(book, sheetIndex, maxRowNum);
+        }
+
+        /// <summary>
+        /// 获取Excel最大行数
+        /// </summary>
+        /// <param name="workbook"></param>
+        /// <param name="sheetIndex"></param>
+        /// <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+        /// <returns></returns>
+        public static int GetSheetLastRowNum(IWorkbook workbook, int sheetIndex = 0, int? maxRowNum = null)
+        {
+            ISheet sheet = workbook.GetSheetAt(sheetIndex);
+            var rowNum = sheet.LastRowNum;
+            if (maxRowNum.HasValue)
+            {
+                if (sheet.LastRowNum > maxRowNum)
+                {
+                    rowNum = -1;
+                    for (int i = 0; i < sheet.PhysicalNumberOfRows; i++)
+                    {
+                        if (!sheet.GetRow(i)?.ZeroHeight ?? true)
+                            rowNum++;
+                    }
+                }
+            }
+            return rowNum;
+        }
         #endregion
 
         #region 写入Excle
@@ -335,7 +482,7 @@ namespace Talk.NPOI
             var blankCellCount = 0;
             for (int i = 0; i < cellNum; i++)
             {
-                if (row.GetCell(i) == null|| string.IsNullOrWhiteSpace(row.GetValue(i)))
+                if (row.GetCell(i) == null || string.IsNullOrWhiteSpace(row.GetValue(i)))
                 {
                     blankCellCount++;
                 }

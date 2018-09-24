@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talk</name>
+    </assembly>
+    <members>
+        <member name="T:Talk.Application.Dto.ILimitedRequest">
+            <summary>
+            分页
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Dto.ILimitedRequest.MaxResultCount">
+            <summary>
+            取多少条
+            </summary>
+        </member>
+        <member name="T:Talk.Application.Dto.IPagedRequest">
+            <summary>
+            分页查询
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Dto.IPagedRequest.SkipCount">
+            <summary>
+            跳过多少条
+            </summary>
+        </member>
+        <member name="M:Talk.AppModule.PreInitialize">
+            <summary>
+            初始化前
+            </summary>
+        </member>
+        <member name="M:Talk.AppModule.Initialize">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:Talk.AppModule.PostInitialize">
+            <summary>
+            初始化后
+            </summary>
+        </member>
+        <member name="T:Talk.ITransientDependency">
+            <summary>
+             瞬时（每次都重新实例）
+            </summary>
+        </member>
+        <member name="T:Talk.IScopedDependency">
+            <summary>
+            一个请求内唯一（本质上是生命周期范围内的单例）
+            </summary>
+        </member>
+        <member name="T:Talk.ISingletonDependency">
+            <summary>
+            单例（全局唯一）
+            </summary>
+        </member>
+        <member name="T:Talk.IRelease">
+            <summary>
+            自动释放
+            </summary>
+        </member>
+        <member name="T:Talk.IAutoInterceptor">
+            <summary>
+            拦截器标识
+            </summary>
+        </member>
+        <member name="P:Talk.DependsOnAttribute.DependedModuleTypes">
+            <summary>
+            类型的依赖模块
+            </summary>
+        </member>
+        <member name="M:Talk.InjectHelper.AutoInjection(Autofac.ContainerBuilder,System.Reflection.Assembly,System.Type)">
+            <summary>
+            自动注入
+            </summary>
+            <param name="services"></param>
+            <param name="assembly"></param>
+            <param name="interceptedType">拦截器</param>
+        </member>
+        <member name="M:Talk.ModuleManager.Initialize">
+            <summary>
+            初始化
+            </summary>
+        </member>
+    </members>
+</doc>

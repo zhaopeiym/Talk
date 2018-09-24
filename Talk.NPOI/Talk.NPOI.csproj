@@ -11,6 +11,12 @@
     <Copyright>Copyright (c) 2018 Talk.  All rights reserved.</Copyright>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Users\benny\Documents\Code\gitee\Talk\Talk.NPOI\Talk.NPOI.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Talk.NPOI.xml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetCore.NPOI" Version="1.0.2" />
   </ItemGroup>

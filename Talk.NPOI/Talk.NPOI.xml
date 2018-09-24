@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talk.NPOI</name>
+    </assembly>
+    <members>
+        <member name="M:Talk.NPOI.NPOIHelper.GetDataTable(System.String,System.Collections.Generic.List{System.Drawing.Point},System.Int32,System.Int32)">
+            <summary>
+            读取Excel到DataTable
+            </summary>
+            <param name="filePath">Excel路径</param>
+            <param name="headPoint">自定义表头（坐标，从0开始计数）</param>
+            <param name="validRow">内容开始行（从0开始计数）</param>
+            <param name="sheetIndex">读取第几个sheet</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetDataTables(System.IO.FileStream,System.Boolean,System.Int32)">
+            <summary>
+            Excel 转DataTable
+            </summary>
+            <param name="stream">Excel文件流</param>
+            <param name="isOldThan2007">是否低于07版本</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetDataTables(System.String,System.Int32)">
+            <summary>
+            Excel 转DataTable集合
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.ToEntitys``1(System.String,System.Int32)">
+            <summary>
+            Excel转泛型T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="path"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.ToEntitys``1(System.IO.Stream,System.String,System.Int32)">
+            <summary>
+            Excel转泛型T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="stream"></param>
+            <param name="fileName"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.ToEntitys``1(NPOI.SS.UserModel.IWorkbook,System.Int32)">
+            <summary>
+            Excel转泛型T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="book"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetExcelHead(System.String,System.Int32)">
+            <summary>
+            获取表头
+            </summary>
+            <param name="path"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetExcelHead(System.IO.Stream,System.String,System.Int32)">
+            <summary>
+            获取表头
+            </summary>
+            <param name="stream"></param>
+            <param name="fileName"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetExcelHead(NPOI.SS.UserModel.IWorkbook,System.Int32)">
+            <summary>
+            获取表头
+            excel的第一行数据
+            </summary>
+            <param name="book"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetMaxRowNumAndHead(System.String,System.Int32)">
+            <summary>
+            获取最大行数和表头数据
+            </summary>
+            <param name="path"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetMaxRowNumAndHead(System.IO.Stream,System.String,System.Int32)">
+            <summary>
+            获取最大行数和表头数据
+            </summary>
+            <param name="stream"></param>
+            <param name="fileName"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetMaxRowNumAndHead(NPOI.SS.UserModel.IWorkbook,System.Int32)">
+            <summary>
+            获取最大行数和表头数据
+            </summary>
+            <param name="book"></param>
+            <param name="sheetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetSheetLastRowNum(System.String,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            获取Excel最大行数
+            </summary>
+            <param name="path"></param>
+            <param name="sheetIndex"></param>
+            <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetSheetLastRowNum(System.IO.Stream,System.String,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+             获取Excel最大行数
+            </summary>
+            <param name="stream"></param>
+            <param name="fileName"></param>
+            <param name="sheetIndex"></param>
+            <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetSheetLastRowNum(NPOI.SS.UserModel.IWorkbook,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            获取Excel最大行数
+            </summary>
+            <param name="workbook"></param>
+            <param name="sheetIndex"></param>
+            <param name="maxRowNum">超过多少行检验隐藏行,并排除隐藏行</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.DataTableToExcel(System.Data.DataTable,System.Boolean)">
+            <summary>
+            将DataTable读到Excle的内存流
+            </summary>
+            <param name="dataTable"></param>
+            <param name="isOldThan2007">是否低于2007</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.DataTableToExcel(System.Data.DataTable,System.String)">
+            <summary>
+            将DataTable写入excel文件
+            </summary>
+            <param name="dataTable"></param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SaveExcel(System.String,System.String,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.Int32,System.String})">
+            <summary>
+            保存结果到源Excel
+            </summary>
+            <param name="filePath">源Excel文件路径</param>
+            <param name="savePath">要保存的路径</param>
+            <param name="sheetIndex">第几个Sheet</param>
+            <param name="columnIndex">第多少列</param>
+            <param name="rowsResult">行 对应要写的注释</param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SaveExcel(System.String,System.String,Talk.NPOI.SheetEntity)">
+            <summary>
+            保存结果到源Excel
+            </summary>
+            <param name="filePath">源Excel文件路径</param>
+            <param name="savePath">要保存的路径</param>
+            <param name="sheetEntity">要记录的结果相关信息</param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SaveExcel(System.String,System.IO.FileStream,System.Boolean,Talk.NPOI.SheetEntity)">
+            <summary>
+            保存结果到源Excel
+            </summary>
+            <param name="savePath">要保存的路径</param>
+            <param name="stream"></param>
+            <param name="isOldThan2007">是否低于2007的版本</param>
+            <param name="sheetEntity">要记录的结果相关信息</param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SaveExcel(System.String,System.String,System.Collections.Generic.List{Talk.NPOI.SheetEntity})">
+            <summary>
+            保存结果到源Excel
+            </summary>
+            <param name="filePath">源Excel文件路径</param>
+            <param name="savePath">要保存的路径</param>        
+            <param name="sheetEntityList">要记录的结果相关信息</param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SaveExcel(System.String,System.IO.FileStream,System.Boolean,System.Collections.Generic.List{Talk.NPOI.SheetEntity})">
+            <summary>
+            保存结果到源Excel
+            </summary>
+            <param name="savePath">要保存的路径</param>
+            <param name="stream"></param>
+            <param name="isOldThan2007">是否低于2007的版本</param>   
+            <param name="sheetEntityList">要记录的结果相关信息</param>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.IsBlankRow(NPOI.SS.UserModel.IRow,System.Int32)">
+            <summary>
+            判斷是否空白行
+            </summary>
+            <param name="row"></param>
+            <param name="cellNum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.SetValue(NPOI.SS.UserModel.ICell,System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            读Excel单元格的数据
+            </summary>
+            <param name="cell">Excel单元格</param>
+            <param name="type">列数据类型</param>
+            <param name="obj"></param>
+            <returns>object 单元格数据</returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetDataTable(NPOI.SS.UserModel.IWorkbook,System.Int32,System.Int32)">
+            <summary>
+            Excel转成DataTable
+            </summary>
+            <param name="stream"></param>
+            <param name="isOldThan2007">excel版本是否低于2007</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIHelper.GetDataTable(NPOI.SS.UserModel.IWorkbook,System.Collections.Generic.List{System.Drawing.Point},System.Int32,System.Int32)">
+            <summary>
+             Excel转成DataTable
+            </summary>
+            <param name="book"></param>
+            <param name="headPoint">表头定位</param>
+            <param name="validRow">从第几行开始算有效数据</param>
+            <param name="sheetIndex">第几个sheet</param>
+            <returns></returns>
+        </member>
+        <member name="P:Talk.NPOI.SheetEntity.SheetIndex">
+            <summary>
+            第几个Sheet
+            </summary>
+        </member>
+        <member name="P:Talk.NPOI.SheetEntity.ColumnIndex">
+            <summary>
+            第多少列
+            </summary>
+        </member>
+        <member name="P:Talk.NPOI.SheetEntity.RowsResult">
+            <summary>
+            行 对应要写的注释
+            </summary>
+        </member>
+        <member name="M:Talk.NPOI.NPOIExtensions.GetValue(NPOI.SS.UserModel.IRow,System.Int32)">
+            <summary>
+            获取XSSFRow的值（全部统一转成字符串）
+            </summary>
+            <param name="row"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIExtensions.GetValueByCellStyle(NPOI.SS.UserModel.ICell,System.Nullable{NPOI.SS.UserModel.CellType})">
+            <summary>
+            根据单元格的类型获取单元格的值
+            </summary>
+            <param name="rowCell"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIExtensions.ToWorkbook(System.Data.DataTable,System.Boolean)">
+            <summary>
+            把DataTable数据写入Workbook
+            </summary>
+            <param name="dataTable"></param>
+            <param name="isOldThan2007">是否低于2007</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIExtensions.ToDatatableFromList``1(System.Collections.Generic.List{``0})">
+            <summary>
+            list数据转换datatable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sourceList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.NPOIExtensions.ToWorkbook(System.Collections.Generic.List{System.Data.DataTable},System.Boolean)">
+            <summary>
+            把DataTable数据写入Workbook
+            </summary>
+            <param name="dataTables"></param>
+            <param name="isOldThan2007"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.DataTableExtensions.GetEntityList``1(System.Data.DataTable,System.Action{System.Data.DataRow,``0})">
+            <summary>
+            DataTable转换成实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="tableList"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.DataTableExtensions.GetEntityList``1(System.Collections.Generic.List{System.Data.DataTable},System.Action{System.Data.DataRow,``0})">
+            <summary>
+            DataTable转换成实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="tableList"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.NPOI.DataTableExtensions.ToDataTable``1(System.Collections.Generic.List{``0},System.Collections.Generic.Dictionary{System.String,System.String},System.Action{System.Data.DataRow,``0})">
+            <summary>
+            实体集合转换成DataTable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listEntity"></param>
+            <param name="headList"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Talk.NPOI.AliasAttribute.Alias">
+            <summary>
+            属性别名
+            </summary>
+        </member>
+        <member name="M:Talk.NPOI.AliasAttribute.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="alias">别名</param>
+        </member>
+    </members>
+</doc>
