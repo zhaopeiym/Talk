@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talk.Linq.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Talk.Linq.Extensions.EnumerableExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.Contains``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            判断集合项是否全部包含
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.IsAny``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            确定Enumerable是否包含任何元素。
+            </summary>
+            <typeparam name="T">Enumerable对象类型</typeparam>
+            <param name="t">Enumerable对象</param>
+            <returns>如果源Enumerable包含任何元素，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.StringJoin``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            将Enumerable对象转换成字符串，多个时按分隔符分隔
+            </summary>
+            <typeparam name="T">Enumerable对象的类型</typeparam>
+            <param name="source">Enumerable对象</param>
+            <param name="separator">分隔符（默认,）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            去重
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.ItmesEquals``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            比较两个集合中的每个元素是否都一样
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source1"></param>
+            <param name="source2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.Each2Int(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            将Enumerable对象转换成列表对象
+            </summary>
+            <param name="list">Enumerable对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            枚举迭代Enumerable对象，按照传入方法操作
+            </summary>
+            <typeparam name="T">Enumerable对象类型</typeparam>
+            <param name="list">Enumerable对象</param>
+            <param name="action">操作方法</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.CustomOrderBy``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean}[])">
+            <summary>
+            自定义排序，根据条件的先后将原List重新排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">需要排序的List</param>
+            <param name="predicates">表达式条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.EnumerableExtension.Contains``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},``1)">
+            <summary>
+            是否包含
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="collection"></param>
+            <param name="selectFunc"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Talk.Linq.Extensions.QueryableExtension">
+            <summary>
+            IQueryable扩展
+            </summary>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.WhereIf``1(System.Linq.IQueryable{``0},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            WhereIf语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="condition"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.PageBy``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="skipCount"></param>
+            <param name="maxResultCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.Select``1(System.Linq.IQueryable)">
+            <summary>        
+            需要在Dto做特性映射，如：[AutoMap(typeof(MyClass2))]
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.OrderBy``1(System.Linq.IQueryable{``0},System.String,System.Object[])">
+            <summary>
+            排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <param name="ordering">排序字符串，如：OrderBy("id desc,name ase")</param>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.Distinct``2(System.Linq.IQueryable{``0},System.Func{``0,``1})">
+            <summary>
+            去重
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            拼接and 条件语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Linq.Extensions.QueryableExtension.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            拼接or 条件语句
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

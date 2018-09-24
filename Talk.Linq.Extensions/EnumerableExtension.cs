@@ -31,6 +31,28 @@ namespace Talk.Linq.Extensions
         }
 
         /// <summary>
+        /// 判断集合项是否全部包含
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public static bool Contains<T>(this IEnumerable<T> source, IEnumerable<T> parameter)
+        {
+            if (source == null) 
+                throw new ArgumentNullException("source");
+            if (parameter == null)
+                throw new ArgumentNullException("parameter");
+
+            foreach (var item in parameter)
+            {
+                if (!source.Contains(item))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 确定Enumerable是否包含任何元素。
         /// </summary>
         /// <typeparam name="T">Enumerable对象类型</typeparam>

@@ -17,6 +17,10 @@
     <DocumentationFile>D:\Users\benny\Documents\Code\gitee\Talk\Talk.Linq.Extensions\Talk.Linq.Extensions.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Users\benny\Documents\Code\gitee\Talk\Talk.Linq.Extensions\Talk.Linq.Extensions.xml</DocumentationFile>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
