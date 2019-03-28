@@ -12,7 +12,7 @@ Write-Host '开始打包...'
 dotnet pack /p:Version=$Version$versionSuffix -c Release
 
 Write-Host '开始上传...'
-nuget push ./bin/Release/$LibraryName.$Version$versionSuffix.nupkg -ApiKey oy2irwyzh6oprjroljwav5aospph6tuepbjibnvdcwmhq4 -Source https://api.nuget.org/v3/index.json
+nuget push ./bin/Release/$LibraryName.$Version$versionSuffix.nupkg -ApiKey oy2irwyzh6oprjroljwav5aospph6tuepbjibnvdcwmhq4 -Source https://nuget.cdn.azure.cn/v3/index.json
 
 Write-Host '输入空格退出...' -NoNewline
 $null = [Console]::ReadKey('?') #等待输入按键

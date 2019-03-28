@@ -87,6 +87,7 @@ namespace Talk.AutoMap.Extensions.Tests
     public class EntityBaseDto
     {
         public string Name { get; set; }
+        public string Name2 { get; set; }
         public List<EntityOrder> EntityOrders { get; set; }
     }
 

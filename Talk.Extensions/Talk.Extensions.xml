@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talk.Extensions</name>
+    </assembly>
+    <members>
+        <!-- 对于成员“M:Talk.Extensions.CollectionExtension.IsNullOrEmpty``1(System.Collections.Generic.ICollection{``0})”忽略有格式错误的 XML 注释 -->
+        <member name="M:Talk.Extensions.CollectionExtension.AddIfNotContains``1(System.Collections.Generic.ICollection{``0},``0)">
+            <summary>
+            添加ICollection中不存在的值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.ComparableExtension.IsBetween``1(``0,``0,``0)">
+            <summary>
+            检查一个值在最小值和最大值之间
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">要检查的值</param>
+            <param name="minInclusiveValue">最小(包容)值</param>
+            <param name="maxInclusiveValue">最大(包容)值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.TimeStamp(System.DateTime)">
+            <summary>
+            获取时间戳
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHssmm(System.DateTime)">
+            <summary>
+            获取yyyMMddHHssmm时间
+            yyyy-MM-dd HH:ss:mm
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHssmm2(System.DateTime)">
+            <summary>
+            获取yyyMMddHHssmm时间
+            yyyy/MM/dd HH:ss:mm
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.TimeSpanChinese(System.DateTime,System.Nullable{System.DateTime})">
+            <summary>
+            获取中文间隔时间差
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Talk.Extensions.EncryptDecryptExtension">
+            <summary>
+            加密、解密
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Base64Encrypt(System.String)">
+            <summary>
+            Base64加密
+            </summary>
+            <param name="input">需要加密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Base64Encrypt(System.String,System.Text.Encoding)">
+            <summary>
+            Base64加密
+            </summary>
+            <param name="input">需要加密的字符串</param>
+            <param name="encode">字符编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Base64Decrypt(System.String)">
+            <summary>
+            Base64解密
+            </summary>
+            <param name="input">需要解密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Base64Decrypt(System.String,System.Text.Encoding)">
+            <summary>
+            Base64解密
+            </summary>
+            <param name="input">需要解密的字符串</param>
+            <param name="encode">字符的编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.DESEncrypt(System.String,System.String,System.String)">
+            <summary>
+            DES加密
+            </summary>
+            <param name="data">加密数据</param>
+            <param name="key">8位字符的密钥字符串</param>
+            <param name="iv">8位字符的初始化向量字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.DESDecrypt(System.String,System.String,System.String)">
+            <summary>
+            DES解密
+            </summary>
+            <param name="data">解密数据</param>
+            <param name="key">8位字符的密钥字符串(需要和加密时相同)</param>
+            <param name="iv">8位字符的初始化向量字符串(需要和加密时相同)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Md5Encrypt(System.String)">
+            <summary>
+            MD5加密
+            </summary>
+            <param name="input">需要加密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Md5Encrypt(System.String,System.Text.Encoding)">
+            <summary>
+            MD5加密
+            </summary>
+            <param name="input">需要加密的字符串</param>
+            <param name="encode">字符的编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.Md5Encrypt(System.IO.Stream)">
+            <summary>
+            MD5对文件流加密
+            </summary>
+            <param name="sr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.ToMD5Encrypt16(System.String,System.Text.Encoding)">
+            <summary>
+            MD5加密(返回16位加密串)
+            </summary>
+            <param name="input"></param>
+            <param name="encode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.ToMd5(System.String)">
+            <summary>
+            Md5加密
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.DES3Encrypt(System.String,System.String)">
+            <summary>
+            3DES加密
+            </summary>
+            <param name="str"></param>
+            <param name="key">必须16位</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EncryptDecryptExtension.DES3Decrypt(System.String,System.String)">
+            <summary>
+            3DES解密
+            </summary>
+            <param name="str"></param>
+            <param name="key">必须16位</param>
+            <returns></returns>
+        </member>
+        <member name="T:Talk.Extensions.EnumExtension">
+            <summary>
+            枚举 扩展类
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.ToDisplay(System.Enum)">
+            <summary>
+            获取DisplayAttribute上指定的Name
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.ToDescription(System.Enum)">
+            <summary>
+             获取DescriptionAttribute上指定的Description
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.ToEnum``1(System.Int32,``0)">
+            <summary>
+             转化为枚举类型，转化不成功为默认值
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.GetDisplayName(System.Enum,System.String)">
+            <summary>
+            获取DisplayAttribute上指定的Name
+            </summary>
+            <param name="value"></param>
+            <param name="defVal">defVal</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.GetDisplayShortName(System.Enum,System.String)">
+            <summary>
+            获取DisplayAttribute上指定的ShortName
+            </summary>
+            <param name="value"></param>
+            <param name="defVal">defVal</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumExtension.GetDisplayDesc(System.Enum,System.String)">
+            <summary>
+            获取DisplayAttribute上指定的Desc
+            </summary>
+            <param name="value"></param>
+            <param name="defVal">defVal</param>
+            <returns></returns>
+        </member>
+        <member name="T:Talk.Extensions.EnumEntry`2">
+            <summary>
+            枚举Entry
+            </summary>
+            <typeparam name="TEnum">枚举类型</typeparam>
+            <typeparam name="TRaw">枚举类型的基础类型</typeparam>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.RawValue">
+            <summary>
+            基础数值类型
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.EnumValue">
+            <summary>
+            原始枚举类型
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.EnumString">
+            <summary>
+            枚举类型字符串表示
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.Description">
+            <summary>
+            枚举类型的文字描述(DescriptionAttribute)
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.DisplayName">
+            <summary>
+            枚举类型的本地字符串名称(DisplayAttribute.Name)
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.DisplayShortName">
+            <summary>
+            枚举类型的本地字符串简称(DisplayAttribute.ShortName)
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.DisplayOrder">
+            <summary>
+            枚举类型的Order(DisplayAttribute.Order)
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.DisplayDesc">
+            <summary>
+            枚举类型的本地字符串说明(DisplayAttribute.Description)
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.EnumEntry`2.CustomName">
+            <summary>
+            自定义名称
+            </summary>
+        </member>
+        <member name="T:Talk.Extensions.EnumHelper">
+            <summary>
+            枚举类型的帮助类
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.ConvertEnumToList``1(System.Type,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String,System.String})">
+            <summary>
+            将指定枚举类型转换成List，用来绑定DropDownList
+            </summary>
+            <typeparam name="T">枚举类型的基础型</typeparam>
+            <param name="enumType">枚举类型</param>
+            <param name="excludes">排除的枚举类型集合（基础型集合）</param>
+            <param name="func">枚举类型对应的文字描述</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.GetEnumShortNameByCode``2(System.Collections.Generic.List{Talk.Extensions.EnumEntry{``0,``1}},System.String,System.String,System.String)">
+            <summary>
+            获取EnumEntry元素简称
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <param name="enums"></param>
+            <param name="code">编码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.GetEnumDescription(System.Enum)">
+            <summary>
+            取得枚举类型的说明文字
+            </summary>
+            <param name="objEnum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.GetEnumDisplay(System.Enum,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="objEnum"></param>
+            <param name="flag">默认值为0.获取Display属性Name值，否则获取Descriptiom</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.GetEnumDisplayAttributs(System.Enum)">
+            <summary>
+            取得枚举类型的Display属性
+            </summary>
+            <param name="objEnum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.EnumHelper.ConvertToEnum``1(System.String,``0)">
+            <summary>
+            把值转换为相应的枚举类型
+            </summary>
+            <typeparam name="T">枚举类型</typeparam>
+            <param name="rawVal">值</param>
+            <param name="defVal">默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.IsNullOrEmpty(System.String)">
+            <summary>
+            字符串是否为Null、空字符串组成。
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            字符串是否为Null、空字符串或仅由空白字符组成。
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.Left(System.String,System.Int32)">
+            <summary>
+            从字符串的开头得到一个字符串的子串
+            len参数不能大于给定字符串的长度
+            </summary>
+            <param name="str"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.Right(System.String,System.Int32)">
+            <summary>
+            从字符串的末尾得到一个字符串的子串
+            len参数不能大于给定字符串的长度
+            </summary>
+            <param name="str"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.MaxLeft(System.String,System.Int32)">
+            <summary>
+            
+            len参数大于给定字符串是返回原字符串
+            </summary>
+            <param name="str"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.MaxRight(System.String,System.Int32)">
+            <summary>
+            从字符串的末尾得到一个字符串的子串
+            </summary>
+            <param name="str"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.ToEnum``1(System.String)">
+            <summary>
+            字符串转枚举
+            </summary>
+            <typeparam name="T">类型的枚举</typeparam>
+            <param name="value">字符串值转换</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.ToEnum``1(System.String,System.Boolean)">
+            <summary>
+            字符串转枚举
+            </summary>
+            <typeparam name="T">类型的枚举</typeparam>
+            <param name="value">字符串值转换</param>
+            <param name="ignoreCase">忽略大小写</param>
+            <returns>Returns enum object</returns>
+        </member>
+    </members>
+</doc>

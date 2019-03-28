@@ -28,7 +28,7 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string yyyMMddHHssmm(this DateTime time)
         {
-            return time.ToString("yyyy-MM-dd HH:ss:mm");
+            return time.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string yyyMMddHHssmm2(this DateTime time)
         {
-            return time.ToString("yyyy/MM/dd HH:ss:mm");
+            return time.ToString("yyyy/MM/dd HH:mm:ss");
         }
 
         /// <summary>
