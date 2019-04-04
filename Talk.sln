@@ -35,7 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.AutoMap.Extensions", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.Linq.Extensions", "Talk.Linq.Extensions\Talk.Linq.Extensions.csproj", "{544B2333-3CA8-49DF-B98D-B4C755351ED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talk.Extensions", "Talk.Extensions\Talk.Extensions.csproj", "{8886F4E2-A108-4429-B5D8-5640D9385AFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.Extensions", "Talk.Extensions\Talk.Extensions.csproj", "{8886F4E2-A108-4429-B5D8-5640D9385AFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{833BA36C-B2F5-4F04-9A83-973F61245379}"
+	ProjectSection(SolutionItems) = preProject
+		C:\nuget.exe = C:\nuget.exe
+		Talk.Redis\nuget下载地址.txt = Talk.Redis\nuget下载地址.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +129,7 @@ Global
 		{CE29A2F8-4D4A-45AF-B24F-C67C3C6D3550} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 		{544B2333-3CA8-49DF-B98D-B4C755351ED1} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 		{8886F4E2-A108-4429-B5D8-5640D9385AFE} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
+		{833BA36C-B2F5-4F04-9A83-973F61245379} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401B7A10-6429-46EE-9B90-B13E416835E9}
