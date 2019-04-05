@@ -14,11 +14,17 @@ namespace Talk.AutoMap.Extensions
         {
             return Mapper.Map<TDestination>(source);
         }
-
         
         public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination)
         {
             return Mapper.Map(source, destination);
+        }
+
+        public static List<TDestination> MapToList<TDestination>(this IEnumerable<object> source)
+        {
+            if (source == null || !source.Any())
+                return new List<TDestination>();
+            return source.Select(t => t.MapTo<TDestination>()).ToList();
         }
     }
 }
