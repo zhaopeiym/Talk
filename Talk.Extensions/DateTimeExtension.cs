@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Talk.Extensions
 {
@@ -21,23 +17,34 @@ namespace Talk.Extensions
         }
 
         /// <summary>
-        /// 获取yyyMMddHHssmm时间
-        /// yyyy-MM-dd HH:ss:mm
+        /// 获取格式化时间字符串
+        /// yyyy-MM-dd HH:mm:ss
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static string yyyMMddHHssmm(this DateTime time)
+        public static string yyyMMddHHmmss(this DateTime time)
         {
             return time.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         /// <summary>
-        /// 获取yyyMMddHHssmm时间
-        /// yyyy/MM/dd HH:ss:mm
+        /// 获取格式化时间字符串
+        /// HH:mm:ss
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static string yyyMMddHHssmm2(this DateTime time)
+        public static string HHmmss(this DateTime time)
+        {
+            return time.ToString("HH:mm:ss");
+        }
+
+        /// <summary>
+        /// 获取格式化时间字符串
+        /// yyyy/MM/dd HH:mm:ss
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static string yyyMMddHHmmss2(this DateTime time)
         {
             return time.ToString("yyyy/MM/dd HH:mm:ss");
         }
@@ -47,7 +54,7 @@ namespace Talk.Extensions
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static string TimeSpanChinese(this DateTime time, DateTime? nowTime)
+        public static string TimeSpanChinese(this DateTime time, DateTime? nowTime = null)
         {
             var now = nowTime.HasValue ? nowTime.Value : DateTime.Now;
             var span = now.Subtract(time);

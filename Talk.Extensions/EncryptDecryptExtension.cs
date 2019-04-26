@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Talk.Extensions
 {
@@ -67,8 +64,8 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string DESEncrypt(this string data, string key, string iv)
         {
-            byte[] byKey = System.Text.ASCIIEncoding.ASCII.GetBytes(key);
-            byte[] byIV = System.Text.ASCIIEncoding.ASCII.GetBytes(iv);
+            byte[] byKey = Encoding.ASCII.GetBytes(key);
+            byte[] byIV = Encoding.ASCII.GetBytes(iv);
 
             DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
             int i = cryptoProvider.KeySize;
@@ -204,6 +201,8 @@ namespace Talk.Extensions
         {
             if (key?.Length != 16)
                 throw new ArgumentNullException("DES3Encrypt的Key必须为16位");
+            if (string.IsNullOrWhiteSpace(str))
+                return string.Empty;
 
             byte[] inputArray = Encoding.UTF8.GetBytes(str);
             var tripleDES = TripleDES.Create();
@@ -229,6 +228,8 @@ namespace Talk.Extensions
         {
             if (key?.Length != 16)
                 throw new ArgumentNullException("DES3Decrypt的Key必须为16位");
+            if (string.IsNullOrWhiteSpace(str))
+                return string.Empty;
 
             byte[] inputArray = Convert.FromBase64String(str);
             var tripleDES = TripleDES.Create();

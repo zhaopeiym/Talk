@@ -26,6 +26,17 @@ namespace Talk.Extensions
         }
 
         /// <summary>
+        /// 添加判断添加
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static string If(this string str, bool condition)
+        {
+            return condition ? str : string.Empty;
+        }
+
+        /// <summary>
         /// 从字符串的开头得到一个字符串的子串
         /// len参数不能大于给定字符串的长度
         /// </summary>
@@ -34,11 +45,11 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string Left(this string str, int len)
         {
-            if (str == null) 
-                throw new ArgumentNullException("str"); 
+            if (str == null)
+                throw new ArgumentNullException("str");
 
-            if (str.Length < len) 
-                throw new ArgumentException("len参数不能大于给定字符串的长度"); 
+            if (str.Length < len)
+                throw new ArgumentException("len参数不能大于给定字符串的长度");
 
             return str.Substring(0, len);
         }
@@ -52,11 +63,11 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string Right(this string str, int len)
         {
-            if (str == null) 
-                throw new ArgumentNullException("str"); 
+            if (str == null)
+                throw new ArgumentNullException("str");
 
-            if (str.Length < len) 
-                throw new ArgumentException("len参数不能大于给定字符串的长度"); 
+            if (str.Length < len)
+                throw new ArgumentException("len参数不能大于给定字符串的长度");
 
             return str.Substring(str.Length - len, len);
         }
@@ -87,8 +98,8 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string MaxRight(this string str, int len)
         {
-            if (str == null) 
-                throw new ArgumentNullException("str"); 
+            if (str == null)
+                throw new ArgumentNullException("str");
 
             if (str.Length < len)
                 return str;
@@ -96,6 +107,19 @@ namespace Talk.Extensions
             return str.Substring(str.Length - len, len);
         }
 
+        /// <summary>
+        /// 是否是数字
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsDouble(this string str)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return double.TryParse(str, out double number);
+        }
+
+        #region 类型转换
         /// <summary>
         /// 字符串转枚举
         /// </summary>
@@ -105,8 +129,8 @@ namespace Talk.Extensions
         public static T ToEnum<T>(this string value)
            where T : struct
         {
-            if (value == null) 
-                throw new ArgumentNullException(nameof(value));  
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
             return (T)Enum.Parse(typeof(T), value);
         }
 
@@ -121,7 +145,7 @@ namespace Talk.Extensions
             where T : struct
         {
             if (value == null)
-                throw new ArgumentNullException(nameof(value)); 
+                throw new ArgumentNullException(nameof(value));
             return (T)Enum.Parse(typeof(T), value, ignoreCase);
         }
 
@@ -160,6 +184,34 @@ namespace Talk.Extensions
             return Convert.ToDouble(str);
         }
 
+        public static float ToFloat(this string str)
+        {
+            //https://www.cnblogs.com/cjm123/p/8619910.html
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+            return Convert.ToSingle(str);
+        }
+
+        /// <summary>
+        /// 如果不是数值 则返回默认值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="defaultNumber"></param>
+        /// <returns></returns>
+        public static float? ToFloatOrDefault(this string str, float? defaultNumber = 0)
+        {
+            if (float.TryParse(str?.Trim(), out float number))
+            {
+                return number;
+            }
+            return defaultNumber;
+        }
+
+        /// <summary>
+        /// Bytes转String
+        /// </summary>
+        /// <param name="byteArray"></param>
+        /// <returns></returns>
         public static string BytesToString(this byte[] byteArray)
         {
             if (byteArray == null)
@@ -167,11 +219,17 @@ namespace Talk.Extensions
             return Encoding.Default.GetString(byteArray);
         }
 
+        /// <summary>
+        /// String转Bytes
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static byte[] ToBytes(this string str)
         {
             if (str == null)
                 throw new ArgumentNullException(nameof(str));
-            return Encoding.Default.GetBytes(str); ;
+            return Encoding.Default.GetBytes(str);
         }
+        #endregion 
     }
 }

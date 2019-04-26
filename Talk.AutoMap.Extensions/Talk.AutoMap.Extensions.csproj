@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
-    <PackageReference Include="Talk" Version="0.0.0.7-pre" />
+    <PackageReference Include="Talk" Version="0.0.0.16" />
   </ItemGroup>
 
 </Project>

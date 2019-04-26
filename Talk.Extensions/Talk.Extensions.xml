@@ -31,18 +31,26 @@
             <param name="time"></param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHssmm(System.DateTime)">
+        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHmmss(System.DateTime)">
             <summary>
-            获取yyyMMddHHssmm时间
-            yyyy-MM-dd HH:ss:mm
+            获取格式化时间字符串
+            yyyy-MM-dd HH:mm:ss
             </summary>
             <param name="time"></param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHssmm2(System.DateTime)">
+        <member name="M:Talk.Extensions.DateTimeExtension.HHmmss(System.DateTime)">
             <summary>
-            获取yyyMMddHHssmm时间
-            yyyy/MM/dd HH:ss:mm
+            获取格式化时间字符串
+            HH:mm:ss
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.yyyMMddHHmmss2(System.DateTime)">
+            <summary>
+            获取格式化时间字符串
+            yyyy/MM/dd HH:mm:ss
             </summary>
             <param name="time"></param>
             <returns></returns>
@@ -318,6 +326,86 @@
             <param name="defVal">默认值</param>
             <returns></returns>
         </member>
+        <member name="T:Talk.Extensions.Helper.HttpHelper">
+            <summary>
+            请求帮助类
+            </summary>
+        </member>
+        <member name="F:Talk.Extensions.Helper.HttpHelper.dictionary">
+            <summary>
+            不同url分配不同HttpClient
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.PostAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Post请求
+            </summary>
+            <param name="url">url地址</param>
+            <param name="jsonString">请求参数（Json字符串）</param>
+            <param name="headers">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.PostAsync``1(System.String,``0,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Post请求
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="url">url地址</param>
+            <param name="content">请求参数</param>
+            <param name="headers">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.GetAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Get请求
+            </summary>
+            <param name="url">url地址</param>
+            <param name="headers">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.PutAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Put请求
+            </summary>
+            <param name="url">url地址</param>
+            <param name="jsonString">请求参数（Json字符串）</param>
+            <param name="headers">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.PutAsync``1(System.String,``0,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Put请求
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="url">url地址</param>
+            <param name="content">请求参数</param>
+            <param name="headers">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.HttpHelper.DeleteAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Delete请求
+            </summary>
+            <param name="url">url地址</param>
+            <param name="authorization">webapi做用户认证</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.NumberHelper.KeepDigit(System.Double,System.Int32)">
+            <summary>
+            保留小数位 - 不四舍五入（默认保留2位）
+            </summary>
+            <param name="number"></param>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.NumberHelper.Round(System.Double,System.Int32)">
+            <summary>
+            保留小数位 - 四舍五入（默认保留2位）
+            </summary>
+            <param name="number"></param>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.StringExtension.IsNullOrEmpty(System.String)">
             <summary>
             字符串是否为Null、空字符串组成。
@@ -330,6 +418,14 @@
             字符串是否为Null、空字符串或仅由空白字符组成。
             </summary>
             <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.If(System.String,System.Boolean)">
+            <summary>
+            添加判断添加
+            </summary>
+            <param name="str"></param>
+            <param name="condition"></param>
             <returns></returns>
         </member>
         <member name="M:Talk.Extensions.StringExtension.Left(System.String,System.Int32)">
@@ -367,6 +463,13 @@
             <param name="len"></param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.StringExtension.IsDouble(System.String)">
+            <summary>
+            是否是数字
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.StringExtension.ToEnum``1(System.String)">
             <summary>
             字符串转枚举
@@ -383,6 +486,28 @@
             <param name="value">字符串值转换</param>
             <param name="ignoreCase">忽略大小写</param>
             <returns>Returns enum object</returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.ToFloatOrDefault(System.String,System.Nullable{System.Single})">
+            <summary>
+            如果不是数值 则返回默认值
+            </summary>
+            <param name="str"></param>
+            <param name="defaultNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.BytesToString(System.Byte[])">
+            <summary>
+            Bytes转String
+            </summary>
+            <param name="byteArray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.ToBytes(System.String)">
+            <summary>
+            String转Bytes
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
