@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{833BA36C
 		Talk.Redis\nuget下载地址.txt = Talk.Redis\nuget下载地址.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talk.Extensions.Tests", "Talk.Extensions.Tests\Talk.Extensions.Tests.csproj", "{3F458904-88D6-4111-B13E-1DFAEA822C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{8886F4E2-A108-4429-B5D8-5640D9385AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8886F4E2-A108-4429-B5D8-5640D9385AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8886F4E2-A108-4429-B5D8-5640D9385AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F458904-88D6-4111-B13E-1DFAEA822C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F458904-88D6-4111-B13E-1DFAEA822C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F458904-88D6-4111-B13E-1DFAEA822C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F458904-88D6-4111-B13E-1DFAEA822C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{544B2333-3CA8-49DF-B98D-B4C755351ED1} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 		{8886F4E2-A108-4429-B5D8-5640D9385AFE} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 		{833BA36C-B2F5-4F04-9A83-973F61245379} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
+		{3F458904-88D6-4111-B13E-1DFAEA822C3F} = {E89920F0-6221-48A7-9E1C-F9B52A1D91D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401B7A10-6429-46EE-9B90-B13E416835E9}

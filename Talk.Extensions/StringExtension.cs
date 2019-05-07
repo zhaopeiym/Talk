@@ -91,6 +91,23 @@ namespace Talk.Extensions
         }
 
         /// <summary>
+        /// 从指定位置截取字符串，如果小于指定位置，则返回空字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static string Sub(this string str, int len)
+        {
+            if (str == null)
+                throw new ArgumentNullException("str");
+
+            if (str.Length < len)
+                return string.Empty;
+
+            return str.Substring(len);
+        }
+
+        /// <summary>
         /// 从字符串的末尾得到一个字符串的子串
         /// </summary>
         /// <param name="str"></param>

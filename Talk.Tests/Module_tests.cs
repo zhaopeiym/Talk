@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Talk.Extensions;
 using Xunit;
 
 namespace Talk.Tests
@@ -11,7 +12,10 @@ namespace Talk.Tests
         public void Test1()
         {
             var obj = ModuleManager.Create<TalkTestMoule>();
-            obj.Initialize();            
+            obj.Initialize();
+
+
+          
             //   var obj = typeof(TalkTestMoule).GetCustomAttributes<DependsOnAttribute>();
             //var attributes = obj.SelectMany(t => t.DependedModuleTypes).ToList();
             //foreach (var attr in attributes)

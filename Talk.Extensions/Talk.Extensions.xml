@@ -326,6 +326,40 @@
             <param name="defVal">默认值</param>
             <returns></returns>
         </member>
+        <member name="T:Talk.Extensions.Helper.CodeBuilderHelper">
+            <summary>
+            code生成器
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.CodeBuilderHelper.Dictionaries">
+            <summary>
+            字典
+            警告：不可随意修改字典
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.CodeBuilderHelper.ConvertToCode(System.Char,System.Int32)">
+            <summary>
+            Code转换器
+            </summary>
+            <param name="numberChar">数字</param>
+            <param name="position">位数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.CodeBuilderHelper.NumberConvertCode(System.Int32,System.Int32)">
+            <summary>
+            数字转成混淆后的Code
+            </summary>
+            <param name="number">数字</param>
+            <param name="position">位数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.CodeBuilderHelper.CodeConvertNumber(System.String)">
+            <summary>
+            混淆后的Code解析成自增数字
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
         <member name="T:Talk.Extensions.Helper.HttpHelper">
             <summary>
             请求帮助类
@@ -390,6 +424,56 @@
             <param name="authorization">webapi做用户认证</param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="seqKey"></param>
+        </member>
+        <member name="P:Talk.Extensions.Helper.ShortCodeGenerate.CodeLength">
+            <summary>
+            短码长度        
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.ShortCodeGenerate.MaxLength">
+            <summary>
+            注意：超过设定的长度可能会有异常数据
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.GenerateKeys">
+            <summary>
+            生成随机的0-9a-zA-Z字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.Convert(System.Int64)">
+            <summary>
+            10进制转换为62进制【简单】
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.Convert(System.String)">
+            <summary>
+            将62进制转为10进制【简单】
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.ConfusionConvert(System.Int64)">
+            <summary>
+            10进制转换为62进制【混淆】
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.Helper.ShortCodeGenerate.ConfusionConvert(System.String)">
+            <summary>
+            将62进制转为10进制【混淆】
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.NumberHelper.KeepDigit(System.Double,System.Int32)">
             <summary>
             保留小数位 - 不四舍五入（默认保留2位）
@@ -404,6 +488,20 @@
             </summary>
             <param name="number"></param>
             <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.NumberHelper.KBToShowSize(System.Single)">
+            <summary>
+            千字节(KB)转可读大小
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.NumberHelper.BToShowSize(System.Single)">
+            <summary>
+            字节(B)转可读大小
+            </summary>
+            <param name="size"></param>
             <returns></returns>
         </member>
         <member name="M:Talk.Extensions.StringExtension.IsNullOrEmpty(System.String)">
@@ -450,6 +548,14 @@
             <summary>
             
             len参数大于给定字符串是返回原字符串
+            </summary>
+            <param name="str"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.Sub(System.String,System.Int32)">
+            <summary>
+            从指定位置截取字符串，如果小于指定位置，则返回空字符串
             </summary>
             <param name="str"></param>
             <param name="len"></param>
