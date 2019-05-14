@@ -474,6 +474,19 @@
             <param name="num"></param>
             <returns></returns>
         </member>
+        <member name="T:Talk.Extensions.Helper.WetBulbTemperatureHelper">
+            <summary>
+            湿球温度计算
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.WetBulbTemperatureHelper.Calculate(System.Int32,System.Single)">
+            <summary>
+            计算
+            </summary>
+            <param name="humidity">湿度</param>
+            <param name="temperature">干球温度</param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.NumberHelper.KeepDigit(System.Double,System.Int32)">
             <summary>
             保留小数位 - 不四舍五入（默认保留2位）
