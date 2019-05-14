@@ -43,7 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{833BA36C
 		Talk.Redis\nuget下载地址.txt = Talk.Redis\nuget下载地址.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talk.Extensions.Tests", "Talk.Extensions.Tests\Talk.Extensions.Tests.csproj", "{3F458904-88D6-4111-B13E-1DFAEA822C3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.Extensions.Tests", "Talk.Extensions.Tests\Talk.Extensions.Tests.csproj", "{3F458904-88D6-4111-B13E-1DFAEA822C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
