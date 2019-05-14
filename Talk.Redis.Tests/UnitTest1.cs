@@ -8,7 +8,7 @@ namespace Talk.Redis.Tests
     {
         public UnitTest1()
         {
-            RedisHelper.RedisConfig = "192.168.10.107:6379,allowAdmin=true,password=redispass";
+            RedisHelper.RedisConfig = "";
         }
         [Fact]
         public void Test1Async()

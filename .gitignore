@@ -332,3 +332,8 @@ ASALocalRun/
 /Talk.NPOI.Tests/Data/Temp
 /Talk.Linq.Extensions ---
 /Talk.AutoMap.Extensions ----
+/Talk.Linq.Extensions/自增版本号打包.ps1
+/Talk.AutoMap.Extensions/自增版本号打包.ps1
+/Talk.NPOI/自增版本号打包.ps1
+/Talk.Extensions/自增版本号打包.ps1
+/Talk/自增版本号打包.ps1
