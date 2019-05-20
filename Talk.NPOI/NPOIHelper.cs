@@ -372,7 +372,7 @@ namespace Talk.NPOI
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="filePath"></param>
-        public static void DataTableToExcel(DataTable dataTable, string filePath)
+        public static void DataTableToExcel(this DataTable dataTable, string filePath)
         {
             if (dataTable == null)
                 throw new Exception("dataTable不能为null");
@@ -454,6 +454,17 @@ namespace Talk.NPOI
             SaveExcel(savePath, book, sheetEntityList);
         }
 
+        /// <summary>
+        /// 实体保存到Excel
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entitys"></param>
+        /// <param name="filePath"></param>
+        public static void ToExcel<T>(this List<T> entitys, string filePath) where T : new()
+        {
+            var table = NPOIExtensions.ToDatatableFromList(entitys);
+            DataTableToExcel(table, filePath);
+        }
         #endregion
 
         #region private
@@ -868,7 +879,7 @@ namespace Talk.NPOI
         /// <typeparam name="T"></typeparam>
         /// <param name="sourceList"></param>
         /// <returns></returns>
-        public static DataTable ToDatatableFromList<T>(this List<T> sourceList) where T : new()
+        public static DataTable ToDatatableFromList<T>(this List<T> sourceList, bool autoColumnName = false) where T : new()
         {
             if (sourceList == null || !sourceList.Any()) { return null; }
             var pros = typeof(T).GetProperties();
@@ -881,6 +892,14 @@ namespace Talk.NPOI
                 {
                     targetTable.Columns.Add(alias);
                     propertyInfoList.Add(p);
+                }
+                else
+                {
+                    if (autoColumnName)
+                    {
+                        targetTable.Columns.Add(p?.Name);
+                        propertyInfoList.Add(p);
+                    }
                 }
             }
             object[] values = new object[targetTable.Columns.Count];

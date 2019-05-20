@@ -73,6 +73,29 @@ namespace Talk.NPOI.Tests
         }
 
         [Fact]
+        public void 测试实体转换成DataTable2()
+        {
+            var list = new List<AirEntity>();
+            list.Add(new AirEntity()
+            {
+                Carrier = "Carrier",
+                ETD = DateTime.Now,
+                FromTerminal = "FromTerminal",
+                ToTerminal = "ToTerminal",
+            });
+            list.Add(new AirEntity()
+            {
+                Carrier = "Carrier2",
+                ETD = DateTime.Now,
+                FromTerminal = "FromTerminal2",
+                ToTerminal = "ToTerminal2",
+            });
+
+            //var table = list.ToExcel();
+            list.ToExcel(@"D:\123.xls");
+        }
+
+        [Fact]
         public void 多个Shett读取成多个Table再分别写入Excel()
         {
             var tableList = NPOIHelper.GetDataTables(basePath + "空运模板2.xls");
@@ -125,7 +148,7 @@ namespace Talk.NPOI.Tests
 
         public class AirEntity
         {
-            [Alias("*起运空港")]
+            //[Alias("*起运空港")]
             public string FromTerminal { get; set; }
             [Alias("*目标空港")]
             public string ToTerminal { get; set; }

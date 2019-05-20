@@ -195,6 +195,14 @@
             <param name="isOldThan2007">是否低于2007的版本</param>   
             <param name="sheetEntityList">要记录的结果相关信息</param>
         </member>
+        <member name="M:Talk.NPOI.NPOIHelper.ToExcel``1(System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            实体保存到Excel
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entitys"></param>
+            <param name="filePath"></param>
+        </member>
         <member name="M:Talk.NPOI.NPOIHelper.IsBlankRow(NPOI.SS.UserModel.IRow,System.Int32)">
             <summary>
             判斷是否空白行
@@ -269,7 +277,7 @@
             <param name="isOldThan2007">是否低于2007</param>
             <returns></returns>
         </member>
-        <member name="M:Talk.NPOI.NPOIExtensions.ToDatatableFromList``1(System.Collections.Generic.List{``0})">
+        <member name="M:Talk.NPOI.NPOIExtensions.ToDatatableFromList``1(System.Collections.Generic.List{``0},System.Boolean)">
             <summary>
             list数据转换datatable
             </summary>
