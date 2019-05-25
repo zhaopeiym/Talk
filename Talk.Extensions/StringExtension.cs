@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.International.Converters.PinYinConverter;
+using System;
 using System.Text;
 
 namespace Talk.Extensions
@@ -134,6 +135,55 @@ namespace Talk.Extensions
             if (str == null)
                 throw new ArgumentNullException(nameof(str));
             return double.TryParse(str, out double number);
+        }
+
+        /// <summary> 
+        /// 汉字转化为拼音
+        /// https://www.cnblogs.com/lwc1st/archive/2018/05/16/9045382.html
+        /// </summary> 
+        /// <param name="str">汉字</param> 
+        /// <returns>全拼</returns> 
+        public static string GetPinyin(this string str)
+        {
+            string r = string.Empty;
+            foreach (char obj in str)
+            {
+                try
+                {
+                    ChineseChar chineseChar = new ChineseChar(obj);
+                    string t = chineseChar.Pinyins[0].ToString();
+                    r += t.Substring(0, t.Length - 1);
+                }
+                catch
+                {
+                    r += obj.ToString();
+                }
+            }
+            return r;
+        }
+
+        /// <summary> 
+        /// 汉字转化为拼音首字母
+        /// </summary> 
+        /// <param name="str">汉字</param> 
+        /// <returns>首字母</returns> 
+        public static string GetFirstPinyin(this string str)
+        {
+            string r = string.Empty;
+            foreach (char obj in str)
+            {
+                try
+                {
+                    ChineseChar chineseChar = new ChineseChar(obj);
+                    string t = chineseChar.Pinyins[0].ToString();
+                    r += t.Substring(0, 1);
+                }
+                catch
+                {
+                    r += obj.ToString();
+                }
+            }
+            return r;
         }
 
         #region 类型转换

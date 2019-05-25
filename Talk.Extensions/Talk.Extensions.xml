@@ -589,6 +589,21 @@
             <param name="str"></param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.StringExtension.GetPinyin(System.String)">
+            <summary> 
+            汉字转化为拼音
+            https://www.cnblogs.com/lwc1st/archive/2018/05/16/9045382.html
+            </summary> 
+            <param name="str">汉字</param> 
+            <returns>全拼</returns> 
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.GetFirstPinyin(System.String)">
+            <summary> 
+            汉字转化为拼音首字母
+            </summary> 
+            <param name="str">汉字</param> 
+            <returns>首字母</returns> 
+        </member>
         <member name="M:Talk.Extensions.StringExtension.ToEnum``1(System.String)">
             <summary>
             字符串转枚举
