@@ -593,6 +593,7 @@
             <summary> 
             汉字转化为拼音
             https://www.cnblogs.com/lwc1st/archive/2018/05/16/9045382.html
+            https://gitee.com/hyjiacan/Pinyin4Net
             </summary> 
             <param name="str">汉字</param> 
             <returns>全拼</returns> 
@@ -620,6 +621,14 @@
             <param name="value">字符串值转换</param>
             <param name="ignoreCase">忽略大小写</param>
             <returns>Returns enum object</returns>
+        </member>
+        <member name="M:Talk.Extensions.StringExtension.ToDataFormType(System.String,System.Type)">
+            <summary>
+            转出对应数据类型
+            </summary>
+            <param name="str"></param>
+            <param name="type"></param>
+            <returns></returns>
         </member>
         <member name="M:Talk.Extensions.StringExtension.ToFloatOrDefault(System.String,System.Nullable{System.Single})">
             <summary>
