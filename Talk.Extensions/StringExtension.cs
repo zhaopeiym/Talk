@@ -140,6 +140,7 @@ namespace Talk.Extensions
         /// <summary> 
         /// 汉字转化为拼音
         /// https://www.cnblogs.com/lwc1st/archive/2018/05/16/9045382.html
+        /// https://gitee.com/hyjiacan/Pinyin4Net
         /// </summary> 
         /// <param name="str">汉字</param> 
         /// <returns>全拼</returns> 
