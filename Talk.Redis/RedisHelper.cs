@@ -299,105 +299,7 @@ namespace Talk.Redis
         }
         #endregion
 
-        /// <summary>
-        /// 删除键
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public bool Remove(string key)
-        {
-            return database.KeyDelete(key);
-        }
-
-        /// <summary>
-        /// 判断是否存在键
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public bool Exists(string key)
-        {
-            return database.KeyExists(key);
-        }
-
-        /// <summary>
-        /// 计数器
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="expiry">只有第一次设置有效期生效</param>
-        /// <returns></returns>
-        public long SetStringIncr(string key, long value, TimeSpan? expiry = null)
-        {
-            try
-            {
-                var nubmer = database.StringIncrement(key, value);
-                if (nubmer == 1 && expiry != null)//只有第一次设置有效期（防止覆盖）
-                    database.KeyExpireAsync(key, expiry);//设置有效期
-                return nubmer;
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
-        }
-
-        /// <summary>
-        /// 计数器
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="expiry"></param>
-        /// <returns></returns>
-        public long SetStringIncr(string key, TimeSpan? expiry = null)
-        {
-            return SetStringIncr(key, 1, expiry);
-        }
-
-        /// <summary>
-        /// 读取计数器
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public long GetStringIncr(string key)
-        {
-            var value = GetString(key);
-            return string.IsNullOrWhiteSpace(value) ? 0 : long.Parse(value);
-        }
-
-        public void FlushDb()
-        {
-            var endPoints = database.Multiplexer.GetEndPoints();
-            foreach (var endpoint in endPoints)
-            {
-                database.Multiplexer.GetServer(endpoint).FlushDatabase();
-            }
-        }
-
-        public void FlushAll()
-        {
-            var endPoints = database.Multiplexer.GetEndPoints();
-            foreach (var endpoint in endPoints)
-            {
-                database.Multiplexer.GetServer(endpoint).FlushAllDatabases();
-            }
-        }
-
-        public void Save()
-        {
-            SaveType saveType = SaveType.BackgroundSave;
-            var endPoints = database.Multiplexer.GetEndPoints();
-
-            foreach (var endpoint in endPoints)
-            {
-                database.Multiplexer.GetServer(endpoint).Save(saveType);
-            }
-        }
-
-        public long Increment(string key, long value = 1L)
-        {
-            return database.StringIncrement(key, value);
-        }
-
+        #region List 操作
         public long Enqueue(string key, string value)
         {
             return database.ListLeftPush(key, value);
@@ -501,6 +403,106 @@ namespace Talk.Redis
             }
             return JsonConvert.DeserializeObject<T>(value);
         }
+        #endregion
+
+        /// <summary>
+        /// 删除键
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool Remove(string key)
+        {
+            return database.KeyDelete(key);
+        }
+
+        /// <summary>
+        /// 判断是否存在键
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool Exists(string key)
+        {
+            return database.KeyExists(key);
+        }
+
+        /// <summary>
+        /// 计数器
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="expiry">只有第一次设置有效期生效</param>
+        /// <returns></returns>
+        public long SetStringIncr(string key, long value, TimeSpan? expiry = null)
+        {
+            try
+            {
+                var nubmer = database.StringIncrement(key, value);
+                if (nubmer == 1 && expiry != null)//只有第一次设置有效期（防止覆盖）
+                    database.KeyExpireAsync(key, expiry);//设置有效期
+                return nubmer;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 计数器
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="expiry"></param>
+        /// <returns></returns>
+        public long SetStringIncr(string key, TimeSpan? expiry = null)
+        {
+            return SetStringIncr(key, 1, expiry);
+        }
+
+        /// <summary>
+        /// 读取计数器
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public long GetStringIncr(string key)
+        {
+            var value = GetString(key);
+            return string.IsNullOrWhiteSpace(value) ? 0 : long.Parse(value);
+        }
+
+        public void FlushDb()
+        {
+            var endPoints = database.Multiplexer.GetEndPoints();
+            foreach (var endpoint in endPoints)
+            {
+                database.Multiplexer.GetServer(endpoint).FlushDatabase();
+            }
+        }
+
+        public void FlushAll()
+        {
+            var endPoints = database.Multiplexer.GetEndPoints();
+            foreach (var endpoint in endPoints)
+            {
+                database.Multiplexer.GetServer(endpoint).FlushAllDatabases();
+            }
+        }
+
+        public void Save()
+        {
+            SaveType saveType = SaveType.BackgroundSave;
+            var endPoints = database.Multiplexer.GetEndPoints();
+
+            foreach (var endpoint in endPoints)
+            {
+                database.Multiplexer.GetServer(endpoint).Save(saveType);
+            }
+        }
+
+        public long Increment(string key, long value = 1L)
+        {
+            return database.StringIncrement(key, value);
+        } 
 
         public bool KeyExpire(string key, TimeSpan? expiry)
         {
