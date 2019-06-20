@@ -37,5 +37,11 @@ namespace Tests
             var num4 = WetBulbTemperatureHelper.Calculate(21, 18.1f);
             var num5 = WetBulbTemperatureHelper.Calculate(20, -3);
         }
+
+        [Test]
+        public void Test3()
+        {
+            var num1 = NumberHelper.KeepDigit(5.1f / 1f, 1);
+        }
     }
 }

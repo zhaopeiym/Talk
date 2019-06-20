@@ -10,9 +10,9 @@ namespace Talk.Extensions
         /// <param name="number"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        public static double KeepDigit(double number, int position = 2)
+        public static float KeepDigit(float number, int position = 2)
         {
-            return (int)(number * Math.Pow(10, position)) / Math.Pow(10, position);
+            return (int)(number * (float)Math.Pow(10, position)) / (float)Math.Pow(10, position);
         }
 
         /// <summary>
