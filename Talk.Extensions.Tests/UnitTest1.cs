@@ -41,6 +41,7 @@ namespace Tests
         [Test]
         public void Test3()
         {
+            var aaa = 123.5678.ToString("0.#");
             var num1 = NumberHelper.KeepDigit(5.1f / 1f, 1);
         }
     }
