@@ -474,6 +474,67 @@
             <param name="num"></param>
             <returns></returns>
         </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.OSArchitecture">
+            <summary>
+            系统架构
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.OSDescription">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.ProcessArchitecture">
+            <summary>
+            进程架构
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.Is64BitOperatingSystem">
+            <summary>
+            是否64位操作系统
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.ProcessorCount">
+            <summary>
+            CPU CORE
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.MachineName">
+            <summary>
+            HostName
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.OSVersion">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.FirstIpV4Address">
+            <summary>
+            IPV4地址
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.MacAddress">
+            <summary>
+            MAC地址
+            </summary>
+        </member>
+        <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.SerialNumber">
+            <summary>
+            自定义序列号
+            </summary>
+        </member>
+        <member name="T:Talk.Extensions.Helper.SystemInfo.SystemInfoHelper">
+            <summary>
+            系统信息
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.SystemInfo.SystemInfoHelper.GetOSInfo">
+            <summary>
+            获取系统信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Talk.Extensions.Helper.WetBulbTemperatureHelper">
             <summary>
             湿球温度计算

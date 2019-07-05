@@ -129,12 +129,14 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string Md5Encrypt(this string input, Encoding encode)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] t = md5.ComputeHash(encode.GetBytes(input));
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < t.Length; i++)
-                sb.Append(t[i].ToString("x").PadLeft(2, '0'));
-            return sb.ToString().ToUpper();
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                byte[] t = md5.ComputeHash(encode.GetBytes(input));
+                StringBuilder sb = new StringBuilder(32);
+                for (int i = 0; i < t.Length; i++)
+                    sb.Append(t[i].ToString("x").PadLeft(2, '0'));
+                return sb.ToString().ToUpper();
+            }
         }
 
         /// <summary>
@@ -144,12 +146,14 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string Md5Encrypt(this Stream stream)
         {
-            MD5 md5serv = MD5CryptoServiceProvider.Create();
-            byte[] buffer = md5serv.ComputeHash(stream);
-            StringBuilder sb = new StringBuilder();
-            foreach (byte var in buffer)
-                sb.Append(var.ToString("x2"));
-            return sb.ToString().ToUpper();
+            using (MD5 md5serv = new MD5CryptoServiceProvider())
+            {
+                byte[] buffer = md5serv.ComputeHash(stream);
+                StringBuilder sb = new StringBuilder();
+                foreach (byte var in buffer)
+                    sb.Append(var.ToString("x2"));
+                return sb.ToString().ToUpper();
+            }
         }
 
         /// <summary>
