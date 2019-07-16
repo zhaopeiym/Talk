@@ -39,12 +39,6 @@
             初始化后
             </summary>
         </member>
-        <member name="T:Talk.Contract.IReturn`1">
-            <summary>
-            契约响应接口, 用以标识Request对应的Response
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
         <member name="P:Talk.Contract.ResultBase`1.IsSuccess">
             <summary>
             请求是否成功
@@ -80,7 +74,7 @@
             请求跟踪id
             </summary>
         </member>
-        <member name="M:Talk.Contract.RpcClient.PostAsync``1(Talk.Contract.IReturn{``0},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Talk.Contract.RpcClient.PostAsync``1(Talk.IReturn{``0},System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             post请求
             </summary>
@@ -89,7 +83,7 @@
             <param name="headers">headers可做认证信息</param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.Contract.IReturn,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.IReturn,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             post请求
             </summary>
@@ -142,35 +136,56 @@
             拦截器标识
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C200">
+        <member name="F:Talk.HttpCodeEnum.C200">
             <summary>
             成功
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C404">
+        <member name="F:Talk.HttpCodeEnum.C400">
+            <summary>
+            错误请求
+            </summary>
+        </member>
+        <member name="F:Talk.HttpCodeEnum.C404">
             <summary>
             未找到
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C401">
+        <member name="F:Talk.HttpCodeEnum.C401">
             <summary>
             未登录
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C407">
+        <member name="F:Talk.HttpCodeEnum.C407">
             <summary>
             没权限
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C500">
+        <member name="F:Talk.HttpCodeEnum.C412">
+            <summary>
+            参数验证失败
+            </summary>
+        </member>
+        <member name="F:Talk.HttpCodeEnum.C500">
             <summary>
             内部错误
             </summary>
         </member>
-        <member name="F:Talk.Interface.HttpCodeEnum.C503">
+        <member name="F:Talk.HttpCodeEnum.C503">
             <summary>
             服务不可用
             </summary>
+        </member>
+        <member name="F:Talk.HttpCodeEnum.C504">
+            <summary>
+            请求超时
+            </summary>
+        </member>
+        <member name="T:Talk.IReturn`1">
+            <summary>
+            契约响应接口, 用以标识Request对应的Response
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="M:Talk.ModuleManager.Initialize">
             <summary>
