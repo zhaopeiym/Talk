@@ -64,6 +64,33 @@ namespace Talk.Contract
         }
 
         /// <summary>
+        /// post请求
+        /// </summary>
+        /// <param name="return">返回类型</param>
+        /// <param name="jsonString">请求参数Json字符串</param>
+        /// <param name="headers">headers可做认证信息</param>
+        /// <returns></returns>
+        public static async Task<ResultBase<object>> PostAsync(this IReturn @return, string jsonString, Dictionary<string, string> headers = null)
+        {
+            try
+            {
+                var url = GetUrl(@return);
+                var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, jsonString, headers);
+                var result = await httpResponseMessage.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ResultBase<object>>(result);
+            }
+            catch (System.Exception ex)
+            {
+                return new ResultBase<object>()
+                {
+                    Code = HttpCodeEnum.C500,
+                    IsUserErr = false,
+                    ErrorMsg = $"{ex.Message} { ex.StackTrace}",
+                };
+            }
+        }
+
+        /// <summary>
         /// 获取请求url
         /// </summary>
         /// <param name="request"></param>

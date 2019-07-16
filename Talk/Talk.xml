@@ -91,6 +91,15 @@
             <param name="headers">headers可做认证信息</param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.IReturn,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            post请求
+            </summary>
+            <param name="return">返回类型</param>
+            <param name="jsonString">请求参数Json字符串</param>
+            <param name="headers">headers可做认证信息</param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Contract.RpcClient.GetUrl(System.Object)">
             <summary>
             获取请求url
