@@ -24,6 +24,14 @@
             <param name="maxInclusiveValue">最大(包容)值</param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.ConfigurationManager.GetConfig(System.String,System.String)">
+            <summary>
+            获取配置文件
+            </summary>
+            <param name="key"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.DateTimeExtension.TimeStamp(System.DateTime)">
             <summary>
             获取时间戳
