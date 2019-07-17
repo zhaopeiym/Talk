@@ -5,7 +5,7 @@ using System.Text;
 namespace Talk.Application.Dto
 {
     public interface IHasTotalCount
-    {      
-        int TotalCount { get; set; }
+    {
+        long TotalCount { get; set; }
     }
 }
