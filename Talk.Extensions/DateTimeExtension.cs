@@ -5,12 +5,12 @@ namespace Talk.Extensions
     public static class DateTimeExtension
     {
         /// <summary>
-        /// 设置本地时区
-        /// 一般是东八区，如果本地设置的是东八区
+        /// 把时间设置为本地时区
+        /// 而不是转成本地时区，如系统的ToLocalTime就是把当前数据的时区（或没有带时区的默认成UTC）转成本地时区。这种情况就可能会加八个小时。导致值有变化。
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static DateTime SpecifyKindLocal(this DateTime time)
+        public static DateTime ToLocalTimeKind(this DateTime time)
         {
             return DateTime.SpecifyKind(time, DateTimeKind.Local);
         }

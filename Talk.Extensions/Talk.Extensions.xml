@@ -32,7 +32,7 @@
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Extensions.DateTimeExtension.SpecifyKindLocal(System.DateTime)">
+        <member name="M:Talk.Extensions.DateTimeExtension.ToLocalTimeKind(System.DateTime)">
             <summary>
             设置本地时区
             一般是东八区，如果本地设置的是东八区
