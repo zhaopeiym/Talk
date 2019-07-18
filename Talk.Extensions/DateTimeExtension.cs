@@ -5,6 +5,17 @@ namespace Talk.Extensions
     public static class DateTimeExtension
     {
         /// <summary>
+        /// 设置本地时区
+        /// 一般是东八区，如果本地设置的是东八区
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static DateTime SpecifyKindLocal(this DateTime time)
+        {
+            return DateTime.SpecifyKind(time, DateTimeKind.Local);
+        }
+
+        /// <summary>
         /// 获取时间戳
         /// </summary>
         /// <param name="time"></param>

@@ -32,6 +32,14 @@
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.DateTimeExtension.SpecifyKindLocal(System.DateTime)">
+            <summary>
+            设置本地时区
+            一般是东八区，如果本地设置的是东八区
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.DateTimeExtension.TimeStamp(System.DateTime)">
             <summary>
             获取时间戳
@@ -480,6 +488,22 @@
             将62进制转为10进制【混淆】
             </summary>
             <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Talk.Extensions.Helper.StopwatchHelper">
+            <summary>
+            执行时间性能监控
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.StopwatchHelper.Restart">
+            <summary>
+            重新计算
+            </summary>
+        </member>
+        <member name="M:Talk.Extensions.Helper.StopwatchHelper.GetTotalSeconds">
+            <summary>
+            执行总秒数
+            </summary>
             <returns></returns>
         </member>
         <member name="P:Talk.Extensions.Helper.SystemInfo.OSInfo.OSArchitecture">
