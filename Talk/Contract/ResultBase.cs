@@ -36,6 +36,10 @@ namespace Talk.Contract
         /// 重定向地址
         /// </summary>
         public string ResultUrl { get; set; }
+        /// <summary>
+        /// 请求的地址
+        /// </summary>
+        public string RequestUrl { get; set; }
 
         public List<string> ErrorList { get; set; }
 

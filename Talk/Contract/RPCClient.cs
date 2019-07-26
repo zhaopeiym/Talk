@@ -19,12 +19,15 @@ namespace Talk.Contract
         /// <returns></returns>
         public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IReturn<TResponse> @return, Dictionary<string, string> headers = null)
         {
+            var url = string.Empty;
             try
             {
-                var url = GetUrl(@return);
+                url = GetUrl(@return);
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ResultBase<TResponse>>(result);
+                var resultObj = JsonConvert.DeserializeObject<ResultBase<TResponse>>(result);
+                resultObj.RequestUrl = url;
+                return resultObj;
             }
             catch (System.Exception ex)
             {
@@ -33,6 +36,7 @@ namespace Talk.Contract
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
+                    RequestUrl = url,
                 };
             }
         }
@@ -45,12 +49,15 @@ namespace Talk.Contract
         /// <returns></returns>
         public static async Task<ResultBase<object>> PostAsync(this IReturn @return, Dictionary<string, string> headers = null)
         {
+            var url = string.Empty;
             try
             {
-                var url = GetUrl(@return);
+                url = GetUrl(@return);
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                resultObj.RequestUrl = url;
+                return resultObj;
             }
             catch (System.Exception ex)
             {
@@ -59,6 +66,7 @@ namespace Talk.Contract
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
+                    RequestUrl = url,
                 };
             }
         }
@@ -72,12 +80,15 @@ namespace Talk.Contract
         /// <returns></returns>
         public static async Task<ResultBase<object>> PostAsync(this IReturn @return, string jsonString, Dictionary<string, string> headers = null)
         {
+            var url = string.Empty;
             try
             {
-                var url = GetUrl(@return);
+                url = GetUrl(@return);
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, jsonString, headers);
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                resultObj.RequestUrl = url;
+                return resultObj;
             }
             catch (System.Exception ex)
             {
@@ -86,6 +97,7 @@ namespace Talk.Contract
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
+                    RequestUrl = url,
                 };
             }
         }
