@@ -27,7 +27,7 @@ namespace Talk.Contract
         /// <summary>
         /// 是否为用户友好异常
         /// </summary>
-        public bool? IsUserErr { get; set; } = true;
+        public bool? IsUserErr { get; set; } = false;
         /// <summary>
         /// 异常消息
         /// </summary>
