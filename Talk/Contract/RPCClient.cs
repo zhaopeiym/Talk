@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Talk.Attributes;
 using Talk.Extensions;
 using Talk.Extensions.Helper;
@@ -24,7 +25,7 @@ namespace Talk.Contract
             if (headers == null) headers = new Dictionary<string, string>();
             try
             {
-                headers.Add("RPCContext", JsonConvert.SerializeObject(context));
+                headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
                 url = @return.GetUrl();
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
