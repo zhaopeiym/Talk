@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Talk.Attributes;
 using Talk.Extensions;
 using Talk.Extensions.Helper;
+using Talk.Interface;
 
 namespace Talk.Contract
 {
@@ -17,7 +18,7 @@ namespace Talk.Contract
         /// <param name="return">请求参数</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IReturn<TResponse> @return, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IRPCContext context, IReturn<TResponse> @return, Dictionary<string, string> headers = null)
         {
             var url = string.Empty;
             try
@@ -57,7 +58,7 @@ namespace Talk.Contract
         /// <param name="return">返回类型</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<object>> PostAsync(this IReturn @return, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, IReturn @return, Dictionary<string, string> headers = null)
         {
             var url = string.Empty;
             try
@@ -98,7 +99,7 @@ namespace Talk.Contract
         /// <param name="parentTrackId">请求源的TrackId [GUID类型]</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<object>> PostAsync(this IReturn @return, string parentTrackId, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, IReturn @return, string parentTrackId, Dictionary<string, string> headers = null)
         {
             var url = string.Empty;
             try
@@ -141,7 +142,7 @@ namespace Talk.Contract
         /// <param name="jsonString">请求参数Json字符串</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<object>> PostAsync(string url, string jsonString, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, string url, string jsonString, Dictionary<string, string> headers = null)
         {
             try
             {
