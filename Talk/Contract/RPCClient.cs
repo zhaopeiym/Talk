@@ -22,8 +22,18 @@ namespace Talk.Contract
             var url = string.Empty;
             try
             {
-                url = GetUrl(@return);
+                url = @return.GetUrl();
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
+                if (httpResponseMessage == null || httpResponseMessage.Content == null)
+                {
+                    return new ResultBase<TResponse>()
+                    {
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
+                        RequestUrl = url,
+                    };
+                }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
                 var resultObj = JsonConvert.DeserializeObject<ResultBase<TResponse>>(result);
                 resultObj.RequestUrl = url;
@@ -52,8 +62,61 @@ namespace Talk.Contract
             var url = string.Empty;
             try
             {
-                url = GetUrl(@return);
+                url = @return.GetUrl();
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
+                if (httpResponseMessage == null || httpResponseMessage.Content == null)
+                {
+                    return new ResultBase<object>()
+                    {
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
+                        RequestUrl = url,
+                    };
+                }
+                var result = await httpResponseMessage.Content.ReadAsStringAsync();
+                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                resultObj.RequestUrl = url;
+                return resultObj;
+            }
+            catch (System.Exception ex)
+            {
+                return new ResultBase<object>()
+                {
+                    Code = HttpCodeEnum.C500,
+                    IsUserErr = false,
+                    ErrorMsg = $"{ex.Message} { ex.StackTrace}",
+                    RequestUrl = url,
+                };
+            }
+        }
+
+        /// <summary>
+        /// post请求
+        /// </summary>
+        /// <param name="return">返回类型</param>
+        /// <param name="parentTrackId">请求源的TrackId [GUID类型]</param>
+        /// <param name="headers">headers可做认证信息</param>
+        /// <returns></returns>
+        public static async Task<ResultBase<object>> PostAsync(this IReturn @return, string parentTrackId, Dictionary<string, string> headers = null)
+        {
+            var url = string.Empty;
+            try
+            {
+                url = @return.GetUrl();
+                if (headers == null) headers = new Dictionary<string, string>();
+                headers.Add("ParentTrackId", parentTrackId);
+                var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
+                if (httpResponseMessage == null || httpResponseMessage.Content == null)
+                {
+                    return new ResultBase<object>()
+                    {
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
+                        RequestUrl = url,
+                    };
+                }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
                 var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
                 resultObj.RequestUrl = url;
@@ -78,13 +141,21 @@ namespace Talk.Contract
         /// <param name="jsonString">请求参数Json字符串</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<object>> PostAsync(this IReturn @return, string jsonString, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<object>> PostAsync(string url, string jsonString, Dictionary<string, string> headers = null)
         {
-            var url = string.Empty;
             try
             {
-                url = GetUrl(@return);
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, jsonString, headers);
+                if (httpResponseMessage == null || httpResponseMessage.Content == null)
+                {
+                    return new ResultBase<object>()
+                    {
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
+                        RequestUrl = url,
+                    };
+                }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
                 var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
                 resultObj.RequestUrl = url;
@@ -107,7 +178,7 @@ namespace Talk.Contract
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private static string GetUrl(object request)
+        public static string GetUrl(this IReturn request)
         {
             var assemblyName = request.GetType().Assembly.GetName().Name;
             //这里约定配置BaseUrl
