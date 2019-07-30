@@ -37,10 +37,6 @@ namespace Talk.Interface
         /// </summary>
         string RequestUrl { get; set; }
         /// <summary>
-        /// 请求了哪些客户端
-        /// </summary>
-        List<string> ClientUrls { get; set; }
-        /// <summary>
         /// 请求源IP
         /// </summary>
         string RequestIP { get; set; }
@@ -48,5 +44,17 @@ namespace Talk.Interface
         /// 请求code，请求源应用编号，一般使用应用端口号。
         /// </summary>
         string RequestCode { get; set; }
+        /// <summary>
+        /// 方法描述
+        /// </summary>
+        string MethodDescription { get; set; }
+        /// <summary>
+        /// Action
+        /// </summary>
+        string ActionName { get; set; }
+        /// <summary>
+        /// 控制器
+        /// </summary>
+        string ControllerName { get; set; }
     }
 }

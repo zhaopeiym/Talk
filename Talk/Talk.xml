@@ -79,7 +79,7 @@
             请求跟踪id
             </summary>
         </member>
-        <member name="M:Talk.Contract.RpcClient.PostAsync``1(Talk.IReturn{``0},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Talk.Contract.RpcClient.PostAsync``1(Talk.Interface.IRPCContext,Talk.IReturn{``0},System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             post请求
             </summary>
@@ -88,7 +88,7 @@
             <param name="headers">headers可做认证信息</param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.IReturn,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.Interface.IRPCContext,Talk.IReturn,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             post请求
             </summary>
@@ -96,7 +96,7 @@
             <param name="headers">headers可做认证信息</param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.IReturn,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Talk.Contract.RpcClient.PostAsync(Talk.Interface.IRPCContext,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             post请求
             </summary>
@@ -105,49 +105,81 @@
             <param name="headers">headers可做认证信息</param>
             <returns></returns>
         </member>
-        <member name="M:Talk.Contract.RpcClient.GetUrl(System.Object)">
+        <member name="M:Talk.Contract.RpcClient.GetUrl(Talk.IReturn)">
             <summary>
             获取请求url
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="T:Talk.Contract.RPCContext">
+            <summary>
+            远程调用上下文
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.Email">
+            <summary>
+            调用者邮箱
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.TenantId">
+            <summary>
+            租户id
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.TenantName">
+            <summary>
+            租户名称
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.TrackId">
+            <summary>
+            请求源跟踪ID
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.RequestUrl">
+            <summary>
+            请求源URL
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.RequestIP">
+            <summary>
+            请求源IP
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.RequestCode">
+            <summary>
+            请求code，请求源应用编号，一般使用应用端口号。
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.MethodDescription">
+            <summary>
+            方法描述
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.ActionName">
+            <summary>
+            Action
+            </summary>
+        </member>
+        <member name="P:Talk.Contract.RPCContext.ControllerName">
+            <summary>
+            控制器
+            </summary>
+        </member>
         <member name="P:Talk.DependsOnAttribute.DependedModuleTypes">
             <summary>
             类型的依赖模块
-            </summary>
-        </member>
-        <member name="M:Talk.InjectHelper.AutoInjection(Autofac.ContainerBuilder,System.Reflection.Assembly,System.Type)">
-            <summary>
-            自动注入
-            </summary>
-            <param name="services"></param>
-            <param name="assembly"></param>
-            <param name="interceptedType">拦截器</param>
-        </member>
-        <member name="T:Talk.ITransientDependency">
-            <summary>
-             瞬时（每次都重新实例）
-            </summary>
-        </member>
-        <member name="T:Talk.IScopedDependency">
-            <summary>
-            一个请求内唯一（本质上是生命周期范围内的单例）
-            </summary>
-        </member>
-        <member name="T:Talk.ISingletonDependency">
-            <summary>
-            单例（全局唯一）
-            </summary>
-        </member>
-        <member name="T:Talk.IRelease">
-            <summary>
-            自动释放
-            </summary>
-        </member>
-        <member name="T:Talk.IAutoInterceptor">
-            <summary>
-            拦截器标识
             </summary>
         </member>
         <member name="F:Talk.HttpCodeEnum.C200">
@@ -195,11 +227,109 @@
             请求超时
             </summary>
         </member>
+        <member name="M:Talk.InjectHelper.AutoInjection(Autofac.ContainerBuilder,System.Reflection.Assembly,System.Type)">
+            <summary>
+            自动注入
+            </summary>
+            <param name="services"></param>
+            <param name="assembly"></param>
+            <param name="interceptedType">拦截器</param>
+        </member>
+        <member name="T:Talk.ITransientDependency">
+            <summary>
+             瞬时（每次都重新实例）
+            </summary>
+        </member>
+        <member name="T:Talk.IScopedDependency">
+            <summary>
+            一个请求内唯一（本质上是生命周期范围内的单例）
+            </summary>
+        </member>
+        <member name="T:Talk.ISingletonDependency">
+            <summary>
+            单例（全局唯一）
+            </summary>
+        </member>
+        <member name="T:Talk.IRelease">
+            <summary>
+            自动释放
+            </summary>
+        </member>
+        <member name="T:Talk.IAutoInterceptor">
+            <summary>
+            拦截器标识
+            </summary>
+        </member>
         <member name="T:Talk.IReturn`1">
             <summary>
             契约响应接口, 用以标识Request对应的Response
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Talk.Interface.IRPCContext">
+            <summary>
+            远程调用上下文接口
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.Email">
+            <summary>
+            调用者邮箱
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.TenantId">
+            <summary>
+            租户id
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.TenantName">
+            <summary>
+            租户名称
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.TrackId">
+            <summary>
+            请求源跟踪ID
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.RequestUrl">
+            <summary>
+            请求源URL
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.RequestIP">
+            <summary>
+            请求源IP
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.RequestCode">
+            <summary>
+            请求code，请求源应用编号，一般使用应用端口号。
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.MethodDescription">
+            <summary>
+            方法描述
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.ActionName">
+            <summary>
+            Action
+            </summary>
+        </member>
+        <member name="P:Talk.Interface.IRPCContext.ControllerName">
+            <summary>
+            控制器
+            </summary>
         </member>
         <member name="M:Talk.ModuleManager.Initialize">
             <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Talk.Interface;
 
 namespace Talk.Contract
@@ -38,10 +37,6 @@ namespace Talk.Contract
         /// </summary>
         public string RequestUrl { get; set; }
         /// <summary>
-        /// 请求了哪些客户端
-        /// </summary>
-        public List<string> ClientUrls { get; set; }
-        /// <summary>
         /// 请求源IP
         /// </summary>
         public string RequestIP { get; set; }
@@ -49,5 +44,17 @@ namespace Talk.Contract
         /// 请求code，请求源应用编号，一般使用应用端口号。
         /// </summary>
         public string RequestCode { get; set; }
+        /// <summary>
+        /// 方法描述
+        /// </summary>
+        public string MethodDescription { get; set; }
+        /// <summary>
+        /// Action
+        /// </summary>
+        public string ActionName { get; set; }
+        /// <summary>
+        /// 控制器
+        /// </summary>
+        public string ControllerName { get; set; }
     }
 }

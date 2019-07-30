@@ -21,8 +21,10 @@ namespace Talk.Contract
         public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IRPCContext context, IReturn<TResponse> @return, Dictionary<string, string> headers = null)
         {
             var url = string.Empty;
+            if (headers == null) headers = new Dictionary<string, string>();
             try
             {
+                headers.Add("RPCContext", JsonConvert.SerializeObject(context));
                 url = @return.GetUrl();
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
@@ -61,8 +63,10 @@ namespace Talk.Contract
         public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, IReturn @return, Dictionary<string, string> headers = null)
         {
             var url = string.Empty;
+            if (headers == null) headers = new Dictionary<string, string>();
             try
             {
+                headers.Add("RPCContext", JsonConvert.SerializeObject(context));
                 url = @return.GetUrl();
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
@@ -91,50 +95,7 @@ namespace Talk.Contract
                 };
             }
         }
-
-        /// <summary>
-        /// post请求
-        /// </summary>
-        /// <param name="return">返回类型</param>
-        /// <param name="parentTrackId">请求源的TrackId [GUID类型]</param>
-        /// <param name="headers">headers可做认证信息</param>
-        /// <returns></returns>
-        public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, IReturn @return, string parentTrackId, Dictionary<string, string> headers = null)
-        {
-            var url = string.Empty;
-            try
-            {
-                url = @return.GetUrl();
-                if (headers == null) headers = new Dictionary<string, string>();
-                headers.Add("ParentTrackId", parentTrackId);
-                var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
-                if (httpResponseMessage == null || httpResponseMessage.Content == null)
-                {
-                    return new ResultBase<object>()
-                    {
-                        Code = HttpCodeEnum.C500,
-                        IsUserErr = false,
-                        ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
-                        RequestUrl = url,
-                    };
-                }
-                var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
-                resultObj.RequestUrl = url;
-                return resultObj;
-            }
-            catch (System.Exception ex)
-            {
-                return new ResultBase<object>()
-                {
-                    Code = HttpCodeEnum.C500,
-                    IsUserErr = false,
-                    ErrorMsg = $"{ex.Message} { ex.StackTrace}",
-                    RequestUrl = url,
-                };
-            }
-        }
-
+       
         /// <summary>
         /// post请求
         /// </summary>
@@ -144,8 +105,10 @@ namespace Talk.Contract
         /// <returns></returns>
         public static async Task<ResultBase<object>> PostAsync(this IRPCContext context, string url, string jsonString, Dictionary<string, string> headers = null)
         {
+            if (headers == null) headers = new Dictionary<string, string>();
             try
             {
+                headers.Add("RPCContext", JsonConvert.SerializeObject(context));
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, jsonString, headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
                 {
