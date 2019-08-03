@@ -24,6 +24,31 @@
             跳过多少条
             </summary>
         </member>
+        <member name="T:Talk.Application.Models.RemoteAttestationModel">
+            <summary>
+            远程认证
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Models.RemoteAttestationModel.Code">
+            <summary>
+            边缘设备表示
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Models.RemoteAttestationModel.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Models.RemoteAttestationModel.ProjectId">
+            <summary>
+            项目Id
+            </summary>
+        </member>
+        <member name="P:Talk.Application.Models.RemoteAttestationModel.Key">
+            <summary>
+            认证加密键
+            </summary>
+        </member>
         <member name="M:Talk.AppModule.PreInitialize">
             <summary>
             初始化前
