@@ -9,16 +9,16 @@ namespace Talk.Talk.Apollo
     /// </summary>
     public static class ApolloConfigurationManager
     {
-        public readonly static IConfiguration ApolloConfiguration;
+        private readonly static IConfiguration Configuration;
 
         static ApolloConfigurationManager()
         {
-            var Configuration = new ConfigurationBuilder()
+            var TempConfiguration = new ConfigurationBuilder()
                   .SetBasePath(Directory.GetCurrentDirectory())
                   .AddJsonFile("appsettings.json", optional: true)
                   .Build();
-            ApolloConfiguration = new ConfigurationBuilder()
-                .AddApollo(Configuration.GetSection("apollo"))
+            Configuration = new ConfigurationBuilder()
+                .AddApollo(TempConfiguration.GetSection("apollo"))
                 .AddDefault()
                 .Build();
         }
@@ -29,9 +29,9 @@ namespace Talk.Talk.Apollo
         /// <param name="key"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static string GetConfig(this string key, string defaultValue = "")
+        public static string GetApolloConfig(this string key, string defaultValue = "")
         {
-            var value = ApolloConfiguration.GetValue(key, defaultValue);
+            var value = Configuration.GetValue(key, defaultValue);
             if (string.IsNullOrWhiteSpace(value))
             {
                 if (!string.IsNullOrWhiteSpace(defaultValue))
