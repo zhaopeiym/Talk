@@ -24,6 +24,14 @@
             <param name="maxInclusiveValue">最大(包容)值</param>
             <returns></returns>
         </member>
+        <member name="M:Talk.Extensions.ConfigurationManager.GetSection``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="M:Talk.Extensions.ConfigurationManager.GetConfig(System.String,System.String)">
             <summary>
             获取配置文件

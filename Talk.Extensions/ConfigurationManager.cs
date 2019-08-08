@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System.IO;
 
 namespace Talk.Extensions
@@ -15,16 +13,15 @@ namespace Talk.Extensions
                 .AddJsonFile("appsettings.json", optional: true)
                 .Build();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static T GetSection<T>(string key) where T : class, new()
         {
-            var obj = new ServiceCollection()
-                .AddOptions()
-                .Configure<T>(t => Configuration.GetSection(key))
-                .BuildServiceProvider()
-                .GetService<IOptions<T>>()
-                .Value;
-            return obj;
+            return Configuration.GetSection(key).Get<T>();
         }
 
         /// <summary>
@@ -35,24 +32,14 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string GetConfig(this string key, string defaultValue = "")
         {
-            try
-            {
-                var value = Configuration.GetValue<string>(key);
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    if (!string.IsNullOrWhiteSpace(defaultValue))
-                        return defaultValue;
-                    throw new System.Exception($"获取配置{key}异常");
-                }
-                return value;
-            }
-            catch (System.Exception)
+            var value = Configuration.GetValue(key, defaultValue);
+            if (string.IsNullOrWhiteSpace(value))
             {
                 if (!string.IsNullOrWhiteSpace(defaultValue))
                     return defaultValue;
                 throw new System.Exception($"获取配置{key}异常");
-                throw;
             }
+            return value;
         }
     }
 }

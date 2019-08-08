@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talk.Apollo</name>
+    </assembly>
+    <members>
+        <member name="M:Talk.Talk.Apollo.ApolloConfigurationManager.GetConfig(System.String,System.String)">
+            <summary>
+            获取Apollo配置
+            </summary>
+            <param name="key"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

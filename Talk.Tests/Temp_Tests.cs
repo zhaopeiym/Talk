@@ -4,6 +4,8 @@ using Com.Ctrip.Framework.Apollo.Enums;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
+using Talk.Extensions;
+using Talk.Talk.Apollo;
 using Xunit;
 
 namespace Talk.Tests
@@ -50,6 +52,19 @@ namespace Talk.Tests
             var obj = builder.ConfigRepositoryFactory.GetConfigRepository(ConfigConsts.NamespaceApplication);
             var config = obj.GetConfig();
             var tem = config.GetProperty("test");
+        }
+
+        [Fact]
+        public void test2()
+        {
+            var test1 = ConfigurationManager.GetConfig("test2");
+            var test2 = Talk.Apollo.ApolloConfigurationManager.GetConfig("test", "aa");
+            var aaa = ConfigurationManager.GetSection<aa>("apollo:Meta");
+        }
+
+        public class aa
+        {
+            public string DEV { get; set; }
         }
     }
 }

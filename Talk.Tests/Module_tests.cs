@@ -11,8 +11,8 @@ namespace Talk.Tests
         [Fact]
         public void Test1()
         {
-            var obj = ModuleManager.Create<TalkTestMoule>();
-            obj.Initialize();
+           // var obj = ModuleManager.Create<TalkTestMoule>();
+           // obj.Initialize();
 
 
           
