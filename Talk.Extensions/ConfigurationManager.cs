@@ -7,6 +7,7 @@ namespace Talk.Extensions
     {
         public readonly static IConfiguration Configuration;
 
+        //$"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json"
         static ConfigurationManager() =>
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -36,10 +37,10 @@ namespace Talk.Extensions
             if (string.IsNullOrWhiteSpace(value))
             {
                 if (!string.IsNullOrWhiteSpace(defaultValue))
-                    return defaultValue;
+                    return defaultValue?.Trim();
                 throw new System.Exception($"获取配置{key}异常");
             }
-            return value;
+            return value?.Trim();
         }
     }
 }
