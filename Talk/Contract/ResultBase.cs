@@ -51,5 +51,9 @@ namespace Talk.Contract
         /// 请求跟踪id
         /// </summary>
         public Guid TrackId { get; set; }
+        /// <summary>
+        /// 请求参数
+        /// </summary>
+        public string RequesArg { get; set; }
     }
 }

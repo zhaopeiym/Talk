@@ -58,7 +58,7 @@ namespace Talk.Tests
         public void test2()
         {
             var test1 = ConfigurationManager.GetConfig("test2");
-            var test2 = Talk.Apollo.ApolloConfigurationManager.GetConfig("test", "aa");
+            var test2 = Talk.Apollo.ApolloConfigurationManager.GetApolloConfig("test", "aa");
             var aaa = ConfigurationManager.GetSection<aa>("apollo:Meta");
         }
 

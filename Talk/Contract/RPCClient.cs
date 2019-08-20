@@ -32,6 +32,7 @@ namespace Talk.Contract
                 {
                     return new ResultBase<TResponse>()
                     {
+                        RequesArg = JsonConvert.SerializeObject(@return),
                         Code = HttpCodeEnum.C500,
                         IsUserErr = false,
                         ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
@@ -47,6 +48,7 @@ namespace Talk.Contract
             {
                 return new ResultBase<TResponse>()
                 {
+                    RequesArg = JsonConvert.SerializeObject(@return),
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
@@ -74,6 +76,7 @@ namespace Talk.Contract
                 {
                     return new ResultBase<object>()
                     {
+                        RequesArg = JsonConvert.SerializeObject(@return),
                         Code = HttpCodeEnum.C500,
                         IsUserErr = false,
                         ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
@@ -89,6 +92,7 @@ namespace Talk.Contract
             {
                 return new ResultBase<object>()
                 {
+                    RequesArg = JsonConvert.SerializeObject(@return),
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
@@ -96,7 +100,7 @@ namespace Talk.Contract
                 };
             }
         }
-       
+
         /// <summary>
         /// post请求
         /// </summary>
@@ -115,6 +119,7 @@ namespace Talk.Contract
                 {
                     return new ResultBase<object>()
                     {
+                        RequesArg = jsonString,
                         Code = HttpCodeEnum.C500,
                         IsUserErr = false,
                         ErrorMsg = $"请求结果HttpResponseMessage为null。请确认是否存在地址{url},或检查参数是否有误。",
@@ -130,6 +135,7 @@ namespace Talk.Contract
             {
                 return new ResultBase<object>()
                 {
+                    RequesArg = jsonString,
                     Code = HttpCodeEnum.C500,
                     IsUserErr = false,
                     ErrorMsg = $"{ex.Message} { ex.StackTrace}",
