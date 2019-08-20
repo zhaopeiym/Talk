@@ -68,8 +68,8 @@ namespace Talk.Contract
     public class RemoteAuthentication
     {
         /// <summary>
-        /// 加密后的认证内容（序列号后再加密）
-        /// 包括：Key（认证加密键）、TenantId（租户id）、ProjectId（项目Id）、Code（边缘设备表示）
+        /// 加密后的认证内容（实际上就是 RemoteAttestationModel 序列号后再加密）
+        /// 包括：Key（认证加密键）、TenantId [这里的TenantId比RPCContext.TenantId可信度更高]、ProjectId（项目Id）、Code（边缘设备表示）        
         /// 使用被调用方的key加密
         /// </summary>
         public string RemoteAuthorize { get; set; }
