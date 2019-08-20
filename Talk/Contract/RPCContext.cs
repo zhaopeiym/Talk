@@ -56,5 +56,26 @@ namespace Talk.Contract
         /// 控制器
         /// </summary>
         public string ControllerName { get; set; }
+        /// <summary>
+        /// 远程认证
+        /// </summary>
+        public RemoteAuthentication Authentication { get; set; }
+    }
+
+    /// <summary>
+    /// 远程认证
+    /// </summary>
+    public class RemoteAuthentication
+    {
+        /// <summary>
+        /// 加密后的认证内容（序列号后再加密）
+        /// 包括：Key（认证加密键）、TenantId（租户id）、ProjectId（项目Id）、Code（边缘设备表示）
+        /// 使用被调用方的key加密
+        /// </summary>
+        public string RemoteAuthorize { get; set; }
+        /// <summary>
+        /// 加密后的时间（使用上面解密后的Key（认证加密键）来进行加密）
+        /// </summary>
+        public string RemoteToken { get; set; }
     }
 }

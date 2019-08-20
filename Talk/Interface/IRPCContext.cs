@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Talk.Contract;
 
 namespace Talk.Interface
 {
@@ -56,5 +57,9 @@ namespace Talk.Interface
         /// 控制器
         /// </summary>
         string ControllerName { get; set; }
+        /// <summary>
+        /// 远程认证
+        /// </summary>
+        RemoteAuthentication Authentication { get; set; }
     }
 }
