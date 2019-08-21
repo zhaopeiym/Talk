@@ -4,12 +4,12 @@
         <name>Talk.Apollo</name>
     </assembly>
     <members>
-        <member name="T:Talk.Talk.Apollo.ApolloConfigurationManager">
+        <member name="T:Talk.Apollo.ApolloConfigurationManager">
             <summary>
             阿波罗配置中心客户端
             </summary>
         </member>
-        <member name="M:Talk.Talk.Apollo.ApolloConfigurationManager.GetApolloConfig(System.String,System.String)">
+        <member name="M:Talk.Apollo.ApolloConfigurationManager.GetApolloConfig(System.String,System.String)">
             <summary>
             获取Apollo配置
             </summary>

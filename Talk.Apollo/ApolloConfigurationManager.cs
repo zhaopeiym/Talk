@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Talk.Talk.Apollo
+namespace Talk.Apollo
 {
     /// <summary>
     /// 阿波罗配置中心客户端
