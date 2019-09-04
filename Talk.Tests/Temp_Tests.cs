@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using Talk.Extensions;
-using Talk.Talk.Apollo;
 using Xunit;
 
 namespace Talk.Tests
@@ -57,8 +56,8 @@ namespace Talk.Tests
         [Fact]
         public void test2()
         {
-            var test1 = ConfigurationManager.GetConfig("test2");
-            var test2 = Talk.Apollo.ApolloConfigurationManager.GetApolloConfig("test", "aa");
+           // var test1 = ConfigurationManager.GetConfig("test2");
+            var test2 = Talk.Apollo.ApolloConfigurationManager.GetApolloConfig("eswebapikey", "aa");
             var aaa = ConfigurationManager.GetSection<aa>("apollo:Meta");
         }
 
