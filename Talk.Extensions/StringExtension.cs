@@ -320,6 +320,10 @@ namespace Talk.Extensions
             {
                 return number;
             }
+            if (str?.Trim().ToUpper() == "true".ToUpper())
+                return 1;
+            if (str?.Trim().ToUpper() == "false".ToUpper())
+                return 0;
             return defaultNumber;
         }
 
