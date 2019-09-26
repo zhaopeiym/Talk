@@ -38,10 +38,10 @@ namespace Talk
         }
 
         /// <summary>
-        /// 初始化
+        /// 外部ContainerBuilder初始化
         /// </summary>
         /// <param name="ContainerBuilder"></param>
-        public void Initialize(ContainerBuilder ContainerBuilder)
+        public void ExternalBuilderInitialize(ContainerBuilder ContainerBuilder)
         {
             var obj = StartupType.GetCustomAttributes<DependsOnAttribute>();
             var attributes = obj.SelectMany(t => t.DependedModuleTypes).ToList();
@@ -51,7 +51,7 @@ namespace Talk
                 module.Initialize();
                 ContainerBuilder.AutoInjection(module.ModuleAssembly);
             }
-            Container = ContainerBuilder.Build();
+            //Container = ContainerBuilder.Build();
         }
     }
 }
