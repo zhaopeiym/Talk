@@ -20,10 +20,28 @@ namespace Talk
             StartupType = typeof(TModule);
             return new ModuleManager();
         }
+
         /// <summary>
         /// 初始化
         /// </summary>
         public void Initialize()
+        {
+            var obj = StartupType.GetCustomAttributes<DependsOnAttribute>();
+            var attributes = obj.SelectMany(t => t.DependedModuleTypes).ToList();
+            foreach (var attr in attributes)
+            {
+                var module = (AppModule)Activator.CreateInstance(attr);
+                module.Initialize();
+                ContainerBuilder.AutoInjection(module.ModuleAssembly);
+            }
+            Container = ContainerBuilder.Build();
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="ContainerBuilder"></param>
+        public void Initialize(ContainerBuilder ContainerBuilder)
         {
             var obj = StartupType.GetCustomAttributes<DependsOnAttribute>();
             var attributes = obj.SelectMany(t => t.DependedModuleTypes).ToList();
