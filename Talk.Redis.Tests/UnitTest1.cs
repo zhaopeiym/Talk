@@ -8,12 +8,12 @@ namespace Talk.Redis.Tests
     {
         public UnitTest1()
         {
-            RedisHelper.RedisConfig = "";
+            //RedisManager.RedisConfig = "";
         }
         [Fact]
         public void Test1Async()
         {
-            RedisHelper redis = new RedisHelper(1);
+            RedisManager redis = new RedisManager(1);
             redis.Set("key3", "hahah");
             var value = redis.GetString("key3");
             Assert.True(value == "hahah");
@@ -22,7 +22,7 @@ namespace Talk.Redis.Tests
         [Fact]
         public void Test2Async()
         {
-            RedisHelper redis = new RedisHelper(3);
+            RedisManager redis = new RedisManager(3);
             redis.Set("key5", "hahah");
             var value = redis.GetString("key5");
             Assert.True(value == "hahah");

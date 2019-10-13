@@ -341,3 +341,4 @@ ASALocalRun/
 /Talk.Tests/appsettings.json
 /Talk.Apollo/自增版本号打包.ps1
 /Talk.Apollo/version.props
+/Talk.Redis/自增版本号打包.ps1

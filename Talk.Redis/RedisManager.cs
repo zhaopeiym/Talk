@@ -6,12 +6,12 @@ using Newtonsoft.Json;
 
 namespace Talk.Redis
 {
-    public class RedisHelper
+    public class RedisManager
     {
         /// <summary>
         /// 连接字符串
         /// </summary>
-        public static string RedisConfig { get; set; }
+        private static string RedisConfig { get; set; }
         /// <summary>
         /// 数据库索引
         /// </summary>
@@ -33,12 +33,12 @@ namespace Talk.Redis
             }
         }
 
-        public RedisHelper(int dbIndex)
-          : this(dbIndex, null)
-        {
-        }
+        //public RedisManager(int dbIndex)
+        //  : this(dbIndex, null)
+        //{
+        //}
 
-        public RedisHelper(int dbIndex, string config)
+        public RedisManager(int dbIndex, string config)
         {
             if (!string.IsNullOrWhiteSpace(config))
                 RedisConfig = config;
@@ -58,10 +58,10 @@ namespace Talk.Redis
             return database.StringSet(key, value, expiry);
         }
 
-        public bool Set(string key, byte value, TimeSpan? expiry = null)
-        {
-            return database.StringSet(key, value, expiry);
-        }
+        //public bool Set(string key, byte value, TimeSpan? expiry = null)
+        //{
+        //    return database.StringSet(key, value, expiry);
+        //}
 
         public bool Set(string key, int value, TimeSpan? expiry = null)
         {
