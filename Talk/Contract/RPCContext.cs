@@ -1,4 +1,5 @@
 ﻿using System;
+using Talk.Extensions;
 using Talk.Interface;
 
 namespace Talk.Contract
@@ -76,6 +77,16 @@ namespace Talk.Contract
         /// <summary>
         /// 加密后的时间（使用上面解密后的Key（认证加密键）来进行加密）
         /// </summary>
-        public string RemoteToken { get; set; }
+        public string RemoteToken
+        {
+            get
+            {
+                return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(EncryptKey);
+            }
+        }
+        /// <summary>
+        /// EncryptKey(必须16位)用来加密RemoteToken
+        /// </summary>
+        public string EncryptKey { get; set; }
     }
 }
