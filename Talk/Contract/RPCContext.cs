@@ -78,13 +78,7 @@ namespace Talk.Contract
         /// <summary>
         /// 加密后的时间（使用上面解密后的Key（认证加密键）来进行加密）
         /// </summary>
-        public string RemoteToken
-        {
-            get
-            {
-                return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(EncryptKey);
-            }
-        }
+        public string RemoteToken { get; set; }
 
         /// <summary>
         /// 加密键（必须16位）
