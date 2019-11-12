@@ -43,11 +43,25 @@ namespace Talk.Contract
                     };
                 }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                var resultObj = JsonConvert.DeserializeObject<ResultBase<TResponse>>(result);
-                resultObj.RequestUrl = url;
-                return resultObj;
+                try
+                {
+                    var resultObj = JsonConvert.DeserializeObject<ResultBase<TResponse>>(result);
+                    resultObj.RequestUrl = url;
+                    return resultObj;
+                }
+                catch (Exception ex)
+                {
+                    return new ResultBase<TResponse>()
+                    {
+                        RequesArg = JsonConvert.SerializeObject(@return),
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"{ex.Message} { ex.StackTrace} result:{result}",
+                        RequestUrl = url,
+                    };
+                } 
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return new ResultBase<TResponse>()
                 {
@@ -89,11 +103,25 @@ namespace Talk.Contract
                     };
                 }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
-                resultObj.RequestUrl = url;
-                return resultObj;
+                try
+                {
+                    var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                    resultObj.RequestUrl = url;
+                    return resultObj;
+                }
+                catch (Exception ex)
+                {
+                    return new ResultBase<object>()
+                    {
+                        RequesArg = JsonConvert.SerializeObject(@return),
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"{ex.Message} { ex.StackTrace} result:{result}",
+                        RequestUrl = url,
+                    }; 
+                }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return new ResultBase<object>()
                 {
@@ -134,11 +162,25 @@ namespace Talk.Contract
                     };
                 }
                 var result = await httpResponseMessage.Content.ReadAsStringAsync();
-                var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
-                resultObj.RequestUrl = url;
-                return resultObj;
+                try
+                {
+                    var resultObj = JsonConvert.DeserializeObject<ResultBase<object>>(result);
+                    resultObj.RequestUrl = url;
+                    return resultObj;
+                }
+                catch (Exception ex)
+                {
+                    return new ResultBase<object>()
+                    {
+                        RequesArg = jsonString,
+                        Code = HttpCodeEnum.C500,
+                        IsUserErr = false,
+                        ErrorMsg = $"{ex.Message} { ex.StackTrace} result:{result}",
+                        RequestUrl = url,
+                    };
+                }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return new ResultBase<object>()
                 {
