@@ -26,7 +26,7 @@ namespace Talk.Contract
             if (headers == null) headers = new Dictionary<string, string>();
             try
             {
-                if (context.Authentication.EncryptKey?.Length == 16)
+                if (context.Authentication?.EncryptKey?.Length == 16)
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
                 url = @return.GetUrl();
@@ -59,7 +59,7 @@ namespace Talk.Contract
                         ErrorMsg = $"{ex.Message} { ex.StackTrace} result:{result}",
                         RequestUrl = url,
                     };
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace Talk.Contract
             if (headers == null) headers = new Dictionary<string, string>();
             try
             {
-                if (context.Authentication.EncryptKey?.Length == 16)
+                if (context.Authentication?.EncryptKey?.Length == 16)
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
                 url = @return.GetUrl();
@@ -118,7 +118,7 @@ namespace Talk.Contract
                         IsUserErr = false,
                         ErrorMsg = $"{ex.Message} { ex.StackTrace} result:{result}",
                         RequestUrl = url,
-                    }; 
+                    };
                 }
             }
             catch (Exception ex)
@@ -146,7 +146,7 @@ namespace Talk.Contract
             if (headers == null) headers = new Dictionary<string, string>();
             try
             {
-                if (context.Authentication.EncryptKey?.Length == 16)
+                if (context.Authentication?.EncryptKey?.Length == 16)
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, jsonString, headers);
