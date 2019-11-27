@@ -203,10 +203,11 @@ namespace Talk.Contract
             var assemblyName = request.GetType().Assembly.GetName().Name;
             //这里约定配置BaseUrl
             var baseUrl = ConfigurationManager.GetConfig($"ApiHost.{assemblyName}");
-            return baseUrl + request.GetType()
+            var partUrl = request.GetType()
                 .GetCustomAttributes(false)
                 .OfType<RpcRouteAttribute>()
                 .Select(attr => attr).FirstOrDefault()?.Path ?? string.Empty;
+            return new Uri(new Uri(baseUrl), partUrl).ToString();
         }
     }
 }
