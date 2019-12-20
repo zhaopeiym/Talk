@@ -848,22 +848,28 @@ namespace Talk.NPOI
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="isOldThan2007">是否低于2007</param>
+        /// <param name="isAlias">是否启用实体Alias，否则取数据第一行做表头</param>
         /// <returns></returns>
-        public static IWorkbook ToWorkbook(this DataTable dataTable, bool isOldThan2007)
+        public static IWorkbook ToWorkbook(this DataTable dataTable, bool isOldThan2007, bool isAlias = true)
         {
             IWorkbook book = isOldThan2007 ? (IWorkbook)new HSSFWorkbook() : new XSSFWorkbook();
             ISheet sheet = book.CreateSheet();
-            IRow headerRow = sheet.CreateRow(0);
 
-            foreach (DataColumn column in dataTable.Columns)
+            if (isAlias)
             {
-                headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                IRow headerRow = sheet.CreateRow(0);
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                }
             }
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 DataRow row = dataTable.Rows[i];
-                IRow dataRow = sheet.CreateRow(i + 1);
+                IRow dataRow = null;
+                if (isAlias) dataRow = sheet.CreateRow(i + 1);
+                else dataRow = sheet.CreateRow(i);
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
                     dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
@@ -917,10 +923,11 @@ namespace Talk.NPOI
         /// <summary>
         /// 把DataTable数据写入Workbook
         /// </summary>
-        /// <param name="dataTables"></param>
-        /// <param name="isOldThan2007"></param>
+        /// <param name="dataTables">dataTables</param>
+        /// <param name="isOldThan2007">老版本低于2007</param>
+        /// <param name="isAlias">是否启用实体Alias，否则取数据第一行做表头</param>
         /// <returns></returns>
-        public static IWorkbook ToWorkbook(this List<DataTable> dataTables, bool isOldThan2007)
+        public static IWorkbook ToWorkbook(this List<DataTable> dataTables, bool isOldThan2007, bool isAlias = true)
         {
             IWorkbook book = isOldThan2007 ? new HSSFWorkbook() : (IWorkbook)new XSSFWorkbook();
             foreach (var dataTable in dataTables)
@@ -928,16 +935,20 @@ namespace Talk.NPOI
                 if (dataTable == null)
                     continue;
                 ISheet sheet = book.CreateSheet(dataTable.TableName);
-                IRow headerRow = sheet.CreateRow(0);
-                foreach (DataColumn column in dataTable.Columns)
+                if (isAlias)
                 {
-                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                    IRow headerRow = sheet.CreateRow(0);
+                    foreach (DataColumn column in dataTable.Columns)
+                    {
+                        headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                    }
                 }
-
                 for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
                     DataRow row = dataTable.Rows[i];
-                    IRow dataRow = sheet.CreateRow(i + 1);
+                    IRow dataRow = null;
+                    if (isAlias) dataRow = sheet.CreateRow(i + 1);
+                    else dataRow = sheet.CreateRow(i);
                     for (int j = 0; j < dataTable.Columns.Count; j++)
                     {
                         dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
