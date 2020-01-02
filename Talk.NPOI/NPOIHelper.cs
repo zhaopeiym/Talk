@@ -905,7 +905,7 @@ namespace Talk.NPOI
                         var item = sourceList[0];
                         if (!string.IsNullOrWhiteSpace(p.GetValue(item)?.ToString()))
                         {
-                            targetTable.Columns.Add();
+                            targetTable.Columns.Add(p.GetValue(item)?.ToString());
                             propertyInfoList.Add(p);
                         }
                     }
