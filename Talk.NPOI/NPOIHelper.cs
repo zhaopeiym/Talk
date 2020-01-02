@@ -903,8 +903,11 @@ namespace Talk.NPOI
                     if (sourceList.Any())
                     {
                         var item = sourceList[0];
-                        targetTable.Columns.Add(p.GetValue(item)?.ToString());
-                        propertyInfoList.Add(p);
+                        if (!string.IsNullOrWhiteSpace(p.GetValue(item)?.ToString()))
+                        {
+                            targetTable.Columns.Add();
+                            propertyInfoList.Add(p);
+                        }
                     }
                 }
             }
