@@ -848,28 +848,23 @@ namespace Talk.NPOI
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="isOldThan2007">是否低于2007</param>
-        /// <param name="isAlias">是否启用实体Alias，否则取数据第一行做表头</param>
         /// <returns></returns>
-        public static IWorkbook ToWorkbook(this DataTable dataTable, bool isOldThan2007, bool isAlias = true)
+        public static IWorkbook ToWorkbook(this DataTable dataTable, bool isOldThan2007)
         {
             IWorkbook book = isOldThan2007 ? (IWorkbook)new HSSFWorkbook() : new XSSFWorkbook();
             ISheet sheet = book.CreateSheet();
 
-            if (isAlias)
+            IRow headerRow = sheet.CreateRow(0);
+            foreach (DataColumn column in dataTable.Columns)
             {
-                IRow headerRow = sheet.CreateRow(0);
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
-                }
+                headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
             }
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 DataRow row = dataTable.Rows[i];
                 IRow dataRow = null;
-                if (isAlias) dataRow = sheet.CreateRow(i + 1);
-                else dataRow = sheet.CreateRow(i);
+                dataRow = sheet.CreateRow(i + 1);
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
                     dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
@@ -884,8 +879,9 @@ namespace Talk.NPOI
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sourceList"></param>
+        /// <param name="isAlias">是否启用特性Alias，否则取数据第一行做表头</param>
         /// <returns></returns>
-        public static DataTable ToDatatableFromList<T>(this List<T> sourceList, bool autoColumnName = false) where T : new()
+        public static DataTable ToDatatableFromList<T>(this List<T> sourceList, bool isAlias = true) where T : new()
         {
             if (sourceList == null || !sourceList.Any()) { return null; }
             var pros = typeof(T).GetProperties();
@@ -893,21 +889,27 @@ namespace Talk.NPOI
             var propertyInfoList = new List<PropertyInfo>();
             foreach (var p in pros)
             {
-                string alias = AliasAttribute<T>(p);
-                if ((!string.IsNullOrEmpty(alias)))
+                if (isAlias)
                 {
-                    targetTable.Columns.Add(alias);
-                    propertyInfoList.Add(p);
+                    string alias = AliasAttribute<T>(p);
+                    if ((!string.IsNullOrEmpty(alias)))
+                    {
+                        targetTable.Columns.Add(alias);
+                        propertyInfoList.Add(p);
+                    }
                 }
                 else
                 {
-                    if (autoColumnName)
+                    if (sourceList.Any())
                     {
-                        targetTable.Columns.Add(p?.Name);
+                        var item = sourceList[0];
+                        targetTable.Columns.Add(p.GetValue(item)?.ToString());
                         propertyInfoList.Add(p);
                     }
                 }
             }
+            //如果取数据第一行做表头，则在内容里面不在取内容
+            if (!isAlias) sourceList.RemoveAt(0);
             object[] values = new object[targetTable.Columns.Count];
             foreach (T item in sourceList)
             {
@@ -925,9 +927,8 @@ namespace Talk.NPOI
         /// </summary>
         /// <param name="dataTables">dataTables</param>
         /// <param name="isOldThan2007">老版本低于2007</param>
-        /// <param name="isAlias">是否启用实体Alias，否则取数据第一行做表头</param>
         /// <returns></returns>
-        public static IWorkbook ToWorkbook(this List<DataTable> dataTables, bool isOldThan2007, bool isAlias = true)
+        public static IWorkbook ToWorkbook(this List<DataTable> dataTables, bool isOldThan2007)
         {
             IWorkbook book = isOldThan2007 ? new HSSFWorkbook() : (IWorkbook)new XSSFWorkbook();
             foreach (var dataTable in dataTables)
@@ -935,20 +936,17 @@ namespace Talk.NPOI
                 if (dataTable == null)
                     continue;
                 ISheet sheet = book.CreateSheet(dataTable.TableName);
-                if (isAlias)
+
+                IRow headerRow = sheet.CreateRow(0);
+                foreach (DataColumn column in dataTable.Columns)
                 {
-                    IRow headerRow = sheet.CreateRow(0);
-                    foreach (DataColumn column in dataTable.Columns)
-                    {
-                        headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
-                    }
+                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
                 }
                 for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
                     DataRow row = dataTable.Rows[i];
                     IRow dataRow = null;
-                    if (isAlias) dataRow = sheet.CreateRow(i + 1);
-                    else dataRow = sheet.CreateRow(i);
+                    dataRow = sheet.CreateRow(i + 1);
                     for (int j = 0; j < dataTable.Columns.Count; j++)
                     {
                         dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());

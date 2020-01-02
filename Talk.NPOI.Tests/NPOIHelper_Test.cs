@@ -91,8 +91,11 @@ namespace Talk.NPOI.Tests
                 ToTerminal = "ToTerminal2",
             });
 
+
+            var table = list.ToDatatableFromList(false);
+            table.DataTableToExcel(@"D:\123333.xls");
             //var table = list.ToExcel();
-            list.ToExcel(@"D:\123.xls");
+            //list.ToExcel(@"D:\123.xls");
         }
 
         [Fact]
