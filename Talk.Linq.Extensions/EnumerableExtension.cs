@@ -112,7 +112,7 @@ namespace Talk.Linq.Extensions
         /// <returns></returns>
         public static bool ItmesEquals<TSource>(this IEnumerable<TSource> source1, IEnumerable<TSource> source2)
         {
-            return (source1.Count() == source2.Count() && !source1.Any(t => !source2.Contains(t)));
+            return (source1.Count() == source2.Count() && !source1.Any(t => !source2.Contains(t)) && !source2.Any(t => !source1.Contains(t)));
         }
 
         /// <summary>
