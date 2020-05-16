@@ -3,9 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Talk.Redis
 {
+    /// <summary>
+    /// 【超时问题处理】仅仅把同步读取改为异步即可
+    /// syncTimeout=10000   默认是5秒，同步读取超时时间（异步读取不会有读取超时问题）  
+    /// https://blog.csdn.net/qq_35633131/article/details/84069184
+    /// https://docs.microsoft.com/zh-cn/dotnet/api/system.threading.threadpool.setminthreads?view=netframework-4.7.2
+    /// https://www.cnblogs.com/ShaYeBlog/p/11375179.html
+    /// </summary>
     public class RedisManager
     {
         /// <summary>
@@ -48,14 +56,14 @@ namespace Talk.Redis
 
         #region 键值对操作
 
-        public bool Set(string key, string value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, string value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
-        public bool Set(string key, bool value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, bool value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
         //public bool Set(string key, byte value, TimeSpan? expiry = null)
@@ -63,87 +71,87 @@ namespace Talk.Redis
         //    return database.StringSet(key, value, expiry);
         //}
 
-        public bool Set(string key, int value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, int value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
-        public bool Set(string key, long value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, long value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
-        public bool Set(string key, float value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, float value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
-        public bool Set(string key, double value, TimeSpan? expiry = null)
+        public async Task<bool> SetAsync(string key, double value, TimeSpan? expiry = null)
         {
-            return database.StringSet(key, value, expiry);
+            return await database.StringSetAsync(key, value, expiry);
         }
 
-        public bool Set<T>(string key, T value, TimeSpan? expiry = null) where T : class, new()
+        public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiry = null) where T : class, new()
         {
-            return database.StringSet(key, JsonConvert.SerializeObject(value), expiry);
+            return await database.StringSetAsync(key, JsonConvert.SerializeObject(value), expiry);
         }
 
-        public string GetString(string key)
+        public async Task<string> GetStringAsync(string key)
         {
-            return database.StringGet(key);
+            return await database.StringGetAsync(key);
         }
 
-        public int? GetInt(string key)
+        public async Task<int?> GetIntAsync(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return (int)value;
         }
 
-        public bool? GetBoolean(string key)
+        public async Task<bool?> GetBooleanAsync(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return (bool)value;
         }
 
-        public long? GetLong(string key)
+        public async Task<long?> GetLongAsync(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return (long)value;
         }
 
-        public float? GetFloat(string key)
+        public async Task<float?> GetFloatAsync(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return (float)value;
         }
 
-        public double? GetDouble(string key)
+        public async Task<double?> GetDoubleAsync(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return (double)value;
         }
 
-        public object Get(string key, Type type)
+        public async Task<object> GetAsync(string key, Type type)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
                 return null;
             return JsonConvert.DeserializeObject(value, type);
         }
 
-        public T Get<T>(string key)
+        public async Task<T> GetAsync<T>(string key)
         {
-            var value = database.StringGet(key);
+            var value = await database.StringGetAsync(key);
             if (!value.HasValue)
             {
                 return default(T);
@@ -157,19 +165,19 @@ namespace Talk.Redis
         #endregion
 
         #region Set操作
-        public bool SetAdd(string key, string value)
+        public async Task<bool> SetAddAsync(string key, string value)
         {
-            return database.SetAdd(key, value);
+            return await database.SetAddAsync(key, value);
         }
 
-        public bool MultipleSetAdd(string key, RedisValue[] values)
+        public async Task<bool> MultipleSetAddAsync(string key, RedisValue[] values)
         {
-            return database.SetAdd(key, values) > 0;
+            return (await database.SetAddAsync(key, values)) > 0;
         }
 
-        public bool SetContains(string key, string value)
+        public async Task<bool> SetContainsAsync(string key, string value)
         {
-            return database.SetContains(key, value);
+            return await database.SetContainsAsync(key, value);
         }
 
         /// <summary>
@@ -177,22 +185,22 @@ namespace Talk.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string[] SetMembers(string key)
+        public async Task<string[]> SetMembersAsync(string key)
         {
-            return database.SetMembers(key).Select(t => t.ToString()).ToArray();
+            return (await database.SetMembersAsync(key)).Select(t => t.ToString()).ToArray();
         }
         #endregion
 
         #region Hash操作
 
-        public string HashGet(string key, string hashField)
+        public async Task<string> HashGetAsync(string key, string hashField)
         {
-            return database.HashGet(key, hashField);
+            return await database.HashGetAsync(key, hashField);
         }
 
-        public T HashGet<T>(string key, string hashField) where T : class, new()
+        public async Task<T> HashGetAsync<T>(string key, string hashField) where T : class, new()
         {
-            string value = database.HashGet(key, hashField);
+            string value = await database.HashGetAsync(key, hashField);
             if (string.IsNullOrEmpty(value))
             {
                 return default(T);
@@ -200,9 +208,9 @@ namespace Talk.Redis
             return JsonConvert.DeserializeObject<T>(value);
         }
 
-        public object HashGetObj(string key, string hashField)
+        public async Task<object> HashGetObjAsync(string key, string hashField)
         {
-            string value = database.HashGet(key, hashField);
+            string value = await database.HashGetAsync(key, hashField);
             if (string.IsNullOrEmpty(value))
             {
                 return null;
@@ -210,9 +218,9 @@ namespace Talk.Redis
             return JsonConvert.DeserializeObject(value);
         }
 
-        public Dictionary<string, string> HashGetAll(string key)
+        public async Task<Dictionary<string, string>> HashGetAllAsync(string key)
         {
-            HashEntry[] hashEntries = database.HashGetAll(key);
+            HashEntry[] hashEntries = await database.HashGetAllAsync(key);
             if (hashEntries == null || hashEntries.Length == 0)
             {
                 return new Dictionary<string, string>();
@@ -220,9 +228,9 @@ namespace Talk.Redis
             return hashEntries.ToDictionary<HashEntry, string, string>(hashEntry => hashEntry.Name, hashEntry => hashEntry.Value);
         }
 
-        public Dictionary<string, object> HashGetAllObj(string key)
+        public async Task<Dictionary<string, object>> HashGetAllObjAsync(string key)
         {
-            HashEntry[] hashEntries = database.HashGetAll(key);
+            HashEntry[] hashEntries = await database.HashGetAllAsync(key);
             if (hashEntries == null || hashEntries.Length == 0)
             {
                 return new Dictionary<string, object>();
@@ -235,89 +243,89 @@ namespace Talk.Redis
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="db"></param>
-        public void MultiHashSet(Dictionary<string, Dictionary<string, string>> dictionary)
+        public async Task MultiHashSetAsync(Dictionary<string, Dictionary<string, string>> dictionary)
         {
             var batch = database.CreateBatch();
             foreach (var item in dictionary)
             {
                 HashEntry[] hashEntries = item.Value.Select(kv => new HashEntry(kv.Key, kv.Value)).ToArray();
-                batch.HashSetAsync(item.Key, hashEntries);
+                await batch.HashSetAsync(item.Key, hashEntries);
             }
             batch.Execute();
         }
 
-        public void HashSet(string key, Dictionary<string, string> dictionary)
+        public async Task HashSetAsync(string key, Dictionary<string, string> dictionary)
         {
             HashEntry[] hashEntries = dictionary.Select(kv => new HashEntry(kv.Key, kv.Value)).ToArray();
-            database.HashSet(key, hashEntries);
+            await database.HashSetAsync(key, hashEntries);
         }
 
-        public void HashSet(string key, Dictionary<string, object> dictionary)
+        public async Task HashSetAsync(string key, Dictionary<string, object> dictionary)
         {
             HashEntry[] hashEntries = dictionary.Select(kv => new HashEntry(kv.Key, JsonConvert.SerializeObject(kv.Value))).ToArray();
-            database.HashSet(key, hashEntries);
+            await database.HashSetAsync(key, hashEntries);
         }
 
-        public bool HashSet(string key, string hashField, string value)
+        public async Task<bool> HashSetAsync(string key, string hashField, string value)
         {
-            return database.HashSet(key, hashField, value);
+            return await database.HashSetAsync(key, hashField, value);
         }
 
-        public bool HashSet(string key, string hashField, long value)
+        public async Task<bool> HashSetAsync(string key, string hashField, long value)
         {
-            return database.HashSet(key, hashField, value);
+            return await database.HashSetAsync(key, hashField, value);
         }
 
-        public bool HashSet(string key, string hashField, object value, TimeSpan? expiry = null)
+        public async Task<bool> HashSetAsync(string key, string hashField, object value, TimeSpan? expiry = null)
         {
-            bool result = database.HashSet(key, hashField, JsonConvert.SerializeObject(value));
+            bool result = await database.HashSetAsync(key, hashField, JsonConvert.SerializeObject(value));
             if (expiry != null)
             {
-                database.KeyExpire(key, expiry);
+                await database.KeyExpireAsync(key, expiry);
             }
             return result;
         }
 
-        public bool HashSet<T>(string key, string hashField, T value) where T : class, new()
+        public async Task<bool> HashSetAsync<T>(string key, string hashField, T value) where T : class, new()
         {
-            return database.HashSet(key, hashField, JsonConvert.SerializeObject(value));
+            return await database.HashSetAsync(key, hashField, JsonConvert.SerializeObject(value));
         }
 
-        public long HashIncrement(string key, string hashField, long value = 1L)
+        public async Task<long> HashIncrementAsync(string key, string hashField, long value = 1L)
         {
-            return database.HashIncrement(key, hashField, value);
+            return await database.HashIncrementAsync(key, hashField, value);
         }
 
-        public long HashDecrement(string key, string hashField, long value = 1L)
+        public async Task<long> HashDecrementAsync(string key, string hashField, long value = 1L)
         {
-            return database.HashDecrement(key, hashField, value);
+            return await database.HashDecrementAsync(key, hashField, value);
         }
 
-        public bool HashExists(string key, string hashField)
+        public async Task<bool> HashExistsAsync(string key, string hashField)
         {
-            return database.HashExists(key, hashField);
+            return await database.HashExistsAsync(key, hashField);
         }
         #endregion
 
         #region List 操作
-        public long Enqueue(string key, string value)
+        public async Task<long> EnqueueAsync(string key, string value)
         {
-            return database.ListLeftPush(key, value);
+            return await database.ListLeftPushAsync(key, value);
         }
 
-        public long Enqueue<T>(string key, T value)
+        public async Task<long> EnqueueAsync<T>(string key, T value)
         {
-            return database.ListLeftPush(key, JsonConvert.SerializeObject(value));
+            return await database.ListLeftPushAsync(key, JsonConvert.SerializeObject(value));
         }
 
-        public string Dequeue(string key)
+        public async Task<string> DequeueAsync(string key)
         {
-            return database.ListRightPop(key);
+            return await database.ListRightPopAsync(key);
         }
 
-        public T Dequeue<T>(string key)
+        public async Task<T> DequeueAsync<T>(string key)
         {
-            string value = Dequeue(key);
+            string value = await DequeueAsync(key);
             if (string.IsNullOrEmpty(value))
             {
                 return default(T);
@@ -325,9 +333,9 @@ namespace Talk.Redis
             return JsonConvert.DeserializeObject<T>(value);
         }
 
-        public List<string> DequeueAll(string key)
+        public async Task<List<string>> DequeueAllAsync(string key)
         {
-            long length = database.ListLength(key);
+            long length = await database.ListLengthAsync(key);
             if (length == 0)
             {
                 return new List<string>();
@@ -335,14 +343,14 @@ namespace Talk.Redis
             List<string> list = new List<string>();
             for (int i = 0; i < length; i++)
             {
-                list.Add(Dequeue<string>(key));
+                list.Add(await DequeueAsync<string>(key));
             }
             return list;
         }
 
-        public List<T> DequeueAll<T>(string key)
+        public async Task<List<T>> DequeueAllAsync<T>(string key)
         {
-            long length = database.ListLength(key);
+            long length = await database.ListLengthAsync(key);
             if (length == 0)
             {
                 return new List<T>();
@@ -350,14 +358,14 @@ namespace Talk.Redis
             List<T> list = new List<T>();
             for (int i = 0; i < length; i++)
             {
-                list.Add(Dequeue<T>(key));
+                list.Add(await DequeueAsync<T>(key));
             }
             return list;
         }
 
-        public List<T> DequeueList<T>(string key, int count)
+        public async Task<List<T>> DequeueListAsync<T>(string key, int count)
         {
-            long length = database.ListLength(key);
+            long length = await database.ListLengthAsync(key);
             if (length == 0)
             {
                 return new List<T>();
@@ -369,19 +377,19 @@ namespace Talk.Redis
             List<T> list = new List<T>();
             for (int i = 0; i < count; i++)
             {
-                list.Add(Dequeue<T>(key));
+                list.Add(await DequeueAsync<T>(key));
             }
             return list;
         }
 
-        public long ListLength(string key)
+        public async Task<long> ListLengthAsync(string key)
         {
-            return database.ListLength(key);
+            return await database.ListLengthAsync(key);
         }
 
-        public List<T> ListRange<T>(string key, long start = 0L, long stop = -1L)
+        public async Task<List<T>> ListRangeAsync<T>(string key, long start = 0L, long stop = -1L)
         {
-            RedisValue[] values = database.ListRange(key, start, stop);
+            RedisValue[] values = await database.ListRangeAsync(key, start, stop);
             if (values == null || values.Length == 0)
             {
                 return new List<T>();
@@ -389,14 +397,14 @@ namespace Talk.Redis
             return values.Select(redisValue => JsonConvert.DeserializeObject<T>(redisValue)).ToList();
         }
 
-        public string ListGetByIndex(string key, long index)
+        public async Task<string> ListGetByIndexAsync(string key, long index)
         {
-            return database.ListGetByIndex(key, index);
+            return await database.ListGetByIndexAsync(key, index);
         }
 
-        public T ListGetByIndex<T>(string key, long index)
+        public async Task<T> ListGetByIndexAsync<T>(string key, long index)
         {
-            string value = database.ListGetByIndex(key, index);
+            string value = await database.ListGetByIndexAsync(key, index);
             if (string.IsNullOrEmpty(value))
             {
                 return default(T);
@@ -410,9 +418,9 @@ namespace Talk.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public bool Remove(string key)
+        public async Task<bool> RemoveAsync(string key)
         {
-            return database.KeyDelete(key);
+            return await database.KeyDeleteAsync(key);
         }
 
         /// <summary>
@@ -420,9 +428,9 @@ namespace Talk.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public bool Exists(string key)
+        public async Task<bool> ExistsAsync(string key)
         {
-            return database.KeyExists(key);
+            return await database.KeyExistsAsync(key);
         }
 
         /// <summary>
@@ -432,13 +440,13 @@ namespace Talk.Redis
         /// <param name="value"></param>
         /// <param name="expiry">只有第一次设置有效期生效</param>
         /// <returns></returns>
-        public long SetStringIncr(string key, long value, TimeSpan? expiry = null)
+        public async Task<long> SetStringIncrAsync(string key, long value, TimeSpan? expiry = null)
         {
             try
             {
-                var nubmer = database.StringIncrement(key, value);
+                var nubmer = await database.StringIncrementAsync(key, value);
                 if (nubmer == 1 && expiry != null)//只有第一次设置有效期（防止覆盖）
-                    database.KeyExpireAsync(key, expiry);//设置有效期
+                    await database.KeyExpireAsync(key, expiry);//设置有效期
                 return nubmer;
             }
             catch (Exception ex)
@@ -454,9 +462,9 @@ namespace Talk.Redis
         /// <param name="value"></param>
         /// <param name="expiry"></param>
         /// <returns></returns>
-        public long SetStringIncr(string key, TimeSpan? expiry = null)
+        public async Task<long> SetStringIncrAsync(string key, TimeSpan? expiry = null)
         {
-            return SetStringIncr(key, 1, expiry);
+            return await SetStringIncrAsync(key, 1, expiry);
         }
 
         /// <summary>
@@ -464,54 +472,54 @@ namespace Talk.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public long GetStringIncr(string key)
+        public async Task<long> GetStringIncrAsync(string key)
         {
-            var value = GetString(key);
+            var value = await GetStringAsync(key);
             return string.IsNullOrWhiteSpace(value) ? 0 : long.Parse(value);
         }
 
-        public void FlushDb()
+        public async Task FlushDbAsync()
         {
             var endPoints = database.Multiplexer.GetEndPoints();
             foreach (var endpoint in endPoints)
             {
-                database.Multiplexer.GetServer(endpoint).FlushDatabase();
+                await database.Multiplexer.GetServer(endpoint).FlushDatabaseAsync();
             }
         }
 
-        public void FlushAll()
+        public async Task FlushAllAsync()
         {
             var endPoints = database.Multiplexer.GetEndPoints();
             foreach (var endpoint in endPoints)
             {
-                database.Multiplexer.GetServer(endpoint).FlushAllDatabases();
+                await database.Multiplexer.GetServer(endpoint).FlushAllDatabasesAsync();
             }
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
             SaveType saveType = SaveType.BackgroundSave;
             var endPoints = database.Multiplexer.GetEndPoints();
 
             foreach (var endpoint in endPoints)
             {
-                database.Multiplexer.GetServer(endpoint).Save(saveType);
+                await database.Multiplexer.GetServer(endpoint).SaveAsync(saveType);
             }
         }
 
-        public long Increment(string key, long value = 1L)
+        public async Task<long> IncrementAsync(string key, long value = 1L)
         {
-            return database.StringIncrement(key, value);
-        } 
-
-        public bool KeyExpire(string key, TimeSpan? expiry)
-        {
-            return database.KeyExpire(key, expiry);
+            return await database.StringIncrementAsync(key, value);
         }
 
-        public bool KeyExpire(string key, DateTime? expiry)
+        public async Task<bool> KeyExpireAsync(string key, TimeSpan? expiry)
         {
-            return database.KeyExpire(key, expiry);
+            return await database.KeyExpireAsync(key, expiry);
+        }
+
+        public async Task<bool> KeyExpireAsync(string key, DateTime? expiry)
+        {
+            return await database.KeyExpireAsync(key, expiry);
         }
 
         public IEnumerable<RedisValue> SetScan(string key)
