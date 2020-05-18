@@ -41,11 +41,6 @@ namespace Talk.Redis
             }
         }
 
-        //public RedisManager(int dbIndex)
-        //  : this(dbIndex, null)
-        //{
-        //}
-
         public RedisManager(int dbIndex, string config)
         {
             if (!string.IsNullOrWhiteSpace(config))
@@ -56,6 +51,16 @@ namespace Talk.Redis
 
         #region 键值对操作
 
+        public bool Set(RedisKey key, RedisValue value, TimeSpan? expiry = null)
+        {
+            return database.StringSet(key, value, expiry);
+        }
+
+        public bool Set<T>(string key, T value, TimeSpan? expiry = null) where T : class, new()
+        {
+            return database.StringSet(key, JsonConvert.SerializeObject(value), expiry);
+        }
+
         public async Task<bool> SetAsync(string key, string value, TimeSpan? expiry = null)
         {
             return await database.StringSetAsync(key, value, expiry);
@@ -65,11 +70,6 @@ namespace Talk.Redis
         {
             return await database.StringSetAsync(key, value, expiry);
         }
-
-        //public bool Set(string key, byte value, TimeSpan? expiry = null)
-        //{
-        //    return database.StringSet(key, value, expiry);
-        //}
 
         public async Task<bool> SetAsync(string key, int value, TimeSpan? expiry = null)
         {
@@ -94,6 +94,25 @@ namespace Talk.Redis
         public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiry = null) where T : class, new()
         {
             return await database.StringSetAsync(key, JsonConvert.SerializeObject(value), expiry);
+        }
+
+        public RedisValue GetString(RedisKey key)
+        {
+            return database.StringGet(key);
+        }
+
+        public T GetAsync<T>(string key)
+        {
+            var value = database.StringGet(key);
+            if (!value.HasValue)
+            {
+                return default(T);
+            }
+            if (typeof(T) == typeof(string))
+            {
+                return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(value));
+            }
+            return JsonConvert.DeserializeObject<T>(value);
         }
 
         public async Task<string> GetStringAsync(string key)
