@@ -101,7 +101,7 @@ namespace Talk.Redis
             return database.StringGet(key);
         }
 
-        public T GetAsync<T>(string key)
+        public T Get<T>(string key)
         {
             var value = database.StringGet(key);
             if (!value.HasValue)
