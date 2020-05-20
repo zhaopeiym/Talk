@@ -1,4 +1,5 @@
 ﻿using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -855,19 +856,43 @@ namespace Talk.NPOI
             ISheet sheet = book.CreateSheet();
 
             IRow headerRow = sheet.CreateRow(0);
+
+            ICellStyle cellStyle1 = book.CreateCellStyle();
+            cellStyle1.FillPattern = FillPattern.SolidForeground;//填充颜色
+            cellStyle1.FillForegroundColor = HSSFColor.SkyBlue.Index;
+            //创建字体
+            var font1 = book.CreateFont();
+            //给字体设置颜色
+            font1.Color = HSSFColor.White.Index;
+            font1.Boldweight = (short)FontBoldWeight.Bold;
+            font1.FontHeightInPoints = 11;
+            //给样式添加字体
+            cellStyle1.SetFont(font1);
+
+
+            ICellStyle cellStyle2 = book.CreateCellStyle();
+            //创建字体
+            var font2 = book.CreateFont();
+            font2.FontHeightInPoints = 11;
+            //给样式添加字体
+            cellStyle2.SetFont(font2);
+
             foreach (DataColumn column in dataTable.Columns)
             {
-                headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                var cell = headerRow.CreateCell(column.Ordinal);
+                cell.SetCellValue(column.ColumnName);
+                cell.CellStyle = cellStyle1;
             }
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 DataRow row = dataTable.Rows[i];
-                IRow dataRow = null;
-                dataRow = sheet.CreateRow(i + 1);
+                IRow dataRow = sheet.CreateRow(i + 1);
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
-                    dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
+                    var cell = dataRow.CreateCell(j);
+                    cell.SetCellValue(row[j]?.ToString());
+                    cell.CellStyle = cellStyle2;
                 }
             }
 
@@ -941,9 +966,32 @@ namespace Talk.NPOI
                 ISheet sheet = book.CreateSheet(dataTable.TableName);
 
                 IRow headerRow = sheet.CreateRow(0);
+
+                ICellStyle cellStyle1 = book.CreateCellStyle();
+                cellStyle1.FillPattern = FillPattern.SolidForeground;//填充颜色
+                cellStyle1.FillForegroundColor = HSSFColor.SkyBlue.Index;
+                //创建字体
+                var font1 = book.CreateFont();
+                //给字体设置颜色
+                font1.Color = HSSFColor.White.Index;
+                font1.Boldweight = (short)FontBoldWeight.Bold;
+                font1.FontHeightInPoints = 11;
+                //给样式添加字体
+                cellStyle1.SetFont(font1);
+
+
+                ICellStyle cellStyle2 = book.CreateCellStyle();
+                //创建字体
+                var font2 = book.CreateFont();
+                font2.FontHeightInPoints = 11;
+                //给样式添加字体
+                cellStyle2.SetFont(font2);
+
                 foreach (DataColumn column in dataTable.Columns)
                 {
-                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+                    var cell = headerRow.CreateCell(column.Ordinal);
+                    cell.SetCellValue(column.ColumnName);
+                    cell.CellStyle = cellStyle1;
                 }
                 for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
@@ -952,7 +1000,9 @@ namespace Talk.NPOI
                     dataRow = sheet.CreateRow(i + 1);
                     for (int j = 0; j < dataTable.Columns.Count; j++)
                     {
-                        dataRow.CreateCell(j).SetCellValue(row[j]?.ToString());
+                        var cell = dataRow.CreateCell(j);
+                        cell.SetCellValue(row[j]?.ToString());
+                        cell.CellStyle = cellStyle2;
                     }
                 }
             }
