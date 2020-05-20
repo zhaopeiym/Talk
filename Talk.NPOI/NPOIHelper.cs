@@ -896,6 +896,13 @@ namespace Talk.NPOI
                 }
             }
 
+            for (int i = 1; i <= dataTable.Columns.Count; i++)
+            {
+                sheet.AutoSizeColumn(i);//自适应宽度，但是其实还是比实际文本要宽
+                var columnWidth = sheet.GetColumnWidth(i);
+                sheet.SetColumnWidth(i, columnWidth + 600);
+            }
+
             return book;
         }
 
@@ -1004,6 +1011,13 @@ namespace Talk.NPOI
                         cell.SetCellValue(row[j]?.ToString());
                         cell.CellStyle = cellStyle2;
                     }
+                }
+
+                for (int i = 1; i <= dataTable.Columns.Count; i++)
+                {
+                    sheet.AutoSizeColumn(i);//自适应宽度，但是其实还是比实际文本要宽
+                    var columnWidth = sheet.GetColumnWidth(i);
+                    sheet.SetColumnWidth(i, columnWidth + 600);
                 }
             }
             return book;
