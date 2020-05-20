@@ -856,10 +856,12 @@ namespace Talk.NPOI
             ISheet sheet = book.CreateSheet();
 
             IRow headerRow = sheet.CreateRow(0);
+            headerRow.Height = Convert.ToInt16(headerRow.Height + 20 * 4);
 
             ICellStyle cellStyle1 = book.CreateCellStyle();
             cellStyle1.FillPattern = FillPattern.SolidForeground;//填充颜色
             cellStyle1.FillForegroundColor = HSSFColor.SkyBlue.Index;
+            cellStyle1.VerticalAlignment = VerticalAlignment.Center;//上下居中
             //创建字体
             var font1 = book.CreateFont();
             //给字体设置颜色
@@ -871,6 +873,7 @@ namespace Talk.NPOI
 
 
             ICellStyle cellStyle2 = book.CreateCellStyle();
+            cellStyle2.VerticalAlignment = VerticalAlignment.Center;//上下居中
             //创建字体
             var font2 = book.CreateFont();
             font2.FontHeightInPoints = 11;
@@ -888,6 +891,7 @@ namespace Talk.NPOI
             {
                 DataRow row = dataTable.Rows[i];
                 IRow dataRow = sheet.CreateRow(i + 1);
+                dataRow.Height = Convert.ToInt16(dataRow.Height + 20 * 2);
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
                     var cell = dataRow.CreateCell(j);
@@ -973,10 +977,12 @@ namespace Talk.NPOI
                 ISheet sheet = book.CreateSheet(dataTable.TableName);
 
                 IRow headerRow = sheet.CreateRow(0);
+                headerRow.Height = Convert.ToInt16(headerRow.Height + 20 * 4);
 
                 ICellStyle cellStyle1 = book.CreateCellStyle();
                 cellStyle1.FillPattern = FillPattern.SolidForeground;//填充颜色
                 cellStyle1.FillForegroundColor = HSSFColor.SkyBlue.Index;
+                cellStyle1.VerticalAlignment = VerticalAlignment.Center;//上下居中
                 //创建字体
                 var font1 = book.CreateFont();
                 //给字体设置颜色
@@ -988,6 +994,7 @@ namespace Talk.NPOI
 
 
                 ICellStyle cellStyle2 = book.CreateCellStyle();
+                cellStyle2.VerticalAlignment = VerticalAlignment.Center;//上下居中
                 //创建字体
                 var font2 = book.CreateFont();
                 font2.FontHeightInPoints = 11;
@@ -1003,8 +1010,8 @@ namespace Talk.NPOI
                 for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
                     DataRow row = dataTable.Rows[i];
-                    IRow dataRow = null;
-                    dataRow = sheet.CreateRow(i + 1);
+                    IRow dataRow = sheet.CreateRow(i + 1);
+                    dataRow.Height = Convert.ToInt16(dataRow.Height + 20 * 4);
                     for (int j = 0; j < dataTable.Columns.Count; j++)
                     {
                         var cell = dataRow.CreateCell(j);
