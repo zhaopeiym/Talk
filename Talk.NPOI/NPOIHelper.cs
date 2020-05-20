@@ -896,7 +896,7 @@ namespace Talk.NPOI
                 }
             }
 
-            for (int i = 1; i <= dataTable.Columns.Count; i++)
+            for (int i = 0; i <= dataTable.Columns.Count; i++)
             {
                 sheet.AutoSizeColumn(i);//自适应宽度，但是其实还是比实际文本要宽
                 var columnWidth = sheet.GetColumnWidth(i);
@@ -1013,7 +1013,7 @@ namespace Talk.NPOI
                     }
                 }
 
-                for (int i = 1; i <= dataTable.Columns.Count; i++)
+                for (int i = 0; i <= dataTable.Columns.Count; i++)
                 {
                     sheet.AutoSizeColumn(i);//自适应宽度，但是其实还是比实际文本要宽
                     var columnWidth = sheet.GetColumnWidth(i);
