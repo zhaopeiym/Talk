@@ -42,14 +42,18 @@ namespace Tests
         public void Test3()
         {
             var aaa = 123.5678.ToString("0.#");
-            float f1 = 27.8f;
-            float f2 = 6.1f;
+            float f1 = 2.1f;
+            float f2 = 6.105f;
+            float f3 = 6.146f;
+            float f4 = 6;
 
-            var num1 = NumberHelper.KeepDigit(f1 / 1000);
-            var num2 = NumberHelper.KeepDigit(f2 / 1000);
-            var num3 = NumberHelper.KeepDigit(num1 / num2, 1); 
+            var num1 = NumberHelper.KeepDigit(f1);
+            var num2 = NumberHelper.KeepDigit(f2 );
+            var num3 = NumberHelper.KeepDigit(f3);
+            var num4 = NumberHelper.KeepDigit(f4);
+            var num5 = NumberHelper.KeepDigit(num1 / num2, 1); 
 
-            var num4 = NumberHelper.KeepDigit(NumberHelper.KeepDigit(f1 / 1000) / NumberHelper.KeepDigit(f2 / 1000), 1);
+            var num6 = NumberHelper.KeepDigit(NumberHelper.KeepDigit(f1 / 1000) / NumberHelper.KeepDigit(f2 / 1000), 1);
         }
     }
 }
