@@ -22,6 +22,18 @@ namespace Talk.Extensions
             return number;
         }
 
+        public static double KeepDigit(double number, int position = 2)
+        {
+            var tempNumber = number.ToString();
+            var indexof = tempNumber.IndexOf('.');
+            if (indexof > 0 && tempNumber.Length > indexof + 3)
+            {
+                tempNumber = tempNumber.Substring(0, indexof + 3);
+                return double.Parse(tempNumber);
+            }
+            return number;
+        }
+
         /// <summary>
         /// 保留小数位 - 四舍五入（默认保留2位）
         /// </summary>
