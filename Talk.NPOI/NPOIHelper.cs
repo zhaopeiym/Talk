@@ -1,4 +1,6 @@
-﻿using NPOI.HSSF.UserModel;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.UserModel;
@@ -955,6 +957,46 @@ namespace Talk.NPOI
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] = propertyInfoList[i].GetValue(item);
+                }
+                targetTable.Rows.Add(values);
+            }
+            return targetTable;
+        }
+
+        /// <summary>
+        /// object数据转换datatable
+        /// object必须是实体对象，
+        /// </summary>
+        /// <param name="sourceList"></param>
+        /// <param name="isAttributeToTitle">是否取属性名做表头，否则取数据第一行做表头</param>
+        /// <returns></returns>
+        public static DataTable ToDatatableFromList(this List<object> sourceList, bool isAttributeToTitle = true)
+        {
+            if (sourceList == null || !sourceList.Any()) { return null; }
+            var jsonObj = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(sourceList));
+            var pros = (jsonObj as JToken).FirstOrDefault()?.Select(t => (t as JProperty).Name).ToList();
+            DataTable targetTable = new DataTable();
+            foreach (var p in pros)
+            {
+                if (isAttributeToTitle)
+                {
+                    targetTable.Columns.Add(p);
+                }
+                else
+                {
+                    var jtoken = (jsonObj as JToken).FirstOrDefault();
+                    targetTable.Columns.Add((jtoken[p] as JValue).Value.ToString());
+                }
+            }
+            object[] values = new object[targetTable.Columns.Count];
+            var listJson = (jsonObj as JToken).ToList();
+            if (!isAttributeToTitle) listJson = (jsonObj as JToken).Skip(1).ToList();
+
+            foreach (var jtoken in listJson)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = (jtoken[pros[i]] as JValue).Value;
                 }
                 targetTable.Rows.Add(values);
             }

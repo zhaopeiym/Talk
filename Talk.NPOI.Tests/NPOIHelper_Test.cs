@@ -75,7 +75,7 @@ namespace Talk.NPOI.Tests
         [Fact]
         public void 测试实体转换成DataTable2()
         {
-            var list = new List<AirEntity>();
+            var list = new List<object>();
             list.Add(new AirEntity()
             {
                 Carrier = "Carrier",

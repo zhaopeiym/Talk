@@ -2,9 +2,10 @@
 using Com.Ctrip.Framework.Apollo.Core;
 using Com.Ctrip.Framework.Apollo.Enums;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
-using Talk.Extensions;
 using Xunit;
 
 namespace Talk.Tests
@@ -56,9 +57,33 @@ namespace Talk.Tests
         [Fact]
         public void test2()
         {
-           // var test1 = ConfigurationManager.GetConfig("test2");
-            var test2 = Talk.Apollo.ApolloConfigurationManager.GetApolloConfig("eswebapikey", "aa");
-            var aaa = ConfigurationManager.GetSection<aa>("apollo:Meta");
+            var str = "[{\"id\":2,\"name\":\"天下无双\",\"damage\":123},{\"id\":3,\"name\":\"天下无贼\",\"damage\":21},{\"id\":4,\"name\":\"咫尺天涯\",\"damage\":900}]";
+            var obj = JsonConvert.DeserializeObject(str);
+
+            var p = (obj as JToken).FirstOrDefault()?.Select(t => (t as JProperty).Name).ToList();
+
+            foreach (var item1 in ((JToken)obj))
+            {
+                foreach (JProperty item in item1)
+                {   //((Newtonsoft.Json.Linq.JProperty)item).Name
+                    //((Newtonsoft.Json.Linq.JValue)item1["id"]).Value
+
+                    var value = (item1[item.Name] as JValue).Value;
+                }
+            }
+            //foreach (var item in obj)
+            //{
+
+            //}
+            //var jsonObj = JsonMapper.ToObject(str);
+            //foreach (JsonData item in jsonObj)
+            //{
+            //    foreach (var key in item.Keys)
+            //    {
+            //        var aa = item[key];
+            //    }
+            //}
+
         }
 
         public class aa
