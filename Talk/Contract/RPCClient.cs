@@ -20,7 +20,7 @@ namespace Talk.Contract
         /// <param name="return">请求参数</param>
         /// <param name="headers">headers可做认证信息</param>
         /// <returns></returns>
-        public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IRPCContext context, IReturn<TResponse> @return, Dictionary<string, string> headers = null)
+        public static async Task<ResultBase<TResponse>> PostAsync<TResponse>(this IRPCContext context, IReturn<TResponse> @return, Dictionary<string, string> headers)
         {
             return await PostAsync(context, @return, null, headers);
         }
