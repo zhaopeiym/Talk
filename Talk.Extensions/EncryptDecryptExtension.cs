@@ -250,5 +250,31 @@ namespace Talk.Extensions
         }
 
         #endregion
+
+        /// <summary>
+        /// RSA加密
+        /// </summary>
+        /// <param name="str">需要加密的内容</param>
+        /// <param name="publicKey">公钥</param>
+        /// <param name="type">类型（加密算法类型 RSA SHA1 长度不限制，推荐使用2048位以上;RSA2 SHA256 密钥长度至少为2048）</param>
+        /// <returns></returns>
+        public static string RSAEncrypt(this string str, string publicKey, RSAType type)
+        {
+            RSAHelper helper = new RSAHelper(type, Encoding.UTF8, null, publicKey);
+            return helper.Encrypt(str);
+        }
+
+        /// <summary>
+        /// RSA解密
+        /// </summary>
+        /// <param name="str">需要解密的内容</param>
+        /// <param name="privateKey">私钥</param>
+        /// <param name="type">类型（加密算法类型 RSA SHA1 长度不限制，推荐使用2048位以上;RSA2 SHA256 密钥长度至少为2048）</param>
+        /// <returns></returns>
+        public static string RSADecrypt(this string str, string privateKey, RSAType type)
+        {
+            RSAHelper helper = new RSAHelper(type, Encoding.UTF8, privateKey);
+            return helper.Decrypt(str);
+        }
     }
 }
