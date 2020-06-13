@@ -42,5 +42,22 @@ namespace Talk.Extensions
             }
             return value?.Trim();
         }
+
+        /// <summary>
+        /// 获取配置文件
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static string GetTryConfig(this string key, string defaultValue = "")
+        {
+            var value = Configuration.GetValue(key, defaultValue);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                if (!string.IsNullOrWhiteSpace(defaultValue))
+                    return defaultValue?.Trim();
+            }
+            return value?.Trim();
+        }
     }
 }
