@@ -223,6 +223,24 @@ namespace Talk.Extensions
         }
 
         /// <summary>
+        /// 3DES加密
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="key">必须16位</param>
+        /// <returns></returns>
+        public static string DES3TryEncrypt(this string str, string key)
+        {
+            try
+            {
+                return DES3Encrypt(str, key);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 3DES解密
         /// </summary>
         /// <param name="str"></param>
@@ -249,6 +267,23 @@ namespace Talk.Extensions
             return Encoding.UTF8.GetString(resultArray);
         }
 
+        /// <summary>
+        /// 3DES解密
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="key">必须16位</param>
+        /// <returns></returns>
+        public static string DES3TryDecrypt(this string str, string key)
+        {
+            try
+            {
+                return DES3Decrypt(str, key);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -265,6 +300,25 @@ namespace Talk.Extensions
         }
 
         /// <summary>
+        /// RSA加密
+        /// </summary>
+        /// <param name="str">需要加密的内容</param>
+        /// <param name="publicKey">公钥</param>
+        /// <param name="type">类型（加密算法类型 RSA SHA1 长度不限制，推荐使用2048位以上;RSA2 SHA256 密钥长度至少为2048）</param>
+        /// <returns></returns>
+        public static string RSATryEncrypt(this string str, string publicKey, RSAType type = RSAType.RSA2)
+        {
+            try
+            {
+                return RSAEncrypt(str, publicKey, type);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// RSA解密
         /// </summary>
         /// <param name="str">需要解密的内容</param>
@@ -275,6 +329,25 @@ namespace Talk.Extensions
         {
             RSAHelper helper = new RSAHelper(type, Encoding.UTF8, privateKey);
             return helper.Decrypt(str);
+        }
+
+        /// <summary>
+        /// RSA解密
+        /// </summary>
+        /// <param name="str">需要解密的内容</param>
+        /// <param name="privateKey">私钥</param>
+        /// <param name="type">类型（加密算法类型 RSA SHA1 长度不限制，推荐使用2048位以上;RSA2 SHA256 密钥长度至少为2048）</param>
+        /// <returns></returns>
+        public static string RSATryDecrypt(this string str, string privateKey, RSAType type = RSAType.RSA2)
+        {
+            try
+            {
+                return RSADecrypt(str, privateKey, type);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
