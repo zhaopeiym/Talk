@@ -43,6 +43,7 @@ namespace Talk.Extensions.Helper.SystemInfo
         public string MacAddress { get; set; }
         /// <summary>
         /// 自定义序列号
+        /// 注意：IP地址、计算机名称、系统版本有可能会发生变化，导致SerialNumber变化
         /// </summary>
         public string SerialNumber { get; set; }
     }

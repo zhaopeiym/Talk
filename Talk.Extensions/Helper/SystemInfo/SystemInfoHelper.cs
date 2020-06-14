@@ -17,8 +17,9 @@ namespace Talk.Extensions.Helper.SystemInfo
         /// <summary>
         /// 获取系统信息
         /// </summary>
+        /// <param name="fuzzyIp">ip模糊匹配，定位到想要的网卡</param>
         /// <returns></returns>
-        public static OSInfo GetOSInfo()
+        public static OSInfo GetOSInfo(string fuzzyIp = "192.168.")
         {
             OSInfo osInfo = new OSInfo()
             {
@@ -31,6 +32,7 @@ namespace Talk.Extensions.Helper.SystemInfo
                 OSVersion = Environment.OSVersion
             };
             var firstUpInterface = NetworkInterface.GetAllNetworkInterfaces()
+                   .Where(t => t.GetIPProperties().UnicastAddresses.Any(u => u.Address.ToString().Contains(fuzzyIp)))
                    .OrderByDescending(c => c.Speed)
                    .FirstOrDefault(c => c.NetworkInterfaceType != NetworkInterfaceType.Loopback && c.OperationalStatus == OperationalStatus.Up);
             if (firstUpInterface != null)

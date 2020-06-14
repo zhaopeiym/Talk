@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Talk.Extensions.Helper.SystemInfo;
 
 namespace Talk.Extensions.Tests
 {
@@ -26,6 +27,12 @@ namespace Talk.Extensions.Tests
             var aa3 = str.RSASign(privateKey);
 
             var aa4 = str.RSAVerify(aa3, publicKey);
+        }
+
+        [Test]
+        public void GetOSInfoTest()
+        {
+            var obj = SystemInfoHelper.GetOSInfo();
         }
     }
 }
