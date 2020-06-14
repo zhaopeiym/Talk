@@ -349,5 +349,71 @@ namespace Talk.Extensions
                 return null;
             }
         }
+
+        /// <summary>
+        /// 签名
+        /// </summary>
+        /// <param name="str">需要签名的字符串</param>
+        /// <param name="privateKey">私钥</param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string RSASign(this string str, string privateKey, RSAType type = RSAType.RSA2)
+        {
+            RSAHelper helper = new RSAHelper(type, Encoding.UTF8, privateKey);
+            return helper.Sign(str);
+        }
+
+        /// <summary>
+        /// 签名
+        /// </summary>
+        /// <param name="str">需要签名的字符串</param>
+        /// <param name="privateKey">私钥</param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string RSATrySign(this string str, string privateKey, RSAType type = RSAType.RSA2)
+        {
+            try
+            {
+                return RSASign(str, privateKey, type);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 验证签名
+        /// </summary>
+        /// <param name="str">需要验签的字符串</param>
+        /// <param name="sign">签名</param>
+        /// <param name="publicKey">公钥</param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool RSAVerify(this string str, string sign, string publicKey, RSAType type = RSAType.RSA2)
+        {
+            RSAHelper helper = new RSAHelper(type, Encoding.UTF8, null, publicKey);
+            return helper.Verify(str, sign);
+        }
+
+        /// <summary>
+        /// 验证签名
+        /// </summary>
+        /// <param name="str">需要验签的字符串</param>
+        /// <param name="sign">签名</param>
+        /// <param name="publicKey">公钥</param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool RSATryVerify(this string str, string sign, string publicKey, RSAType type = RSAType.RSA2)
+        {
+            try
+            {
+                return RSAVerify(str, sign, publicKey, type);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
