@@ -129,6 +129,7 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static string Md5Encrypt(this string input, Encoding encode)
         {
+            encode = encode ?? Encoding.UTF8;
             using (MD5 md5 = new MD5CryptoServiceProvider())
             {
                 byte[] t = md5.ComputeHash(encode.GetBytes(input));
@@ -162,12 +163,15 @@ namespace Talk.Extensions
         /// <param name="input"></param>
         /// <param name="encode"></param>
         /// <returns></returns>
-        public static string ToMD5Encrypt16(this string input, Encoding encode)
+        public static string ToMD5Encrypt16(this string input, Encoding encode = null)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
-            result = result.Replace("-", "");
-            return result;
+            encode = encode ?? Encoding.UTF8;
+            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            {
+                string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
+                result = result.Replace("-", "");
+                return result;
+            }
         }
 
 
