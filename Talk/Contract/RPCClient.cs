@@ -218,7 +218,7 @@ namespace Talk.Contract
             var baseUrl = ConfigurationManager.GetConfig($"ApiHost.{assemblyName}");
 
             //优先使用代码设置的bashUrl （优先级 2）
-            if (!string.IsNullOrWhiteSpace(context?.RPCBaseUrl))
+            if (!string.IsNullOrWhiteSpace(context?.RPCBaseUrl?.Trim()))
                 baseUrl = context.RPCBaseUrl;
 
             var partUrl = request.GetType()
