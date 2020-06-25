@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using Talk.Extensions;
 using Talk.Interface;
 
@@ -62,6 +63,10 @@ namespace Talk.Contract
         /// 远程认证
         /// </summary>
         public RemoteAuthentication Authentication { get; set; }
+        /// <summary>
+        /// rpc baseurl ,如果没有，则会读取配置文件
+        /// </summary>
+        public string RPCBaseUrl { get; set; }
     }
 
     /// <summary>

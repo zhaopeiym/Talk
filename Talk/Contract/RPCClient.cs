@@ -42,7 +42,7 @@ namespace Talk.Contract
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
                 url = @return.GetUrl();
-                if (!string.IsNullOrWhiteSpace(setUrl)) url = setUrl;
+                if (!string.IsNullOrWhiteSpace(setUrl)) url = setUrl;//（优先级 1）
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
                 {
@@ -211,11 +211,16 @@ namespace Talk.Contract
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public static string GetUrl(this IReturn request)
+        public static string GetUrl(this IReturn request, IRPCContext context = null)
         {
             var assemblyName = request.GetType().Assembly.GetName().Name;
-            //这里约定配置BaseUrl
+            //这里约定配置BaseUrl (优先级 3)
             var baseUrl = ConfigurationManager.GetConfig($"ApiHost.{assemblyName}");
+
+            //优先使用代码设置的bashUrl （优先级 2）
+            if (!string.IsNullOrWhiteSpace(context?.RPCBaseUrl))
+                baseUrl = context.RPCBaseUrl;
+
             var partUrl = request.GetType()
                 .GetCustomAttributes(false)
                 .OfType<RpcRouteAttribute>()

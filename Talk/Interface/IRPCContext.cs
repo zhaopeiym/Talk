@@ -61,5 +61,9 @@ namespace Talk.Interface
         /// 远程认证
         /// </summary>
         RemoteAuthentication Authentication { get; set; }
+        /// <summary>
+        /// rpc baseurl(key:ApiHost.程序集 value:url),如果没有，则会读取配置文件
+        /// </summary>
+        string RPCBaseUrl { get; set; }
     }
 }
