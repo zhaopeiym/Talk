@@ -41,7 +41,7 @@ namespace Talk.Contract
                 if (context.Authentication?.EncryptKey?.Length == 16)
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
-                url = @return.GetUrl();
+                url = @return.GetUrl(context);
                 if (!string.IsNullOrWhiteSpace(setUrl)) url = setUrl;//（优先级 1）
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
@@ -102,7 +102,7 @@ namespace Talk.Contract
                 if (context.Authentication?.EncryptKey?.Length == 16)
                     context.Authentication.RemoteToken = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").DES3Encrypt(context.Authentication.EncryptKey);
                 headers.Add("RPCContext", HttpUtility.UrlEncode(JsonConvert.SerializeObject(context)));
-                url = @return.GetUrl();
+                url = @return.GetUrl(context);
                 var httpResponseMessage = await HttpHelper.Instance.PostAsync(url, JsonConvert.SerializeObject(@return), headers);
                 if (httpResponseMessage == null || httpResponseMessage.Content == null)
                 {
