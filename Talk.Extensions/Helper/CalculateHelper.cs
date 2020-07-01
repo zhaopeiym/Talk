@@ -3,11 +3,11 @@
 namespace Talk.Extensions.Helper
 {
     /// <summary>
-    /// 湿球温度计算
+    /// 相关计算
     /// </summary>
-    public class WetBulbTemperatureHelper
+    public class CalculateHelper
     {
-        private readonly static double[,] seedsNumber = new double[,] 
+        private readonly static double[,] seedsNumber = new double[,]
                                             {{ -8.32, -8.12, -7.91, -7.70, -7.48, -7.27, -7.05, -6.84, -6.63, -6.42, -6.21, -6.01, -5.80, -5.61, -5.41, -5.21, -5.00 },
                                             {-7.54,-7.32,-7.10,-6.87,-6.64,-6.40,-6.17,-5.94,-5.72,-5.49,-5.27,-5.05,-4.84,-4.63,-4.42,-4.21,-4.00 },
                                             {-6.77,-6.53,-6.29,-6.04,-5.79,-5.54,-5.29,-5.05,-4.81,-4.57,-4.33,-4.10,-3.87,-3.65,-3.43,-3.21,-3.00 },
@@ -58,12 +58,12 @@ namespace Talk.Extensions.Helper
                                             {23.33,24.98,26.54,27.42,29.40,30.71,31.97,33.18,34.36,35.42,36.47,37.47,38.45,39.38,40.28,41.16,42.00 }};
 
         /// <summary>
-        /// 计算
+        /// 湿球温度计算
         /// </summary>
         /// <param name="humidity">湿度</param>
         /// <param name="temperature">干球温度</param>
         /// <returns></returns>
-        public static double Calculate(int humidity, float temperature)
+        public static double WetBulbTemperatureCalculate(int humidity, float temperature)
         {
             if (humidity < 20 || humidity > 100)
                 throw new ArgumentNullException("湿度必须大于20并且小于100");
@@ -90,6 +90,25 @@ namespace Talk.Extensions.Helper
                 temp = temp + (seedsNumber[(int)y, x + 1] - temp) / 5 * x_number;
             }
             return NumberHelper.Round(temp);
+        }
+
+        /// <summary>
+        /// 含湿量计算
+        /// </summary>
+        /// <param name="humidity">湿度</param>
+        /// <param name="temperature">干球温度</param>
+        /// <returns></returns>
+        public static MoistureContentData MoistureContentCalculate(int humidity, float temperature)
+        {
+            if (humidity < 5 || humidity > 100)
+                throw new ArgumentNullException("湿度必须大于5并且小于100");
+            if (temperature < 0 || temperature > 60)
+                throw new ArgumentNullException("干球温度必须大于0并且小于60");
+            var data = new MoistureContentData();
+            data.PartialPressureSaturatedSteam = Math.Exp(12.062 - 4039.558 / (temperature + 235.379)) * 100000;
+            data.MoistureContent = 0.622 * humidity * data.PartialPressureSaturatedSteam / 100 / (100090 - humidity * data.PartialPressureSaturatedSteam / 100) * 1000;
+            data.Enthalpy = 1.01 * temperature + 0.001 * data.MoistureContent * (2500 + 1.84 * temperature);
+            return data;
         }
     }
 }

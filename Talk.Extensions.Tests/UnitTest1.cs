@@ -29,13 +29,13 @@ namespace Tests
         public void Test2()
         {
             //var aa =  (12.43 * 10) % 10;
-            var temp2 = WetBulbTemperatureHelper.Calculate(33, 19.1f);
-            var temp = WetBulbTemperatureHelper.Calculate(25, 18.8f);
-            var num1 = WetBulbTemperatureHelper.Calculate(20, 18);
-            var num2 = WetBulbTemperatureHelper.Calculate(21, 18);
-            var num3 = WetBulbTemperatureHelper.Calculate(20, 18.1f);
-            var num4 = WetBulbTemperatureHelper.Calculate(21, 18.1f);
-            var num5 = WetBulbTemperatureHelper.Calculate(20, -3);
+            var temp2 = CalculateHelper.Calculate(33, 19.1f);
+            var temp = CalculateHelper.Calculate(25, 18.8f);
+            var num1 = CalculateHelper.Calculate(20, 18);
+            var num2 = CalculateHelper.Calculate(21, 18);
+            var num3 = CalculateHelper.Calculate(20, 18.1f);
+            var num4 = CalculateHelper.Calculate(21, 18.1f);
+            var num5 = CalculateHelper.Calculate(20, -3);
         }
 
         [Test]
