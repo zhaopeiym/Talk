@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E89920F0-6221-48A7-9E1C-F9B52A1D91D3}"
 EndProject
@@ -53,7 +53,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.Dapper.Entitys", "Talk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.AutoMap.Extensions.Test", "Talk.AutoMap.Extensions.Test\Talk.AutoMap.Extensions.Test.csproj", "{71A70C54-3718-4A9F-BB20-296FECE24CF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talk.Apollo", "Talk.Apollo\Talk.Apollo.csproj", "{8DB40450-13DF-439B-92FB-D2F55B274E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talk.Apollo", "Talk.Apollo\Talk.Apollo.csproj", "{8DB40450-13DF-439B-92FB-D2F55B274E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talk.Tool", "Talk.Tool\Talk.Tool.csproj", "{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +147,10 @@ Global
 		{8DB40450-13DF-439B-92FB-D2F55B274E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DB40450-13DF-439B-92FB-D2F55B274E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DB40450-13DF-439B-92FB-D2F55B274E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +178,7 @@ Global
 		{901E7F0A-6C81-4EF0-B645-CC15881D7B0D} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
 		{71A70C54-3718-4A9F-BB20-296FECE24CF9} = {E89920F0-6221-48A7-9E1C-F9B52A1D91D3}
 		{8DB40450-13DF-439B-92FB-D2F55B274E13} = {3709BAF9-283E-42D7-AC6C-F4E49E940B2D}
+		{CDFE48D1-D62F-443D-B7C2-C8F0C75B067D} = {E89920F0-6221-48A7-9E1C-F9B52A1D91D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {401B7A10-6429-46EE-9B90-B13E416835E9}
