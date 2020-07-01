@@ -41,7 +41,7 @@ namespace Talk.Redis
             }
         }
 
-        public RedisManager(int dbIndex, string config)
+        public RedisManager(string config, int dbIndex = -1)
         {
             if (!string.IsNullOrWhiteSpace(config))
                 RedisConfig = config;
