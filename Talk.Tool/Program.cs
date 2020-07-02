@@ -213,8 +213,8 @@ namespace Talk.Tool
                 else
                 {
                     readString.Append(i.KeyChar);
-                    //Console.Write(i.Key);
-                    Console.Write(i.KeyChar);
+                    Console.Write(i.Key);
+                    //Console.Write(i.KeyChar);
                 }
             }
             var command = readString.ToString();
