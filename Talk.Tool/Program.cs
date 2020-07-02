@@ -213,15 +213,15 @@ namespace Talk.Tool
                 else
                 {
                     readString.Append(i.KeyChar);
-                    Console.Write(i.Key);
-                    //Console.Write(i.KeyChar);
+                    Console.WriteLine(i.Key);
+                    Console.WriteLine(i.KeyChar);
                 }
             }
             var command = readString.ToString();
             CommandList.Add(command);
             CommandIndex = CommandList.Count - 1;
             return command;
-        } 
+        }
         #endregion
     }
 }
