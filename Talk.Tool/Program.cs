@@ -2,6 +2,9 @@
 using IoTClient.Common.Enums;
 using System;
 using Talk.Redis;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Talk.Tool
 {
@@ -17,7 +20,7 @@ namespace Talk.Tool
             }
             newStart:
             Console.WriteLine("您可以连接redis或者plc");
-            var command = Console.ReadLine();
+            var command = ReadLine();
 
             #region redis
             if (command.StartsWith("redis"))
@@ -40,7 +43,7 @@ namespace Talk.Tool
                 var timeConsuming = (DateTime.Now - initialTime).TotalMilliseconds;
                 Console.WriteLine($"连接成功\t\t\t\t耗时：{timeConsuming}ms");
                 getOrSet:
-                command = Console.ReadLine();
+                command = ReadLine();
                 items = command.Split(' ');
                 if (command.StartsWith("get"))
                 {
@@ -93,7 +96,7 @@ namespace Talk.Tool
                 Console.WriteLine("请输入您好连接的版本：");
                 Console.WriteLine("1、S7-200Smar");
                 Console.WriteLine("2、S7-200");
-                var version = Console.ReadLine();
+                var version = ReadLine();
                 switch (version)
                 {
                     case "1":
@@ -119,7 +122,7 @@ namespace Talk.Tool
                 }
 
                 getOrSet:
-                command = Console.ReadLine();
+                command = ReadLine();
                 items = command.Split(' ');
                 if (command.StartsWith("get"))
                 {
@@ -148,5 +151,77 @@ namespace Talk.Tool
 
             goto newStart;
         }
+
+        static List<string> CommandList = new List<string>();
+        static int CommandIndex = 0;
+        static int GetCommandIndex(bool up)
+        {
+            if (up)
+            {
+                CommandIndex--;
+                if (CommandIndex < 0) CommandIndex = CommandList.Count - 1;
+            }
+            else
+            {
+                CommandIndex++;
+                if (CommandIndex >= CommandList.Count) CommandIndex = 0;
+            }
+            return CommandIndex;
+        }
+        #region ReadLine
+        static string ReadLine()
+        {
+            StringBuilder readString = new StringBuilder();
+            while (true)
+            {
+                var i = Console.ReadKey(true);
+                if (i.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+                if (i.Key == ConsoleKey.Backspace)
+                {
+                    if (readString.Length > 0)
+                    {
+                        readString.Remove(readString.Length - 1, 1);
+                    }
+                    Console.Write("\b \b");
+                }
+                else if (i.Key == ConsoleKey.UpArrow)
+                {
+                    if (CommandList.Any())
+                    {
+                        for (int j = 0; j < 20; j++)
+                        {
+                            Console.Write("\b \b");
+                        }
+                        Console.Write(CommandList[GetCommandIndex(true)]);
+                    }
+                }
+                else if (i.Key == ConsoleKey.DownArrow)
+                {
+                    if (CommandList.Any())
+                    {
+                        for (int j = 0; j < 20; j++)
+                        {
+                            Console.Write("\b \b");
+                        }
+                        Console.Write(CommandList[GetCommandIndex(false)]);
+                    }
+                }
+                else
+                {
+                    readString.Append(i.KeyChar);
+                    //Console.Write(i.Key);
+                    Console.Write(i.KeyChar);
+                }
+            }
+            var command = readString.ToString();
+            CommandList.Add(command);
+            CommandIndex = CommandList.Count - 1;
+            return command;
+        } 
+        #endregion
     }
 }
