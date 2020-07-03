@@ -57,6 +57,8 @@ namespace Talk.Extensions.Helper
                                             {22.69,24.30,25.82,26.76,28.62,29.91,31.14,32.32,33.48,34.53,35.55,36.54,37.50,38.42,39.30,40.17,41.00 },
                                             {23.33,24.98,26.54,27.42,29.40,30.71,31.97,33.18,34.36,35.42,36.47,37.47,38.45,39.38,40.28,41.16,42.00 }};
 
+        private readonly static double[] co1_scope = new double[] { 0, 5, 10, 35, 60, 90, 120, 150 };
+        private readonly static double[] laqi_scope = new double[] { 0, 50, 100, 150, 200, 300, 400, 500 };
         /// <summary>
         /// 湿球温度计算
         /// </summary>
@@ -109,6 +111,36 @@ namespace Talk.Extensions.Helper
             data.MoistureContent = 0.622 * humidity * data.PartialPressureSaturatedSteam / 100 / (100090 - humidity * data.PartialPressureSaturatedSteam / 100) * 1000;
             data.Enthalpy = 1.01 * temperature + 0.001 * data.MoistureContent * (2500 + 1.84 * temperature);
             return data;
+        }
+
+        /// <summary>
+        /// AQI计算
+        /// </summary>
+        /// <param name="co1">一氧化碳（mg/m³）</param>
+        /// <returns></returns>
+        public static double AQICalculate(double co1)
+        {
+            var co1_index = -1;
+            for (int i = 0; i < co1_scope.Length - 1; i++)
+            {
+                if (co1 >= co1_scope[i] && co1 < co1_scope[i + 1])
+                {
+                    co1_index = i;
+                }
+            }
+
+            if (co1_index == -1)
+            {
+                throw new Exception($"co1[{co1}]不在范围0-150");
+            }
+
+            var Cl = co1_scope[co1_index];
+            var Ch = co1_scope[co1_index + 1];
+            var Il = laqi_scope[co1_index];
+            var Ih = laqi_scope[co1_index + 1];
+
+            var value = (Ih - Il) / (Ch - Cl) * (co1 - Cl) + Il;
+            return NumberHelper.KeepDigit(value, 0);
         }
     }
 }
