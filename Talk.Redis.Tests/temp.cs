@@ -4,21 +4,22 @@ using Talk.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using StackExchange.Redis;
 
 namespace Talk.Redis.Tests
 {
     public class temp
     {
         [Fact]
-        public void Set_Test()
+        public async Task Set_TestAsync()
         {
             //**** 注意 ****
             //同类型的数据操作 相同的key会覆盖
             //不同类型的数据操作 相同的key会报错
-            //var strConfig = "192.168.10.107:6379,allowAdmin=true,password=redispass";
+            var strConfig = "127.0.0.1:6379,allowAdmin=true,password=redispass";
 
-            var testConfig = "192.168.10.178";//开发环境
-            RedisManager redis = new RedisManager(testConfig);
+            //var testConfig = "192.168.10.178";//开发环境
+            RedisManager redis = new RedisManager(strConfig);
 
             #region 键值对
             ////键值对
@@ -53,15 +54,18 @@ namespace Talk.Redis.Tests
             #endregion
 
             #region set / 集合
-            ////set
-            //redis.SetAdd("key1", "123");
-            //redis.SetAdd("key1", "234");
-            //redis.SetAdd("key1", "666");
-            //redis.SetAdd("key1", new List<string>() { "777", "888" });
-            //var listSet = redis.SetMembers("key1");
-            //Assert.Contains("123", listSet);
-            //Assert.Contains("666", listSet);
-            //Assert.Contains("888", listSet);
+            //set 1、重复的值不会记录多次
+            await redis.SetAddAsync("key1", "123");
+            await redis.SetAddAsync("key1", "234");
+            await redis.SetAddAsync("key1", "666");
+            await redis.SetAddAsync("key1", "666");
+            var aa = await redis.SetContainsAsync("key1", "666");
+            await redis.SetRemoveAsync("key1", "666");
+            await redis.SetAddAsync("key1", new RedisValue[] { "777", "888" });
+            var listSet = await redis.SetMembersAsync("key1");
+            Assert.Contains("123", listSet);
+            Assert.Contains("666", listSet);
+            Assert.Contains("888", listSet);
             #endregion
 
             #region hashSet

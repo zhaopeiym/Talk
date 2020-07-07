@@ -184,14 +184,37 @@ namespace Talk.Redis
         #endregion
 
         #region Set操作
-        public async Task<bool> SetAddAsync(string key, string value)
+
+        /// <summary>
+        /// 新增集合值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public async Task<bool> SetAddAsync(string key, RedisValue value)
         {
             return await database.SetAddAsync(key, value);
         }
 
-        public async Task<bool> MultipleSetAddAsync(string key, RedisValue[] values)
+        public async Task<long> SetAddAsync(string key, RedisValue[] values)
         {
-            return (await database.SetAddAsync(key, values)) > 0;
+            return await database.SetAddAsync(key, values);
+        }
+
+        /// <summary>
+        /// 移除集合值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public async Task<bool> SetRemoveAsync(string key, RedisValue values)
+        {
+            return await database.SetRemoveAsync(key, values);
+        }
+
+        public async Task<long> SetRemoveAsync(string key, RedisValue[] values)
+        {
+            return await database.SetRemoveAsync(key, values);
         }
 
         public async Task<bool> SetContainsAsync(string key, string value)
