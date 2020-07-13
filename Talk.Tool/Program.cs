@@ -26,9 +26,11 @@ namespace Talk.Tool
             if (command.StartsWith("redis"))
             {
                 var items = command.Split(' ');
-                var ip = items.Length >= 2 ? items[1] : "127.0.0.1";
-                var port = items.Length >= 3 ? items[2] : "6379";
-                var dbindex = items.Length >= 4 ? items[3] : "1";
+                var ip_port = items.Length >= 2 ? items[1] : "127.0.0.1:6379";
+                var ip_port_split = ip_port.Split(':');
+                var ip = ip_port_split[0];
+                var port = ip_port_split.Length >= 2 ? ip_port_split[1] : "6379";                
+                var dbindex = items.Length >= 3 ? items[2] : "1";
                 var config = $"{ip}:{port},allowAdmin=true,password=,syncTimeout=15000,defaultdatabase={dbindex}";
                 var initialTime = DateTime.Now;
                 try
@@ -91,8 +93,10 @@ namespace Talk.Tool
             else if (command.StartsWith("plc"))
             {
                 var items = command.Split(' ');
-                var ip = items.Length >= 2 ? items[1] : "127.0.0.1";
-                var port = items.Length >= 3 ? items[2] : "102";
+                var ip_port = items.Length >= 2 ? items[1] : "127.0.0.1:102";                
+                var ip_port_split = ip_port.Split(':');
+                var ip = ip_port_split[0];
+                var port = ip_port_split.Length >= 2 ? ip_port_split[1] : "102";
                 Console.WriteLine("请输入您好连接的版本：");
                 Console.WriteLine("1、S7-200Smar");
                 Console.WriteLine("2、S7-200");
