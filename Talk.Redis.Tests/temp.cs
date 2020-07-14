@@ -115,5 +115,33 @@ namespace Talk.Redis.Tests
             //    await item;
             //}
         }
+
+        //https://www.cnblogs.com/zhangtingzu/p/6939895.html
+        //https://www.cnblogs.com/huangxincheng/p/6212406.html
+        //批量读取
+        //public void TestBatchSent()
+        //{
+        //    using (var muxer = Config.GetUnsecuredConnection())
+        //    {
+        //        var conn = muxer.GetDatabase(0);
+        //        conn.KeyDeleteAsync("batch");
+        //        conn.StringSetAsync("batch", "batch-sent");
+        //        var tasks = new List<Task>();
+        //        var batch = conn.CreateBatch();
+        //        tasks.Add(batch.KeyDeleteAsync("batch"));
+        //        tasks.Add(batch.SetAddAsync("batch", "a"));
+        //        tasks.Add(batch.SetAddAsync("batch", "b"));
+        //        tasks.Add(batch.SetAddAsync("batch", "c"));
+        //        batch.Execute();
+
+        //        var result = conn.SetMembersAsync("batch");
+        //        tasks.Add(result);
+        //        Task.WhenAll(tasks.ToArray());
+
+        //        var arr = result.Result;
+        //        Array.Sort(arr, (x, y) => string.Compare(x, y));
+        //        ...
+        //    }
+        //}
     }
 }

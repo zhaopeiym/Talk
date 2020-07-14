@@ -48,6 +48,10 @@ namespace Talk.Redis
             database = Connection.GetDatabase(dbIndex);
         }
 
+        public IBatch CreateBatch(object asyncState = null)
+        {
+            return database.CreateBatch(asyncState);
+        }
 
         #region 键值对操作
 
