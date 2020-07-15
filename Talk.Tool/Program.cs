@@ -29,7 +29,7 @@ namespace Talk.Tool
                 var ip_port = items.Length >= 2 ? items[1] : "127.0.0.1:6379";
                 var ip_port_split = ip_port.Split(':');
                 var ip = ip_port_split[0];
-                var port = ip_port_split.Length >= 2 ? ip_port_split[1] : "6379";                
+                var port = ip_port_split.Length >= 2 ? ip_port_split[1] : "6379";
                 var dbindex = items.Length >= 3 ? items[2] : "1";
                 var config = $"{ip}:{port},allowAdmin=true,password=,syncTimeout=15000,defaultdatabase={dbindex}";
                 var initialTime = DateTime.Now;
@@ -93,7 +93,7 @@ namespace Talk.Tool
             else if (command.StartsWith("plc"))
             {
                 var items = command.Split(' ');
-                var ip_port = items.Length >= 2 ? items[1] : "127.0.0.1:102";                
+                var ip_port = items.Length >= 2 ? items[1] : "127.0.0.1:102";
                 var ip_port_split = ip_port.Split(':');
                 var ip = ip_port_split[0];
                 var port = ip_port_split.Length >= 2 ? ip_port_split[1] : "102";
@@ -149,6 +149,14 @@ namespace Talk.Tool
                     }
                     if (number > 1)
                         Console.WriteLine($"\t\t\t\t平均耗时：{sunTime / number}ms");
+
+                    var readList = command.Split("-r");
+                    var readNumber = readList.Length >= 2 ? ushort.Parse(readList[1]) : (ushort)1;
+                    var resules = client.ReadUInt32(key, readNumber);
+                    foreach (var item in resules.Value)
+                    {
+                        Console.WriteLine($"[读取 {item.Key} 成功]：{item.Value}\t\t耗时：{resules.TimeConsuming}ms");
+                    }
                 }
                 goto getOrSet;
             }

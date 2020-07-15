@@ -12,7 +12,9 @@ namespace Talk.Extensions
         /// <returns></returns>
         public static float KeepDigit(float number, int position = 2)
         {
-            var tempNumber = number.ToString();
+            //ToString() 会保留16位小数后四舍五入，ToString("r")会返到相同数字的字符串
+            //https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings?redirectedfrom=MSDN
+            var tempNumber = number.ToString("r");
             var indexof = tempNumber.IndexOf('.');
             if (indexof > 0 && tempNumber.Length > indexof + 3)
             {
@@ -24,7 +26,7 @@ namespace Talk.Extensions
 
         public static double KeepDigit(double number, int position = 2)
         {
-            var tempNumber = number.ToString();
+            var tempNumber = number.ToString("r");
             var indexof = tempNumber.IndexOf('.');
             if (indexof > 0 && tempNumber.Length > indexof + 3)
             {

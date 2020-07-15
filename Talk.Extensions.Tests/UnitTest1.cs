@@ -28,12 +28,19 @@ namespace Tests
         [Test]
         public void Test2()
         {
-         
+
         }
 
         [Test]
         public void Test3()
         {
+
+            float a = 64.24f;
+            double x = a * 100.0d;
+            decimal y = (decimal)a * 100.0m;
+            var aa1 = x.ToString().Length;
+            var aa2 = x.ToString("r");
+
             var aaa = 123.5678.ToString("0.#");
             float f1 = 2.1f;
             float f2 = 6.105f;
@@ -41,10 +48,10 @@ namespace Tests
             float f4 = 6;
 
             var num1 = NumberHelper.KeepDigit(f1);
-            var num2 = NumberHelper.KeepDigit(f2 );
+            var num2 = NumberHelper.KeepDigit(f2);
             var num3 = NumberHelper.KeepDigit(f3);
             var num4 = NumberHelper.KeepDigit(f4);
-            var num5 = NumberHelper.KeepDigit(num1 / num2, 1); 
+            var num5 = NumberHelper.KeepDigit(num1 / num2, 1);
 
             var num6 = NumberHelper.KeepDigit(NumberHelper.KeepDigit(f1 / 1000) / NumberHelper.KeepDigit(f2 / 1000), 1);
         }

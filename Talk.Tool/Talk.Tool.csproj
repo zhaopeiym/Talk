@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IoTClient" Version="0.0.32" />
+    <PackageReference Include="IoTClient" Version="0.0.38" />
     <PackageReference Include="Talk.Redis" Version="1.0.4" />
   </ItemGroup>
 
