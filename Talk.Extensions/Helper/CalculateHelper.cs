@@ -68,9 +68,9 @@ namespace Talk.Extensions.Helper
         public static double WetBulbTemperatureCalculate(int humidity, float temperature)
         {
             if (humidity < 20 || humidity > 100)
-                throw new ArgumentNullException("湿度必须大于20并且小于100");
+                throw new ArgumentNullException($"湿度必须大于20并且小于100，当前湿度：{humidity}");
             if (temperature < -5 || temperature > 42)
-                throw new ArgumentNullException("干球温度必须大于-5并且小于42");
+                throw new ArgumentNullException($"干球温度必须大于-5并且小于42，当前干球温度：{temperature}");
 
             var x = (humidity - 20) / 5;
             var x_number = (humidity - 20) % 5;

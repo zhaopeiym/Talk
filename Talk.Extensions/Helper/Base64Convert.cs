@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Talk.Extensions.Helper
 {
     /// <summary>
     /// Base64图片相互转换
+    /// http://m.tnblog.net/aojiancc2/article/details/2622
     /// </summary>
     public class Base64Convert
     {
@@ -33,7 +35,9 @@ namespace Talk.Extensions.Helper
         /// <returns></returns>
         public void Base64ToFileAndSave(string strInput, string fileName)
         {
-            byte[] buffer = Convert.FromBase64String(strInput);
+            //base64需要把前面的申明去掉
+            string newbase = Regex.Replace(strInput, "data:image/.*;base64,", "");
+            byte[] buffer = Convert.FromBase64String(newbase);
             using (FileStream fs = new FileStream(fileName, FileMode.CreateNew))
             {
                 fs.Write(buffer, 0, buffer.Length);
