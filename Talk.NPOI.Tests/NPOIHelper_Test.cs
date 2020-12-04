@@ -160,5 +160,11 @@ namespace Talk.NPOI.Tests
             [Alias("*开航日期")]
             public DateTime? ETD { get; set; }
         }
+
+        [Fact]
+        public void test()
+        {
+            var entitys = NPOIHelper.ToEntitys<AssetPointExcelEntity>(@"D:\Users\bennyzhao\Desktop\梧州通讯设置(1)(1)(1).xls");
+        }
     }
 }

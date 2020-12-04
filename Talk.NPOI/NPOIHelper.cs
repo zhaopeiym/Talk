@@ -166,7 +166,7 @@ namespace Talk.NPOI
             var pros = typeof(T).GetProperties();
             for (int i = firstCellNum; i < lastCellNum; i++)
             {
-                string name = row.GetCell(i).StringCellValue;
+                string name = row.GetCell(i)?.StringCellValue;
                 foreach (var p in pros)
                 {
                     string alias = AliasAttribute<T>(p);
